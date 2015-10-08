@@ -2,9 +2,16 @@
 using System.Collections;
 
 public class RabbitMovementController : MonoBehaviour {
+    //increase of jump height
+    public float upModifier;
+    //limit of jump height
+    public float upLimit;
+    public float upMultiplier;
+    //minimal jump
+    public float minimalUp;
 
-    public float upAndDownModifier;
-    public float upAndDownLimit;
+    public float downModifier;
+    public float fallLimit;
 
     public float gravityAttenuation;
     public float jumpPenalzationModifier;
@@ -33,6 +40,7 @@ public class RabbitMovementController : MonoBehaviour {
             rb.velocity = new Vector2(minimalHorizontalVelocity, rb.velocity.y);
         }
 
+        //slowly increase game speed
         minimalHorizontalVelocity += accelerationForward;
 
         //weaken gravity
@@ -41,30 +49,42 @@ public class RabbitMovementController : MonoBehaviour {
         //handle user input
         if (!(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)))
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                verticalForce += upAndDownModifier;
-                if (verticalForce > upAndDownLimit)
+                verticalForce = minimalUp;
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                verticalForce += upModifier;
+                if (verticalForce > upLimit)
                 {
-                    verticalForce = upAndDownLimit;
+                    verticalForce = upLimit;
                 }
 
                 //increase horizontal speed as a penalization
                 minimalHorizontalVelocity += accelerationForward * jumpPenalzationModifier;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKeyUp(KeyCode.S))
             {
-                verticalForce -= upAndDownModifier;
-                if (verticalForce < (-0.7f) * upAndDownLimit)
-                {
-                    verticalForce = (-0.7f) * upAndDownLimit;
-                }
+                transform.Translate(Vector2.down * downModifier);
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
             else
             {
-                rb.AddForce(new Vector2(0, verticalForce));
-                verticalForce = 0;
+                //jump if there is any force gathered
+                if (verticalForce != 0 && rb.velocity.y < 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    rb.AddForce(new Vector2(0, verticalForce * upMultiplier));
+                    verticalForce = 0;
+                }
             }
+        }
+
+        //limit fall speed
+        if (rb.velocity.y < fallLimit)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, fallLimit);
         }
     }
 }
