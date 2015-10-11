@@ -72,7 +72,7 @@ public class RabbitMovementController : MonoBehaviour {
             else
             {
                 //jump if there is any force gathered
-                if (verticalForce != 0 && rb.velocity.y < 0)
+                if (rb.velocity.y < 0)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, 0);
                     rb.AddForce(new Vector2(0, verticalForce * upMultiplier));
