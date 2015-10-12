@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	public float jumpVelocity;
 	public float horizontalVelocity;
 
+    private AudioSource audio;
+
     private Rigidbody2D rb;
 
     // Use this for initialization
@@ -17,6 +19,8 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
+
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				rb.velocity = new Vector2(rb.velocity.x, 0);  // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
 				rb.AddForce(new Vector2(0,jumpVelocity));
+                audio.Play();
 			}
 			else if(Input.GetKeyDown(KeyCode.S))
 			{
