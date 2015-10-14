@@ -43,9 +43,42 @@ public class PlayerController : MonoBehaviour {
 			}
 			else if(Input.GetKeyDown(KeyCode.S))
 			{
-				transform.Translate(Vector2.down * diveLength); // when diving, player´s position changes discretely (but visually with continuous motion animation)
-				rb.velocity = new Vector2(rb.velocity.x, 0); // set vertical velocity to zero so player slowly starts to fall after dive action
+                var distanceToCollider = Physics2D.Raycast(transform.position, Vector2.down).distance;
+
+                // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
+                if (distanceToCollider <= diveLength)
+                {
+                    //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, Vector2.down).collider.name 
+                    //    + " Distance: " + distanceToCollider);
+
+                    transform.Translate(Vector2.down * distanceToCollider);
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                }
+                else
+                {
+                    //Debug.Log("No obstacle!");
+
+                    // when diving, player´s position changes discretely (but visually with continuous motion animation)
+                    transform.Translate(Vector2.down * diveLength);
+
+                    // set vertical velocity to zero so player slowly starts to fall after dive action
+                    rb.velocity = new Vector2(rb.velocity.x, 0); 
+                } 
 			}
+            // Space restarts the game
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Application.LoadLevel(0);
+            }
+            // Escape quits the game
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Application.Quit() is ignored in the editor or the web player.
+                Application.Quit();
+
+                // Force the editor to quit the game
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
 
         }
 
