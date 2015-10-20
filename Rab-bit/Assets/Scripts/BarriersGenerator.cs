@@ -25,6 +25,7 @@ public class BarriersGenerator : MonoBehaviour {
 	private GameObject nextBarrierTop;
 	private GameObject nextBarrierBottom;
 	private bool wasTriggered; // used in Update function when new barrier ahead should be instantiated
+    public PowerUp powerUp;
 
 
 	// Use this for initialization
@@ -48,6 +49,8 @@ public class BarriersGenerator : MonoBehaviour {
 		obstacleList = new Queue<GameObject>();
 		obstacleList.Enqueue(new GameObject());
 		obstacleList.Enqueue(new GameObject());
+
+        //powerUp = new PowerUp();
 
 //		Debug.Log(YScreenCoo*barrierOffset + barrierDimensions[1]);
 //		Debug.Log(YScreenCoo);
@@ -87,6 +90,8 @@ public class BarriersGenerator : MonoBehaviour {
 				nextBarrierBottom = (GameObject) Instantiate(barrier, new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0]*2f, -yScreenCoo*barrierYOffset - barrierDimensions[1]), Quaternion.identity);
 				nextBarrierBottom.tag = "BarrierBottom";
 
+                // Generate powerUp
+                powerUp.SpawnIfAvailable(new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0] * 2f, yScreenCoo - 8));
 
 				// generating obstacles here:
 				obstacleList.Enqueue((GameObject) Instantiate(obstacleOne, new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0]*2f, 0), Quaternion.identity));
