@@ -38,9 +38,10 @@ public class PowerUp : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Power up collected!");
+        Debug.Log("Power up collected! Prepare to be rekt.");
+        gameObject.SetActive(false);
 
-        // TODO: Deactivate and speed up, speed down, change gravity direction, etc.
+        PlayerController.swapGravity = true;
     }
 
     /*private void GameOver()

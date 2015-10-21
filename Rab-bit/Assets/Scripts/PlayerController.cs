@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
 
+    public static bool swapGravity = false;
+    private KeyCode keyW = KeyCode.W;
+    private KeyCode keyS = KeyCode.S;
+
     // Use this for initialization
     void Start()
     {
@@ -32,39 +36,64 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y); 
         }
 
-        //handle user input
-        if (!(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)))
+        if (swapGravity)
         {
-			if(Input.GetKeyDown(KeyCode.W))
+            rb.gravityScale *= -1;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+
+            if (rb.gravityScale > 0)
+            {
+                transform.up = Vector2.up;
+                keyW = KeyCode.W;
+                keyS = KeyCode.S;
+            }
+            else
+            {
+                // Inverse keys (W, S) and transform vector 'up'
+                transform.up = Vector2.down;
+                keyW = KeyCode.S;
+                keyS = KeyCode.W;
+            }
+
+            swapGravity = false;
+        }
+
+        //handle user input
+        if (!(Input.GetKey(keyW) && Input.GetKey(keyS)))
+        {
+			if(Input.GetKeyDown(keyW))
 			{
-				rb.velocity = new Vector2(rb.velocity.x, 0);  // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
-				rb.AddForce(new Vector2(0,jumpVelocity));
+                // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
+                rb.velocity = new Vector2(rb.velocity.x, 0);  
+
+                // Inverse jump velocity if the gravity is inversed as well
+                var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
+
+                rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
                 audio.Play();
 			}
-			else if(Input.GetKeyDown(KeyCode.S))
+			else if(Input.GetKeyDown(keyS))
 			{
-                var distanceToCollider = Physics2D.Raycast(transform.position, Vector2.down).distance;
+                Debug.Log("Gravity direction: " + (Vector3.up == transform.up ? "Down" : "Up"));
+                var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
 
                 // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
                 if (distanceToCollider <= diveLength)
                 {
-                    //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, Vector2.down).collider.name 
-                    //    + " Distance: " + distanceToCollider);
+                    //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, -transform.up).collider.name 
+                    //    + " Distance: " + distanceToCollider + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
 
-                    transform.Translate(Vector2.down * distanceToCollider);
-                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    transform.Translate(Vector3.down * distanceToCollider);    // vector.down
                 }
                 else
                 {
-                    //Debug.Log("No obstacle!");
-
                     // when diving, player´s position changes discretely (but visually with continuous motion animation)
-                    transform.Translate(Vector2.down * diveLength);
+                    transform.Translate(Vector3.down * diveLength);
+                }
 
-                    // set vertical velocity to zero so player slowly starts to fall after dive action
-                    rb.velocity = new Vector2(rb.velocity.x, 0); 
-                } 
-			}
+                // set vertical velocity to zero so player slowly starts to fall after dive action
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
             // Space restarts the game
             else if (Input.GetKeyDown(KeyCode.Space))
             {
