@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BarrierTop
   - BarrierBottom
+  - Barrier
+  - NotToTouch
   layers:
   - Default
   - TransparentFX
