@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ad2a856e64540fcb2c734c1f6d26f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleOne: {fileID: 197384, guid: 9679299e69a7b4b8bb25f5b698140a88, type: 2}
+  obstacleOne: {fileID: 199098, guid: 5ba22aade68d92c409f5f5ab3f793608, type: 2}
   obstacleTwo: {fileID: 105158, guid: 4f4ff51ff97c14023adc9cf18133172a, type: 2}
   barrier: {fileID: 191966, guid: b9c8c33fcd7714a4996601102d8cc05f, type: 2}
   barrierYOffset: .639999986
