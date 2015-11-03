@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	public float jumpVelocity;
 	public float horizontalVelocity;
 
+    public bool pauseOnCollide;
+
     private AudioSource audio;
 
     private Rigidbody2D rb;
@@ -16,7 +18,9 @@ public class PlayerController : MonoBehaviour {
     public static bool swapGravity = false;
     public static bool paused = false;
     private KeyCode keyW = KeyCode.W;
+    private KeyCode keyUp = KeyCode.UpArrow;
     private KeyCode keyS = KeyCode.S;
+    private KeyCode keyDown = KeyCode.DownArrow;
 
     // Use this for initialization
     void Start()
@@ -48,23 +52,27 @@ public class PlayerController : MonoBehaviour {
                 {
                     transform.up = Vector2.up;
                     keyW = KeyCode.W;
+                    keyUp = KeyCode.UpArrow;
                     keyS = KeyCode.S;
+                    keyDown = KeyCode.DownArrow;
                 }
                 else
                 {
                     // Inverse keys (W, S) and transform vector 'up'
                     transform.up = Vector2.down;
                     keyW = KeyCode.S;
+                    keyUp = KeyCode.DownArrow;
                     keyS = KeyCode.W;
+                    keyDown = KeyCode.UpArrow;
                 }
 
                 swapGravity = false;
             }
 
             //handle user input
-            if (!(Input.GetKey(keyW) && Input.GetKey(keyS)))
+            if (!(Input.GetKey(keyW) && Input.GetKey(keyS)) || !(Input.GetKey(keyUp) && Input.GetKey(keyDown)))
             {
-                if (Input.GetKeyDown(keyW))
+                if (Input.GetKeyDown(keyW) || Input.GetKeyDown(keyUp))
                 {
                     // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
                     rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -75,9 +83,9 @@ public class PlayerController : MonoBehaviour {
                     rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
                     audio.Play();
                 }
-                else if (Input.GetKeyDown(keyS))
+                else if (Input.GetKeyDown(keyS) || Input.GetKeyDown(keyDown))
                 {
-                    Debug.Log("Gravity direction: " + (Vector3.up == transform.up ? "Down" : "Up"));
+                    //Debug.Log("Gravity direction: " + (Vector3.up == transform.up ? "Down" : "Up"));
                     var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
 
                     // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
@@ -125,7 +133,7 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "NotToTouch")
+        if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
             paused = true;
         }
