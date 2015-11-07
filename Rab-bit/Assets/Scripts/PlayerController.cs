@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float diveLength;
 	public float jumpVelocity;
+    public int jumpCountLimit;
 	public float horizontalVelocity;
 
     public bool pauseOnCollide;
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour {
     private KeyCode keyUp = KeyCode.UpArrow;
     private KeyCode keyS = KeyCode.S;
     private KeyCode keyDown = KeyCode.DownArrow;
+
+    public float yScreenCoo;
+    private int jumpCount = 0;
 
     // Use this for initialization
     void Start()
@@ -74,14 +78,20 @@ public class PlayerController : MonoBehaviour {
             {
                 if (Input.GetKeyDown(keyW) || Input.GetKeyDown(keyUp))
                 {
-                    // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
-                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    // ignore jump if limit was exceeded
+                    if (jumpCount < jumpCountLimit)
+                    {
+                        // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
+                        rb.velocity = new Vector2(rb.velocity.x, 0);
 
-                    // Inverse jump velocity if the gravity is inversed as well
-                    var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
+                        // Inverse jump velocity if the gravity is inversed as well
+                        var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
 
-                    rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
-                    audio.Play();
+                        rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
+                        audio.Play();
+
+                        jumpCount++;
+                    }                    
                 }
                 else if (Input.GetKeyDown(keyS) || Input.GetKeyDown(keyDown))
                 {
@@ -133,9 +143,21 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+        // Pause game on collision with tagged object
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
             paused = true;
+        }
+
+        Debug.Log(jumpCount);
+        Debug.Log(coll.gameObject.tag + " " + coll.gameObject.transform.position.y + " " + yScreenCoo + " " + rb.gravityScale);
+
+        // Reset jump counter if colliding with floor
+        if ((coll.gameObject.tag == "BarrierBottom" && coll.gameObject.transform.position.y == yScreenCoo && rb.gravityScale > 0)
+            || (coll.gameObject.tag == "BarrierTop" && coll.gameObject.transform.position.y == -yScreenCoo && rb.gravityScale <= 0)
+            )
+        {
+            jumpCount = 0;
         }
     }
 }

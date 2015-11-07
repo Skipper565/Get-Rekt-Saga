@@ -499,6 +499,14 @@ Prefab:
       propertyPath: pauseOnCollide
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11410108, guid: 249b0a1b6f5e64b7a866f0ded0726bcc, type: 2}
+      propertyPath: jumpCountLimit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410108, guid: 249b0a1b6f5e64b7a866f0ded0726bcc, type: 2}
+      propertyPath: yScreenCoo
+      value: -5.69999981
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 249b0a1b6f5e64b7a866f0ded0726bcc, type: 2}
   m_IsPrefabParent: 0
