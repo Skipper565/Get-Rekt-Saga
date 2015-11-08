@@ -109,7 +109,8 @@ public class PlayerController : MonoBehaviour {
             {
                 if (Input.GetKeyDown(keyW) || Input.GetKeyDown(keyUp))
                 {
-                    moveUp();                   
+                    moveUp();
+					Debug.Log("smrdis");
                 }
                 else if (Input.GetKeyDown(keyS) || Input.GetKeyDown(keyDown))
                 {
