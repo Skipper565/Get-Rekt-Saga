@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour {
     private KeyCode keyS = KeyCode.S;
     private KeyCode keyDown = KeyCode.DownArrow;
 
-    public float yScreenCoo;
     public static int jumpCount = 0;
 
     private float screenSplit;
@@ -110,7 +109,6 @@ public class PlayerController : MonoBehaviour {
                 if (Input.GetKeyDown(keyW) || Input.GetKeyDown(keyUp))
                 {
                     moveUp();
-					Debug.Log("smrdis");
                 }
                 else if (Input.GetKeyDown(keyS) || Input.GetKeyDown(keyDown))
                 {
@@ -150,9 +148,11 @@ public class PlayerController : MonoBehaviour {
             paused = true;
         }
 
+        Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
+
         // Reset jump counter if colliding with floor
-        if ((coll.gameObject.tag == "BarrierBottom" && coll.gameObject.transform.position.y == yScreenCoo && rb.gravityScale > 0)
-            || (coll.gameObject.tag == "BarrierTop" && coll.gameObject.transform.position.y == -yScreenCoo && rb.gravityScale <= 0)
+        if ((coll.gameObject.tag == "BarrierBottom" && rb.gravityScale > 0)
+            || (coll.gameObject.tag == "BarrierTop" && rb.gravityScale <= 0)
             )
         {
             jumpCount = 0;
