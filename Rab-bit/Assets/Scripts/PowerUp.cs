@@ -42,6 +42,7 @@ public class PowerUp : MonoBehaviour {
         gameObject.SetActive(false);
 
         PlayerController.swapGravity = true;
+        PlayerController.jumpCount = 0;
     }
 
     /*private void GameOver()

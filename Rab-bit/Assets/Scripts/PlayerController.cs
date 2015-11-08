@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour {
     private KeyCode keyDown = KeyCode.DownArrow;
 
     public float yScreenCoo;
-    private int jumpCount = 0;
+    public static int jumpCount = 0;
+
+    private float screenSplit;
 
     // Use this for initialization
     void Start()
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 		rb.freezeRotation = true;
 
         audio = GetComponent<AudioSource>();
+
+        screenSplit = Camera.main.pixelWidth/2;
     }
 
     // Update is called once per frame
@@ -73,47 +77,43 @@ public class PlayerController : MonoBehaviour {
                 swapGravity = false;
             }
 
-            //handle user input
+            //handle user touch input
+            if (Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Began)
+            {
+                if (Input.touches[0].position.x < screenSplit)
+                {
+                    if (rb.gravityScale > 0)
+                    {
+                        moveUp();
+                    }
+                    else 
+                    {
+                        moveDown();
+                    }
+                }
+                else
+                {
+                    if (rb.gravityScale > 0)
+                    {
+                        moveDown();
+                    }
+                    else
+                    {
+                        moveUp();
+                    }
+                }
+            }
+
+            //handle user key input
             if (!(Input.GetKey(keyW) && Input.GetKey(keyS)) || !(Input.GetKey(keyUp) && Input.GetKey(keyDown)))
             {
                 if (Input.GetKeyDown(keyW) || Input.GetKeyDown(keyUp))
                 {
-                    // ignore jump if limit was exceeded
-                    if (jumpCount < jumpCountLimit)
-                    {
-                        // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
-                        rb.velocity = new Vector2(rb.velocity.x, 0);
-
-                        // Inverse jump velocity if the gravity is inversed as well
-                        var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
-
-                        rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
-                        audio.Play();
-
-                        jumpCount++;
-                    }                    
+                    moveUp();                   
                 }
                 else if (Input.GetKeyDown(keyS) || Input.GetKeyDown(keyDown))
                 {
-                    //Debug.Log("Gravity direction: " + (Vector3.up == transform.up ? "Down" : "Up"));
-                    var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
-
-                    // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
-                    if (distanceToCollider <= diveLength)
-                    {
-                        //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, -transform.up).collider.name 
-                        //    + " Distance: " + distanceToCollider + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
-
-                        transform.Translate(Vector3.down * distanceToCollider);    // vector.down
-                    }
-                    else
-                    {
-                        // when diving, player´s position changes discretely (but visually with continuous motion animation)
-                        transform.Translate(Vector3.down * diveLength);
-                    }
-
-                    // set vertical velocity to zero so player slowly starts to fall after dive action
-                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    moveDown();
                 }
             }
 
@@ -125,19 +125,19 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Space restarts the game
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             paused = false;
             Application.LoadLevel(0);
         }
         // Escape quits the game
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             // Application.Quit() is ignored in the editor or the web player.
             Application.Quit();
 
             // Force the editor to quit the game
-            UnityEditor.EditorApplication.isPlaying = false;
+            //UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 
@@ -149,9 +149,6 @@ public class PlayerController : MonoBehaviour {
             paused = true;
         }
 
-        Debug.Log(jumpCount);
-        Debug.Log(coll.gameObject.tag + " " + coll.gameObject.transform.position.y + " " + yScreenCoo + " " + rb.gravityScale);
-
         // Reset jump counter if colliding with floor
         if ((coll.gameObject.tag == "BarrierBottom" && coll.gameObject.transform.position.y == yScreenCoo && rb.gravityScale > 0)
             || (coll.gameObject.tag == "BarrierTop" && coll.gameObject.transform.position.y == -yScreenCoo && rb.gravityScale <= 0)
@@ -159,5 +156,46 @@ public class PlayerController : MonoBehaviour {
         {
             jumpCount = 0;
         }
+    }
+
+    void moveUp()
+    {
+        // ignore jump if limit was exceeded
+        if (jumpCount < jumpCountLimit)
+        {
+            // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+
+            // Inverse jump velocity if the gravity is inversed as well
+            var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
+
+            rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
+            audio.Play();
+
+            jumpCount++;
+        }          
+    }
+
+    void moveDown()
+    {
+        //Debug.Log("Gravity direction: " + (Vector3.up == transform.up ? "Down" : "Up"));
+        var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
+
+        // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
+        if (distanceToCollider <= diveLength)
+        {
+            //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, -transform.up).collider.name 
+            //    + " Distance: " + distanceToCollider + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
+
+            transform.Translate(Vector3.down * distanceToCollider);    // vector.down
+        }
+        else
+        {
+            // when diving, player´s position changes discretely (but visually with continuous motion animation)
+            transform.Translate(Vector3.down * diveLength);
+        }
+
+        // set vertical velocity to zero so player slowly starts to fall after dive action
+        rb.velocity = new Vector2(rb.velocity.x, 0);
     }
 }
