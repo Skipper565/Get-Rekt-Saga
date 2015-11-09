@@ -4,8 +4,9 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
     
     public float fallSpeedLimit;
+    public float collisionTolerance;
 
-	public float diveLength;
+    public float diveLength;
 	public float jumpVelocity;
     public int jumpCountLimit;
 	public float horizontalVelocity;
@@ -185,10 +186,19 @@ public class PlayerController : MonoBehaviour {
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
         if (distanceToCollider <= diveLength)
         {
-            //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, -transform.up).collider.name 
+            // Uncomment this for determining distance of the player and the collider. Set value collisionTolerance accordingly.
+            //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, -transform.up).collider.name
             //    + " Distance: " + distanceToCollider + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
 
-            transform.Translate(Vector3.down * distanceToCollider);    // vector.down
+            if (distanceToCollider <= collisionTolerance)
+            {
+                // Do nothing - that prevents "jumping" into the floor.
+            }
+            else
+            {
+                // Else move player to the collider
+                transform.Translate(Vector3.down * distanceToCollider);
+            }
         }
         else
         {

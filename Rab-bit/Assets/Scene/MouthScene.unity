@@ -343,6 +343,22 @@ Prefab:
       propertyPath: yScreenCoo
       value: -5.63000011
       objectReference: {fileID: 0}
+    - target: {fileID: 11427508, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
+      propertyPath: collisionTolerance
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026328, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026328, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026328, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
   m_IsPrefabParent: 0
