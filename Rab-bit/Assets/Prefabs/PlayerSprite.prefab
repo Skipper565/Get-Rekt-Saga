@@ -143,12 +143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeedLimit: -16
+  collisionTolerance: 0
   diveLength: 2
   jumpVelocity: 2300
   jumpCountLimit: 0
   horizontalVelocity: 9
   pauseOnCollide: 0
-  yScreenCoo: 0
 --- !u!212 &21201144
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -197,6 +197,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: 2.04999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: collisionTolerance
+      value: .400000006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
