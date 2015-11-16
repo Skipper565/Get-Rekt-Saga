@@ -534,6 +534,10 @@ Prefab:
       propertyPath: gameOverMenu
       value: 
       objectReference: {fileID: 898036390}
+    - target: {fileID: 8246038, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 50b6455c0f8bf974d8b7576ea038dade, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec0b4d62c82c145f2972dd29f7b42c94, type: 2}
   m_IsPrefabParent: 0
