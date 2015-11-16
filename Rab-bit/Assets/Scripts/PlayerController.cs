@@ -12,13 +12,13 @@ public class PlayerController : MonoBehaviour {
 	public float horizontalVelocity;
 
     public bool pauseOnCollide;
+    public Canvas gameOverMenu;
 
     private AudioSource audio;
 
     private Rigidbody2D rb;
 
     public static bool swapGravity = false;
-    public static bool paused = false;
     private KeyCode keyW = KeyCode.W;
     private KeyCode keyUp = KeyCode.UpArrow;
     private KeyCode keyS = KeyCode.S;
@@ -37,13 +37,15 @@ public class PlayerController : MonoBehaviour {
 
         audio = GetComponent<AudioSource>();
 
+        gameOverMenu.enabled = false;
+
         screenSplit = Camera.main.pixelWidth/2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!paused)
+        if (!gameOverMenu.enabled)
         {
             //moveForward
             if (rb.velocity.x != horizontalVelocity)
@@ -127,7 +129,7 @@ public class PlayerController : MonoBehaviour {
         // Space restarts the game
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            paused = false;
+            gameOverMenu.enabled = false;
             Application.LoadLevel(0);
         }
         // Escape quits the game
@@ -146,10 +148,10 @@ public class PlayerController : MonoBehaviour {
         // Pause game on collision with tagged object
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
-            paused = true;
+            gameOverMenu.enabled = true;
         }
 
-        Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
+        //Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
 
         // Reset jump counter if colliding with floor
         if ((coll.gameObject.tag == "BarrierBottom" && rb.gravityScale > 0)
