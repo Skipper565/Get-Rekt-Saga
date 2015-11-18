@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class TeethClash : MonoBehaviour
 {
-    public Transform PlayerTransform;
+    private Transform PlayerTransform;
     public Transform otherTooth;
 
     private float speed;
@@ -25,6 +25,8 @@ public class TeethClash : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        PlayerTransform = GameObject.Find("PlayerSprite").transform;
+
         // This tooth is upper, the other one lower
         if (transform.position.y > otherTooth.position.y)
         {
