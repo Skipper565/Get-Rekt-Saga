@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class TeethClash : MonoBehaviour
 {
-    private Transform PlayerTransform;
     public Transform otherTooth;
 
     private float speed;
@@ -21,6 +20,9 @@ public class TeethClash : MonoBehaviour
     private Bounds lowerBounds;
     private int upperToothLowestY;
     private int lowerToothHighestY;
+
+    private Transform PlayerTransform;
+    private float delay;
 
     // Use this for initialization
     void Start()
@@ -53,6 +55,7 @@ public class TeethClash : MonoBehaviour
         }
 
         speed = 5f;
+        delay = 1f;
         collided = false;
     }
 
@@ -75,7 +78,7 @@ public class TeethClash : MonoBehaviour
         }
 
         // If the tooth is behind the player, move
-        if (PlayerTransform.transform.position.x >= transform.position.x)
+        if (PlayerTransform.transform.position.x - delay >= transform.position.x)
         {
             MoveTooth();
         }

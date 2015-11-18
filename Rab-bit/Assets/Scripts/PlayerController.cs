@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour {
         {
             gameOverMenu.enabled = false;
             Application.LoadLevel(0);
+            // TODO: when GameOver script was disabled in MouthScene4, unable to jump after Esc
         }
         // Escape quits the game
         else if (Input.GetKeyDown(KeyCode.Space))
