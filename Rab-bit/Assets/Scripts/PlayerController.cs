@@ -130,8 +130,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameOverMenu.enabled = false;
+            jumpCount = 0;
             Application.LoadLevel(0);
-            // TODO: when GameOver script was disabled in MouthScene4, unable to jump after Esc
         }
         // Escape quits the game
         else if (Input.GetKeyDown(KeyCode.Space))
@@ -141,25 +141,6 @@ public class PlayerController : MonoBehaviour {
 
             // Force the editor to quit the game
             //UnityEditor.EditorApplication.isPlaying = false;
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        // Pause game on collision with tagged object
-        if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
-        {
-            gameOverMenu.enabled = true;
-        }
-
-        //Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
-
-        // Reset jump counter if colliding with floor
-        if ((coll.gameObject.tag == "BarrierBottom" && rb.gravityScale > 0)
-            || (coll.gameObject.tag == "BarrierTop" && rb.gravityScale <= 0)
-            )
-        {
-            jumpCount = 0;
         }
     }
 
@@ -178,6 +159,7 @@ public class PlayerController : MonoBehaviour {
             audio.Play();
 
             jumpCount++;
+            //Debug.Log("JumpCount: " + jumpCount);
         }          
     }
 
@@ -185,13 +167,14 @@ public class PlayerController : MonoBehaviour {
     {
         //Debug.Log("Gravity direction: " + (Vector3.up == transform.up ? "Down" : "Up"));
         var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
+        var targetCollider = Physics2D.Raycast(transform.position, -transform.up).collider;
 
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
         if (distanceToCollider <= diveLength)
         {
             // Uncomment this for determining distance of the player and the collider. Set value collisionTolerance accordingly.
-            //Debug.Log("Collider: " + Physics2D.Raycast(transform.position, -transform.up).collider.name
-            //    + " Distance: " + distanceToCollider + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
+            Debug.Log("Move down: Collider: " + targetCollider.name + " Distance: " + distanceToCollider 
+                + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
 
             if (distanceToCollider <= collisionTolerance)
             {
@@ -211,5 +194,24 @@ public class PlayerController : MonoBehaviour {
 
         // set vertical velocity to zero so player slowly starts to fall after dive action
         rb.velocity = new Vector2(rb.velocity.x, 0);
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        // Pause game on collision with tagged object
+        if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
+        {
+            gameOverMenu.enabled = true;
+        }
+
+        //Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
+
+        // Reset jump counter if colliding with floor
+        if ((coll.gameObject.tag == "BarrierBottom" && rb.gravityScale > 0)
+            || (coll.gameObject.tag == "BarrierTop" && rb.gravityScale <= 0)
+            )
+        {
+            jumpCount = 0;
+        }
     }
 }
