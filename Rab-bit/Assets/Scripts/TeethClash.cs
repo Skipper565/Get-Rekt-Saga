@@ -6,23 +6,21 @@ using UnityEngine.EventSystems;
 public class TeethClash : MonoBehaviour
 {
     public Transform otherTooth;
+    private Transform PlayerTransform;
 
     private float speed;
-    private float sizeThisTooth;
-    private float sizeOtherTooth;
+    private float delay;
     private bool collided;
 
-    //private Bounds thisBounds;
-    //private Bounds otherBounds;
     private Transform upperTooth;
     private Transform lowerTooth;
     private Bounds upperBounds;
     private Bounds lowerBounds;
     private int upperToothLowestY;
     private int lowerToothHighestY;
+    private float sizeThisTooth;
+    private float sizeOtherTooth;
 
-    private Transform PlayerTransform;
-    private float delay;
 
     // Use this for initialization
     void Start()
@@ -92,5 +90,10 @@ public class TeethClash : MonoBehaviour
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, towardThisY, step);
         otherTooth.position = Vector3.MoveTowards(otherTooth.position, towardOtherY, step);
+    }
+
+    public void ResetCollisionAnimation()
+    {
+        Start();
     }
 }
