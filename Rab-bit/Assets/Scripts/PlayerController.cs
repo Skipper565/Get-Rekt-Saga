@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     private KeyCode keyUp = KeyCode.UpArrow;
     private KeyCode keyS = KeyCode.S;
     private KeyCode keyDown = KeyCode.DownArrow;
+    private KeyCode restartKey;
+    private KeyCode quitKey;
 
     public static int jumpCount = 0;
 
@@ -40,6 +42,14 @@ public class PlayerController : MonoBehaviour {
         gameOverMenu.enabled = false;
 
         screenSplit = Camera.main.pixelWidth/2;
+
+#if UNITY_ANDROID
+        restartKey = KeyCode.Escape;
+        quitKey = KeyCode.Space;
+#else
+        restartKey = KeyCode.Space;
+        quitKey = KeyCode.Escape;
+#endif
     }
 
     // Update is called once per frame
@@ -127,14 +137,14 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Space restarts the game
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(restartKey))
         {
             gameOverMenu.enabled = false;
             jumpCount = 0;
             Application.LoadLevel(0);
         }
         // Escape quits the game
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(quitKey))
         {
             // Application.Quit() is ignored in the editor or the web player.
             Application.Quit();
