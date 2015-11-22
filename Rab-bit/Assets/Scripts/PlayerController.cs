@@ -97,6 +97,18 @@ public class PlayerController : MonoBehaviour {
                     if (rb.gravityScale > 0)
                     {
                         moveUp();
+						// for transitions between animation states
+						if (GetComponent<Animator>().GetBool("InJumpOne") == false && GetComponent<Animator>().GetBool("InJumpTwo") == false) {
+							GetComponent<Animator>().SetBool("InJumpOne", true);
+						}
+						else if (GetComponent<Animator>().GetBool("InJumpOne") == true && GetComponent<Animator>().GetBool("InJumpTwo") == false) {
+							GetComponent<Animator>().SetBool("InJumpOne", false);
+							GetComponent<Animator>().SetBool("InJumpTwo", true);
+						}
+						else if (GetComponent<Animator>().GetBool("InJumpOne") == false && GetComponent<Animator>().GetBool("InJumpTwo") == true) {
+							GetComponent<Animator>().SetBool("InJumpOne", true);
+							GetComponent<Animator>().SetBool("InJumpTwo", false);
+						}
                     }
                     else 
                     {
@@ -112,6 +124,18 @@ public class PlayerController : MonoBehaviour {
                     else
                     {
                         moveUp();
+						// for transitions between animation states
+						if (GetComponent<Animator>().GetBool("InJumpOne") == false && GetComponent<Animator>().GetBool("InJumpTwo") == false) {
+							GetComponent<Animator>().SetBool("InJumpOne", true);
+						}
+						else if (GetComponent<Animator>().GetBool("InJumpOne") == true && GetComponent<Animator>().GetBool("InJumpTwo") == false) {
+							GetComponent<Animator>().SetBool("InJumpOne", false);
+							GetComponent<Animator>().SetBool("InJumpTwo", true);
+						}
+						else if (GetComponent<Animator>().GetBool("InJumpOne") == false && GetComponent<Animator>().GetBool("InJumpTwo") == true) {
+							GetComponent<Animator>().SetBool("InJumpOne", true);
+							GetComponent<Animator>().SetBool("InJumpTwo", false);
+						}
                     }
                 }
             }
