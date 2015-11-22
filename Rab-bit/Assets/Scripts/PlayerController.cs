@@ -122,6 +122,18 @@ public class PlayerController : MonoBehaviour {
                 if (Input.GetKeyDown(keyW) || Input.GetKeyDown(keyUp))
                 {
                     moveUp();
+					// for transitions between animation states
+					if (GetComponent<Animator>().GetBool("InJumpOne") == false && GetComponent<Animator>().GetBool("InJumpTwo") == false) {
+						GetComponent<Animator>().SetBool("InJumpOne", true);
+					}
+					else if (GetComponent<Animator>().GetBool("InJumpOne") == true && GetComponent<Animator>().GetBool("InJumpTwo") == false) {
+						GetComponent<Animator>().SetBool("InJumpOne", false);
+						GetComponent<Animator>().SetBool("InJumpTwo", true);
+					}
+					else if (GetComponent<Animator>().GetBool("InJumpOne") == false && GetComponent<Animator>().GetBool("InJumpTwo") == true) {
+						GetComponent<Animator>().SetBool("InJumpOne", true);
+						GetComponent<Animator>().SetBool("InJumpTwo", false);
+					}
                 }
                 else if (Input.GetKeyDown(keyS) || Input.GetKeyDown(keyDown))
                 {
@@ -212,6 +224,9 @@ public class PlayerController : MonoBehaviour {
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
             gameOverMenu.enabled = true;
+			GetComponent<Animator>().SetBool("IsCrashed",true);
+			GetComponent<Animator>().SetBool("InJumpOne",false);
+			GetComponent<Animator>().SetBool("InJumpTwo",false);
         }
 
         //Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
@@ -222,6 +237,8 @@ public class PlayerController : MonoBehaviour {
             )
         {
             jumpCount = 0;
+			GetComponent<Animator>().SetBool("InJumpOne",false);
+			GetComponent<Animator>().SetBool("InJumpTwo",false);
         }
     }
 }

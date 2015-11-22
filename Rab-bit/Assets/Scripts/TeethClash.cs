@@ -28,7 +28,7 @@ public class TeethClash : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        PlayerTransform = GameObject.Find("PlayerSprite").transform;
+        PlayerTransform = GameObject.Find("Player").transform;
 
         // This tooth is upper, the other one lower
         if (transform.position.y > otherTooth.position.y)
