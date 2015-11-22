@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 493708}
   - 212: {fileID: 21244814}
   - 61: {fileID: 6101786}
-  - 61: {fileID: 6139898}
   m_Layer: 0
   m_Name: tooth 7
   m_TagString: NotToTouch
@@ -158,7 +157,6 @@ GameObject:
   - 4: {fileID: 416092}
   - 212: {fileID: 21294650}
   - 61: {fileID: 6119496}
-  - 61: {fileID: 6196360}
   m_Layer: 0
   m_Name: tooth 8
   m_TagString: NotToTouch
@@ -359,7 +357,6 @@ GameObject:
   - 4: {fileID: 483166}
   - 212: {fileID: 21294980}
   - 61: {fileID: 6147032}
-  - 61: {fileID: 6155084}
   m_Layer: 0
   m_Name: tooth 10
   m_TagString: NotToTouch
@@ -393,7 +390,6 @@ GameObject:
   - 4: {fileID: 431172}
   - 212: {fileID: 21286936}
   - 61: {fileID: 6176036}
-  - 61: {fileID: 6173066}
   m_Layer: 0
   m_Name: tooth 11
   m_TagString: NotToTouch
@@ -445,7 +441,6 @@ GameObject:
   - 4: {fileID: 488034}
   - 212: {fileID: 21235266}
   - 61: {fileID: 6106262}
-  - 61: {fileID: 6107456}
   m_Layer: 0
   m_Name: tooth 1
   m_TagString: NotToTouch
@@ -686,7 +681,6 @@ GameObject:
   - 4: {fileID: 457230}
   - 212: {fileID: 21281942}
   - 61: {fileID: 6196108}
-  - 61: {fileID: 6126800}
   m_Layer: 0
   m_Name: tooth 5
   m_TagString: NotToTouch
@@ -816,7 +810,6 @@ GameObject:
   - 4: {fileID: 416820}
   - 212: {fileID: 21242956}
   - 61: {fileID: 6142592}
-  - 61: {fileID: 6133750}
   m_Layer: 0
   m_Name: tooth 9
   m_TagString: NotToTouch
@@ -864,7 +857,6 @@ GameObject:
   - 4: {fileID: 416012}
   - 212: {fileID: 21299160}
   - 61: {fileID: 6174340}
-  - 61: {fileID: 6106282}
   m_Layer: 0
   m_Name: tooth 4
   m_TagString: NotToTouch
@@ -962,7 +954,6 @@ GameObject:
   - 4: {fileID: 432478}
   - 212: {fileID: 21282476}
   - 61: {fileID: 6163074}
-  - 61: {fileID: 6143234}
   m_Layer: 0
   m_Name: tooth 2
   m_TagString: NotToTouch
@@ -980,7 +971,6 @@ GameObject:
   - 4: {fileID: 482342}
   - 212: {fileID: 21271500}
   - 61: {fileID: 6109098}
-  - 61: {fileID: 6108502}
   m_Layer: 0
   m_Name: tooth 12
   m_TagString: NotToTouch
@@ -1135,7 +1125,6 @@ GameObject:
   - 4: {fileID: 416688}
   - 212: {fileID: 21246936}
   - 61: {fileID: 6151840}
-  - 61: {fileID: 6181564}
   m_Layer: 0
   m_Name: tooth 3
   m_TagString: NotToTouch
@@ -1153,7 +1142,6 @@ GameObject:
   - 4: {fileID: 428880}
   - 212: {fileID: 21262582}
   - 61: {fileID: 6198592}
-  - 61: {fileID: 6172534}
   m_Layer: 0
   m_Name: tooth 6
   m_TagString: NotToTouch
@@ -2113,7 +2101,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6103690
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2139,46 +2127,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .0500000007}
   serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6106282
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 170056}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6107456
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141104}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
---- !u!61 &6108502
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177592}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6109098
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2191,7 +2140,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: -1.90734863e-06, y: 0}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6119496
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2204,7 +2153,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: -1.90734863e-06, y: 0}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6119800
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2224,19 +2173,6 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189454}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6126800
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 159966}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -2283,19 +2219,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: .0500000007}
   serializedVersion: 2
   m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6133750
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164976}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
 --- !u!61 &6133802
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2309,19 +2232,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.4599998, y: 1.8599999}
---- !u!61 &6139898
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100448}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
 --- !u!61 &6142592
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2334,20 +2244,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 4.76837158e-07}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
---- !u!61 &6143234
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177052}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6145698
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2399,7 +2296,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: -1.90734863e-06, y: 0}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6151840
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2412,7 +2309,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 1.90734863e-06, y: 0}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6153470
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2452,19 +2349,6 @@ BoxCollider2D:
   m_Offset: {x: 4.64520121, y: -5.59320068}
   serializedVersion: 2
   m_Size: {x: 29.2503986, y: 3.16143799}
---- !u!61 &6155084
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132534}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
 --- !u!61 &6163074
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2477,7 +2361,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.80999994}
 --- !u!61 &6172462
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2490,33 +2374,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .0500000007}
   serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6172534
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198950}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6173066
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134820}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6174308
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2542,7 +2400,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 4.76837158e-07}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6176036
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2555,26 +2413,13 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 4.76837158e-07}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6177406
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103558}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6181564
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198000}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -2607,20 +2452,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: -2.38418579e-07}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
---- !u!61 &6196360
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116452}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .0500000007}
-  serializedVersion: 2
-  m_Size: {x: .800000012, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!61 &6198592
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2633,7 +2465,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 4.76837158e-07}
   serializedVersion: 2
-  m_Size: {x: .929999948, y: 3.80999994}
+  m_Size: {x: .800000012, y: 3.69000006}
 --- !u!114 &11403312
 MonoBehaviour:
   m_ObjectHideFlags: 1
