@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{47D44FFB-E25A-FEE7-47F9-733D97E969E9}") = "Rab-bit", "Assembly-CSharp.csproj", "{0C1C5056-049D-9C7F-D0F8-ECFF30F577A7}"
+Project("{47D44FFB-E25A-FEE7-47F9-733D97E969E9}") = "Rab-bit", "Assembly-CSharp-vs.csproj", "{0C1C5056-049D-9C7F-D0F8-ECFF30F577A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,7 +17,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																						GlobalSection(MonoDevelopProperties) = preSolution
+																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
