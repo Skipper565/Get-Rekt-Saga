@@ -350,6 +350,10 @@ Prefab:
       objectReference: {fileID: 898036390}
     - target: {fileID: 8233772, guid: e0011f1a8013e487faa1e5c230f9c114, type: 2}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233772, guid: e0011f1a8013e487faa1e5c230f9c114, type: 2}
+      propertyPath: Mute
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

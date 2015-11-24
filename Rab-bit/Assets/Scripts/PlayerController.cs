@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour {
     
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     private AudioSource audio;
 
     private Rigidbody2D rb;
+    private DateTime deathTime;
 
     public static bool swapGravity = false;
     private KeyCode keyW = KeyCode.W;
@@ -171,13 +173,15 @@ public class PlayerController : MonoBehaviour {
                 rb.velocity = new Vector2(rb.velocity.x, fallSpeedLimit);
             }
         }
+        else if ((Input.touchCount > 0 || Input.anyKeyDown) && DateTime.Now.Subtract(deathTime).TotalSeconds > 0.5)
+        {
+            Restart();
+        }
 
         // Space restarts the game
         if (Input.GetKeyDown(restartKey))
         {
-            gameOverMenu.enabled = false;
-            jumpCount = 0;
-            Application.LoadLevel(0);
+            Restart();
         }
         // Escape quits the game
         else if (Input.GetKeyDown(quitKey))
@@ -248,6 +252,9 @@ public class PlayerController : MonoBehaviour {
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
             gameOverMenu.enabled = true;
+
+            deathTime = DateTime.Now;
+
 			GetComponent<Animator>().SetBool("IsCrashed",true);
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
@@ -264,5 +271,12 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
         }
+    }
+
+    void Restart()
+    {
+        gameOverMenu.enabled = false;
+        jumpCount = 0;
+        Application.LoadLevel(0);
     }
 }
