@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// Generates Barrier walls (top, bottom) and creates two types of obstacles
+// Generates Pavilon walls (top, bottom) and creates two types of obstacles
 
 // Warining - this solution has several limitations:
 // cant handle very high speeds of players x movement
-// prefabs of Barrier walls have to be slightly longer than camera view along x axis
+// prefabs of Pavilon walls have to be slightly longer than camera view along x axis
 
 public class BarriersGenerator : MonoBehaviour {
 
