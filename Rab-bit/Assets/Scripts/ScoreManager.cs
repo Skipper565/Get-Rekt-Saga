@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        distance = Camera.main.transform.position[0] * distanceModifier;
+        distance = Camera.main.transform.position[0] * distanceModifier * PlayerController.scoreCoeficient;
         scoreText.text = "" + (int)distance;
 	}
 }

@@ -2,6 +2,11 @@
 using System.Collections;
 using System;
 
+public enum GameDifficulty
+{
+    EASY, MODERATE, HARD
+}
+
 public class PlayerController : MonoBehaviour {
     
     public float fallSpeedLimit;
@@ -32,10 +37,13 @@ public class PlayerController : MonoBehaviour {
 
     private float screenSplit;
 
+    public static GameDifficulty gameDif = GameDifficulty.MODERATE;
+    public static float scoreCoeficient = 1;
+
     // Use this for initialization
     void Start()
     {
-		rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
 
@@ -57,6 +65,21 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            setDifficulty(GameDifficulty.EASY);
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            setDifficulty(GameDifficulty.MODERATE);
+        }
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            setDifficulty(GameDifficulty.HARD);
+        }
+#endif
+
         if (!gameOverMenu.enabled)
         {
             //moveForward
@@ -278,5 +301,28 @@ public class PlayerController : MonoBehaviour {
         gameOverMenu.enabled = false;
         jumpCount = 0;
         Application.LoadLevel(0);
+    }
+
+    public static void setDifficulty(GameDifficulty gd)
+    {
+        PlayerController.gameDif = gd;
+
+        switch (gd)
+        {
+            case GameDifficulty.EASY:
+                Time.timeScale = 0.5f;
+                scoreCoeficient = 0.5f;
+                break;
+            case GameDifficulty.MODERATE:
+                Time.timeScale = 0.75f;
+                scoreCoeficient = 0.75f;
+                break;
+            case GameDifficulty.HARD:
+                Time.timeScale = 1;
+                scoreCoeficient = 1f;
+                break;
+            default:
+                break;
+        }
     }
 }
