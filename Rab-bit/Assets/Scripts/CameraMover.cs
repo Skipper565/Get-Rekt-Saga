@@ -10,6 +10,7 @@ public class CameraMover : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
 		int xScreenPixel = Camera.main.pixelWidth; // get camera x pixel count
 		xScreenCoo = Camera.main.ScreenToWorldPoint(new Vector2(xScreenPixel,0))[0]*2f; // get world coodrinate screen size using xScreenPixelWidth
 //		Debug.Log(Camera.main.ScreenToWorldPoint(new Vector2(xScreenPixel,0)));
