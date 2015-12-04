@@ -9,23 +9,28 @@ public enum GameDifficulty
 
 public class PlayerController : MonoBehaviour {
     
+    //MOVEMENT
     public float fallSpeedLimit;
     public float collisionTolerance;
-
     public float diveLength;
 	public float jumpVelocity;
     public int jumpCountLimit;
 	public float horizontalVelocity;
 
+    public static int jumpCount = 0;
+
+    //GAME CONTROL
     public bool pauseOnCollide;
     public Canvas gameOverMenu;
 
-    private AudioSource audio;
-
-    private Rigidbody2D rb;
-    private DateTime deathTime;
-
+    //POWERUPS
     public static bool swapGravity = false;
+
+    //DIFFICULTY
+    public static GameDifficulty gameDif = GameDifficulty.MODERATE;
+    public static float scoreCoeficient = 1;
+
+    //PLAYER CONTROL
     private KeyCode keyW = KeyCode.W;
     private KeyCode keyUp = KeyCode.UpArrow;
     private KeyCode keyS = KeyCode.S;
@@ -33,12 +38,13 @@ public class PlayerController : MonoBehaviour {
     private KeyCode restartKey;
     private KeyCode quitKey;
 
-    public static int jumpCount = 0;
-
+    //OTHER
+    private AudioSource audio;
+    private Rigidbody2D rb;
+    private DateTime deathTime;
     private float screenSplit;
 
-    public static GameDifficulty gameDif = GameDifficulty.MODERATE;
-    public static float scoreCoeficient = 1;
+    public static float[] highScore = {0,0,0,0,0,0,0,0,0,0};
 
     // Use this for initialization
     void Start()
@@ -52,6 +58,16 @@ public class PlayerController : MonoBehaviour {
         gameOverMenu.enabled = false;
 
         screenSplit = Camera.main.pixelWidth/2;
+
+        for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
+        {
+            highScore[i] = PlayerPrefs.GetFloat("score_" + ((GameDifficulty) i).ToString());
+
+#if UNITY_EDITOR
+            //Debug.ClearDeveloperConsole();
+            Debug.Log("score_" + ((GameDifficulty)i).ToString() + " " + highScore[i]);
+#endif
+        }
 
 #if UNITY_ANDROID
         restartKey = KeyCode.Escape;
@@ -281,6 +297,13 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("IsCrashed",true);
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
+
+            //Handle and save score
+            if (highScore[(int)gameDif] < ScoreManager.distance)
+            {
+                highScore[(int)gameDif] = ScoreManager.distance;
+                PlayerPrefs.SetFloat("score_" + gameDif.ToString(), highScore[(int)gameDif]);
+            }
         }
 
         //Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
@@ -324,5 +347,15 @@ public class PlayerController : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    public static float getHighScore()
+    {
+        return highScore[(int)gameDif];
+    }
+
+    public static float[] getAllHighScores()
+    {
+        return highScore;
     }
 }

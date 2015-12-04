@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour {
     public Text scoreText;
     public float distanceModifier;
 
-    private float distance = 0;
+    public static float distance = 0;
 
 	// Use this for initialization
 	void Start () {
