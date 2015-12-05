@@ -46,6 +46,19 @@ public class PlayerController : MonoBehaviour {
 
     public static float[] highScore = {0,0,0,0,0,0,0,0,0,0};
 
+    void Awake()
+    {
+        for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
+        {
+            highScore[i] = PlayerPrefs.GetFloat("score_" + ((GameDifficulty)i).ToString());
+
+#if UNITY_EDITOR
+            //Debug.ClearDeveloperConsole();
+            Debug.Log("score_" + ((GameDifficulty)i).ToString() + " " + highScore[i]);
+#endif
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -58,16 +71,6 @@ public class PlayerController : MonoBehaviour {
         gameOverMenu.enabled = false;
 
         screenSplit = Camera.main.pixelWidth/2;
-
-        for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
-        {
-            highScore[i] = PlayerPrefs.GetFloat("score_" + ((GameDifficulty) i).ToString());
-
-#if UNITY_EDITOR
-            //Debug.ClearDeveloperConsole();
-            Debug.Log("score_" + ((GameDifficulty)i).ToString() + " " + highScore[i]);
-#endif
-        }
 
 #if UNITY_ANDROID
         restartKey = KeyCode.Escape;
