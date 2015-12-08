@@ -9,7 +9,7 @@ public class GameStateController : MonoBehaviour {
     private GameObject mainMenu;
 
     // Use this for initialization
-    void Awake() {
+    void Start() {
         gameManager = GameManager.Instance;
         gameManager.OnStateChange += ManageStateChange;
 

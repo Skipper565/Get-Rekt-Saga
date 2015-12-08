@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public static GameObject GameOverMenu;
     public static GameObject MainMenu;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance)
         {

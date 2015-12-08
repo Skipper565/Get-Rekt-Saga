@@ -48,8 +48,6 @@ public class PlayerController : MonoBehaviour {
 
     void Awake()
     {
-        gameManager = GameManager.Instance;
-
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
             highScore[i] = PlayerPrefs.GetFloat("score_" + ((GameDifficulty)i).ToString());
@@ -64,6 +62,8 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        gameManager = GameManager.Instance;
+
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
