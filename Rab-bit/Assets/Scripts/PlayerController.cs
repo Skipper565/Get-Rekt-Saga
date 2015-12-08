@@ -9,7 +9,7 @@ public enum GameDifficulty
 
 public class PlayerController : MonoBehaviour {
     
-    //MOVEMENT
+    // MOVEMENT
     public float fallSpeedLimit;
     public float collisionTolerance;
     public float diveLength;
@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour {
 
     public static int jumpCount = 0;
 
-    //GAME CONTROL
+    // GAME CONTROL
+    GameManager gameManager;
     public bool pauseOnCollide;
-    public Canvas gameOverMenu;
 
-    //POWERUPS
+    // POWERUPS
     public static bool swapGravity = false;
 
-    //DIFFICULTY
+    // DIFFICULTY
     public static GameDifficulty gameDif = GameDifficulty.MODERATE;
     public static float scoreCoeficient = 1;
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     private KeyCode restartKey;
     private KeyCode quitKey;
 
-    //OTHER
+    // OTHER
     private AudioSource audio;
     private Rigidbody2D rb;
     private DateTime deathTime;
@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour {
 
     void Awake()
     {
+        gameManager = GameManager.Instance;
+
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
             highScore[i] = PlayerPrefs.GetFloat("score_" + ((GameDifficulty)i).ToString());
@@ -67,8 +69,6 @@ public class PlayerController : MonoBehaviour {
 		rb.freezeRotation = true;
 
         audio = GetComponent<AudioSource>();
-
-        gameOverMenu.enabled = false;
 
         screenSplit = Camera.main.pixelWidth/2;
 
@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour {
         }
 #endif
 
-        if (!gameOverMenu.enabled)
+        if (gameManager.gameState != GameState.GameOver)
         {
             //moveForward
             if (rb.velocity.x != horizontalVelocity)
@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour {
         // Pause game on collision with tagged object
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
-            gameOverMenu.enabled = true;
+            gameManager.SetGameState(GameState.GameOver);
 
             deathTime = DateTime.Now;
 
@@ -324,7 +324,8 @@ public class PlayerController : MonoBehaviour {
 
     void Restart()
     {
-        gameOverMenu.enabled = false;
+        //gameOverMenu.enabled = false;
+        gameManager.SetGameState(GameState.Playing);
         jumpCount = 0;
         Application.LoadLevel(0);
     }
