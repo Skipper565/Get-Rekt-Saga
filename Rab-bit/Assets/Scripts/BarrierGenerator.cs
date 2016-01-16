@@ -86,7 +86,8 @@ public class BarrierGenerator : MonoBehaviour
         // Set second barrier just to be sure; generate next barriers with Update()
         GenerateBarrier();
 
-        currentObstacleRepetition = 0;
+        // Two barriers generated so far
+        currentObstacleRepetition = 2;
         xGenerationOffset = 5;
     }
 
