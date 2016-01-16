@@ -12,15 +12,18 @@ public class BarrierGenerator : MonoBehaviour
     public int obstacleRepetition;
     private int currentObstacleRepetition;
 
-    // List of barriers; each contain barriers of exactly one barriers
+    // List of barriers; each contain barriers of exactly one type
     // Add new list for each new pavilon
     public List<GameObject> listOfTeethBarriers;
-    //public List<GameObject> listOfPavilon2Barriers;
+    public List<GameObject> listOfSeaBarriers;
+    //public List<GameObject> listOfAnotherPavilonBarriers;
+    // TODO: Add other list
 
     private Pavilon firstPavilon;
     private Pavilon currentPavilon;
     TeethPavilon teethPavilon;
-    //TeethPavilon secondPavilon;
+    SeaPavilon seaPavilon;
+    //TeethPavilon anotherPavilon;
     List<Pavilon> listOfAllPavilons; 
     // TODO: Add other pavilons
 
@@ -41,13 +44,14 @@ public class BarrierGenerator : MonoBehaviour
     void Start()
     {
         teethPavilon = new TeethPavilon(listOfTeethBarriers);
-        //secondPavilon = new TeethPavilon(listOfPavilon2Barriers);
+        seaPavilon = new SeaPavilon(listOfSeaBarriers);
+        //secondPavilon = new AnotherPavilon(listOfAnotherPavilonBarriers);
         // TODO: Initialize other pavilons by their type (PavilonType : Pavilon)
         currentPavilon = teethPavilon;
 
         // Load all barriers and their initial position
         // TODO: Add other pavilons to the list of all pavilons
-        listOfAllPavilons = new List<Pavilon>() { teethPavilon/*, secondPavilon*/ };
+        listOfAllPavilons = new List<Pavilon>() { teethPavilon, seaPavilon/*, anotherPavilon*/ };
 
         foreach (var pavilon in listOfAllPavilons)
         {
@@ -58,7 +62,7 @@ public class BarrierGenerator : MonoBehaviour
             }
         }
         
-        // Deterministicaly set the first barriers as teeth barriers
+        // Deterministically set the first barriers as teeth barriers
         firstPavilon = teethPavilon;
         firstBarrier = firstPavilon.GetBarriers().First();
 
@@ -102,15 +106,18 @@ public class BarrierGenerator : MonoBehaviour
         }
 
         // Pick new barriers if 
-        if (currentObstacleRepetition >= (obstacleRepetition - 1))
+        if (currentObstacleRepetition >= obstacleRepetition)
         {
             ChangePavilon();
+            Debug.Log("Current repetition: " + currentObstacleRepetition + ", obstacle repetition: " + obstacleRepetition);
             currentObstacleRepetition = 0;
         }
     }
 
     private float getNextPositionX()
     {
+        Debug.Log("Next position X: " + (lastBarrier.transform.position.x + barrierLengthInCurrentPavilon));
+        Debug.Log("Barrier length: " + barrierLengthInCurrentPavilon);
         return lastBarrier.transform.position.x + barrierLengthInCurrentPavilon;
     }
 
