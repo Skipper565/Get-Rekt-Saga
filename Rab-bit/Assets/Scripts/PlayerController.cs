@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	public float jumpVelocity;
     public int jumpCountLimit;
 	public float horizontalVelocity;
+    public float waveHopVelocity;
 
     public static int jumpCount = 0;
 
@@ -319,6 +320,14 @@ public class PlayerController : MonoBehaviour {
             jumpCount = 0;
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
+
+            if (coll.gameObject.name.StartsWith("seaWaves"))
+            {
+                //Debug.Log("Collided with" + coll.gameObject.name);
+                rb.AddForce(new Vector2(0, waveHopVelocity));
+
+                //TODO add wave splash sound 
+            }
         }
     }
 
