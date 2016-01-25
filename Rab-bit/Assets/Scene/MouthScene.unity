@@ -348,6 +348,22 @@ Prefab:
       propertyPath: m_Name
       value: SeaSectionTest 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 420316, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -.0733986273
+      objectReference: {fileID: 0}
+    - target: {fileID: 420316, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .997302711
+      objectReference: {fileID: 0}
+    - target: {fileID: 420316, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -6.70934772
+      objectReference: {fileID: 0}
+    - target: {fileID: 420316, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.57593775
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
   m_IsPrefabParent: 0
@@ -1076,7 +1092,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461738, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
@@ -1242,7 +1258,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 461738, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 151064, guid: 90e271a34d209614aba10c09dd4de1db, type: 2}
       propertyPath: m_Name
