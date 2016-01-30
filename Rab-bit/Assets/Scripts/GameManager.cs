@@ -3,6 +3,7 @@ using System.Collections;
 
 public enum GameState
 {
+    About,
     Menu,
     Playing,
     Pause,
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
                     GameObject manager = new GameObject("_gamemanager");
                     DontDestroyOnLoad(manager);
                     _instance = manager.AddComponent<GameManager>();
+                    _instance.gameState = GameState.Menu;
                 }
             }
             return _instance;

@@ -1093,7 +1093,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2018491760}
-        m_MethodName: Clicked
+        m_MethodName: ClickedBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1486,7 +1486,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2006447290}
-        m_MethodName: Clicked
+        m_MethodName: ClickedPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1972,7 +1972,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2006447290}
-        m_MethodName: Clicked
+        m_MethodName: ClickedAbout
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2808,7 +2808,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2006447290}
-        m_MethodName: Clicked
+        m_MethodName: ClickedPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3657,7 +3657,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2006447290}
-        m_MethodName: Clicked
+        m_MethodName: ClickedMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

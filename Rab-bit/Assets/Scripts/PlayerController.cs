@@ -216,10 +216,11 @@ public class PlayerController : MonoBehaviour {
                 rb.velocity = new Vector2(rb.velocity.x, fallSpeedLimit);
             }
         }
-        else if ((Input.touchCount > 0 || Input.anyKeyDown) && DateTime.Now.Subtract(deathTime).TotalSeconds > 0.5)
+        // Disabled for now because of the menu
+        /*else if ((Input.touchCount > 0 || Input.anyKeyDown) && DateTime.Now.Subtract(deathTime).TotalSeconds > 0.5)
         {
             Restart();
-        }
+        }*/
 
         // Space restarts the game
         if (Input.GetKeyDown(restartKey))
@@ -331,10 +332,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Restart()
+    public void Restart()
     {
         //gameOverMenu.enabled = false;
-        gameManager.SetGameState(GameState.Playing);
         jumpCount = 0;
         Application.LoadLevel(0);
     }

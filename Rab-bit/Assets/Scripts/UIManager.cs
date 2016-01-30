@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public static GameObject GameOverMenu;
     public static GameObject MainMenu;
+    public static GameObject AboutMenu;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
             Instance = this;
             GameOverMenu = transform.FindChild("GameOverMenu").gameObject;
             MainMenu = transform.FindChild("MainMenu").gameObject;
+            AboutMenu = transform.FindChild("AboutMenu").gameObject;
         }
     }
 }
