@@ -8,6 +8,7 @@ public class GameStateController : MonoBehaviour {
     private GameObject gameOverMenu;
     private GameObject mainMenu;
     private GameObject aboutMenu;
+    private GameObject hudMenu;
 
     private Animator gameOverMenuAnimator;
     private Animator mainMenuAnimator;
@@ -27,6 +28,7 @@ public class GameStateController : MonoBehaviour {
         gameOverMenu = UIManager.GameOverMenu;
         mainMenu = UIManager.MainMenu;
         aboutMenu = UIManager.AboutMenu;
+        hudMenu = UIManager.HudMenu;
 
         // Load menu animators
         gameOverMenuAnimator = GetMenuAnimator(gameOverMenu);
@@ -38,8 +40,13 @@ public class GameStateController : MonoBehaviour {
 
         Debug.Log(gameManager.gameState);
         oldState = gameManager.gameState;
-        
-        // Go to menu when the game starts, not when it's restarted
+
+        // Disable all menus; enable them as their events are fired
+        mainMenu.SetActive(false);
+        aboutMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
+
+        // Go to menu when the game starts, but don't when it's just restarted
         if (gameManager.gameState == GameState.NewGame)
         {
             gameManager.SetGameState(GameState.Menu);
@@ -49,21 +56,17 @@ public class GameStateController : MonoBehaviour {
         {
             gameManager.OnStateChange -= ManageStateChange;
         }
+    }
 
-        aboutMenu.SetActive(false);
-        gameOverMenu.SetActive(false);
-
-        //gameOverMenu.transform.FindChild("Panel").GetComponent<CanvasRenderer>().SetAlpha(0);
-        //gameOverMenu.transform.localScale = new Vector2(0, 0);
-        /*var cg = canvas.GetComponent<CanvasGroup>();
-        cg.alpha = 0;
-        cg.interactable = false;*/
+    void Update()
+    {
+        // Fix the missing cameras problem
+        SetAllMenuCameras();
     }
 
     public void ManageStateChange()
     {
         Debug.Log("Changing game state to " + gameManager.gameState);
-        //Debug.Break();
 
         Debug.Log("Old: " + oldState + ", new:" + gameManager.gameState);
         if (oldState == gameManager.gameState)
@@ -95,13 +98,18 @@ public class GameStateController : MonoBehaviour {
 
     private void InAboutMenu()
     {
-        aboutMenu.SetActive(true);
-
+        // Always accessed from main menu
         mainMenuAnimator.SetTrigger("hideMenu");
-        aboutMenuAnimator.SetTrigger("showMenu");
 
-        //gameOverMenu.SetActive(false);
-        //mainMenu.SetActive(true);
+        if (aboutMenu.activeSelf)
+        {
+            aboutMenuAnimator.SetTrigger("showMenu");
+        }
+        else
+        {
+            aboutMenu.SetActive(true);
+        }
+
         Time.timeScale = 0;
     }
 
@@ -113,10 +121,21 @@ public class GameStateController : MonoBehaviour {
         }
         else if (oldState == GameState.GameOver)
         {
+            hudMenu.SetActive(true);
             gameOverMenuAnimator.SetTrigger("hideMenu");
         }
 
-        mainMenuAnimator.SetTrigger("showMenu");
+        if (mainMenu.activeSelf)
+        {
+            mainMenuAnimator.SetTrigger("showMenu");
+            Debug.Log("yo1");
+        }
+        else
+        {
+            mainMenu.SetActive(true);
+            Debug.Log("yo2");
+        }
+
         Time.timeScale = 0;
         Debug.Log("MENU");
     }
@@ -129,6 +148,7 @@ public class GameStateController : MonoBehaviour {
         }
         else if (oldState == GameState.GameOver)
         {
+            hudMenu.SetActive(true);
             gameOverMenuAnimator.SetTrigger("hideMenu");
         }
 
@@ -151,11 +171,43 @@ public class GameStateController : MonoBehaviour {
     {
         //gameOverMenu.transform.FindChild("Panel").GetComponent<CanvasRenderer>().SetAlpha(100);
         //gameOverMenu.transform.localScale = new Vector2(1, 1);
-        gameOverMenu.SetActive(true);
-        gameOverMenuAnimator.SetTrigger("showMenu");
+
+        //gameOverMenu.SetActive(true);
+        //gameOverMenuAnimator.SetTrigger("showMenu");
+
+        //gameOverMenuAnimator.SetTrigger("showMenu");
+        //mainMenuAnimator.SetTrigger("hideMenu");
+        //aboutMenuAnimator.SetTrigger("hideMenu");
+
+        hudMenu.SetActive(false);
+
+        if (gameOverMenu.activeSelf)
+        {
+            gameOverMenuAnimator.SetTrigger("showMenu");
+            Debug.Log("Game over trigger");
+        }
+        else
+        {
+            gameOverMenu.SetActive(true);
+            Debug.Log("Game over set true");
+        }
+
         Time.timeScale = 1;
         Debug.Log("GAME OVER");
-        Debug.Log("Old in game over: " + oldState);
+    }
+
+    public void SetMenuCamera(GameObject menu)
+    {
+        var canvas = menu.GetComponent<Canvas>();
+        canvas.worldCamera = Camera.main;
+    }
+
+    public void SetAllMenuCameras()
+    {
+        SetMenuCamera(gameOverMenu);
+        SetMenuCamera(mainMenu);
+        SetMenuCamera(aboutMenu);
+        SetMenuCamera(hudMenu);
     }
 
     public Animator GetMenuAnimator(GameObject menu)

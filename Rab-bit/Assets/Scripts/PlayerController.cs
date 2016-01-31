@@ -225,7 +225,8 @@ public class PlayerController : MonoBehaviour {
         // Space restarts the game
         if (Input.GetKeyDown(restartKey))
         {
-            Restart();
+            //Restart();
+            gameManager.SetGameState(GameState.Playing);
         }
         // Escape quits the game
         else if (Input.GetKeyDown(quitKey))
@@ -297,9 +298,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (gameManager.gameState != GameState.GameOver)
             {
-                Debug.Log("BEFORE");
                 gameManager.SetGameState(GameState.GameOver);
-                Debug.Log("AFTER");
             }
 
             deathTime = DateTime.Now;

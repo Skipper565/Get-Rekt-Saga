@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public static GameObject GameOverMenu;
     public static GameObject MainMenu;
     public static GameObject AboutMenu;
+    public static GameObject HudMenu;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
             GameOverMenu = transform.FindChild("GameOverMenu").gameObject;
             MainMenu = transform.FindChild("MainMenu").gameObject;
             AboutMenu = transform.FindChild("AboutMenu").gameObject;
+            HudMenu = transform.FindChild("HUD Canvas").gameObject;
         }
     }
 }

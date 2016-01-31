@@ -5,7 +5,6 @@ using System.Collections;
 public class MenuController : MonoBehaviour
 {
     private GameManager gameManager;
-    private GameObject button;
 
     void Awake()
     {
