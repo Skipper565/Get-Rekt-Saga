@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     static GameManager _instance;
     public event OnStateChangeHandler OnStateChange;
     public GameState gameState { get; private set; }
+    public GameState previousGameState { get; private set; }
 
     // Get only single GameManager instance
     public static GameManager Instance
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
                     DontDestroyOnLoad(manager);
                     _instance = manager.AddComponent<GameManager>();
                     _instance.gameState = GameState.NewGame;
+                    _instance.gameState = GameState.NewGame;
                 }
             }
             return _instance;
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameState gameState)
     {
+        previousGameState = this.gameState;
         this.gameState = gameState;
 
         if (OnStateChange != null)
