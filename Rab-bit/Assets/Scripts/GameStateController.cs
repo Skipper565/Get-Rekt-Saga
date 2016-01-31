@@ -37,15 +37,17 @@ public class GameStateController : MonoBehaviour {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
         Debug.Log(gameManager.gameState);
-        if (gameManager.gameState != GameState.Menu)
-        {
-            gameManager.SetGameState(GameState.Playing);
-            oldState = GameState.Playing;
-        }
-        else
+        oldState = gameManager.gameState;
+        
+        // Go to menu when the game starts, not when it's restarted
+        if (gameManager.gameState == GameState.NewGame)
         {
             gameManager.SetGameState(GameState.Menu);
-            oldState = GameState.Menu;
+        }
+        // Unsubscribe from the event if the game was restarted to prevent duplicate event calls
+        else
+        {
+            gameManager.OnStateChange -= ManageStateChange;
         }
 
         aboutMenu.SetActive(false);
@@ -61,6 +63,13 @@ public class GameStateController : MonoBehaviour {
     public void ManageStateChange()
     {
         Debug.Log("Changing game state to " + gameManager.gameState);
+        //Debug.Break();
+
+        Debug.Log("Old: " + oldState + ", new:" + gameManager.gameState);
+        if (oldState == gameManager.gameState)
+        {
+            Debug.Log("GAME STATES ARE EQUAL!!!");
+        }
 
         switch (gameManager.gameState)
         {
@@ -109,6 +118,7 @@ public class GameStateController : MonoBehaviour {
 
         mainMenuAnimator.SetTrigger("showMenu");
         Time.timeScale = 0;
+        Debug.Log("MENU");
     }
 
     private void WhilePlaying()
@@ -116,15 +126,20 @@ public class GameStateController : MonoBehaviour {
         if (oldState == GameState.Menu)
         {
             mainMenuAnimator.SetTrigger("hideMenu");
-            playerController.Restart();
         }
         else if (oldState == GameState.GameOver)
         {
             gameOverMenuAnimator.SetTrigger("hideMenu");
-            playerController.Restart();
         }
 
         Time.timeScale = 1;
+        Debug.Log("PLAY");
+
+        if (oldState != GameState.Pause)
+        {
+            //gameManager.OnStateChange -= ManageStateChange;
+            playerController.Restart();
+        }
     }
 
     private void WhilePaused()
@@ -138,7 +153,9 @@ public class GameStateController : MonoBehaviour {
         //gameOverMenu.transform.localScale = new Vector2(1, 1);
         gameOverMenu.SetActive(true);
         gameOverMenuAnimator.SetTrigger("showMenu");
-        Time.timeScale = 0;
+        Time.timeScale = 1;
+        Debug.Log("GAME OVER");
+        Debug.Log("Old in game over: " + oldState);
     }
 
     public Animator GetMenuAnimator(GameObject menu)

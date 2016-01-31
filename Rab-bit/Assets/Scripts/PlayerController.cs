@@ -295,7 +295,12 @@ public class PlayerController : MonoBehaviour {
         // Pause game on collision with tagged object
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
-            gameManager.SetGameState(GameState.GameOver);
+            if (gameManager.gameState != GameState.GameOver)
+            {
+                Debug.Log("BEFORE");
+                gameManager.SetGameState(GameState.GameOver);
+                Debug.Log("AFTER");
+            }
 
             deathTime = DateTime.Now;
 

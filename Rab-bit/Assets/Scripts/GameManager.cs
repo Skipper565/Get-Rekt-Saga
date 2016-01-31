@@ -8,6 +8,7 @@ public enum GameState
     Playing,
     Pause,
     GameOver,
+    NewGame,
 }
 
 public delegate void OnStateChangeHandler();
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
                     GameObject manager = new GameObject("_gamemanager");
                     DontDestroyOnLoad(manager);
                     _instance = manager.AddComponent<GameManager>();
-                    _instance.gameState = GameState.Menu;
+                    _instance.gameState = GameState.NewGame;
                 }
             }
             return _instance;
