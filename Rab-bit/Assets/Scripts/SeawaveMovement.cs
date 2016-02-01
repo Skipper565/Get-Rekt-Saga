@@ -10,7 +10,7 @@ public class SeawaveMovement : MonoBehaviour
     private float previousTime;
     public float deltaTime { get; private set; }
 
-    void Awake()
+    void Start()
     {
         previousTime = Time.realtimeSinceStartup;
     }

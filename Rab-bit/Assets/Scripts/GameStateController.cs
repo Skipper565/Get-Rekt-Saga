@@ -144,26 +144,11 @@ public class GameStateController : MonoBehaviour {
 
     private void WhilePlaying()
     {
-        // Loop for waiting 1 second
-
-        /*if (gameManager.previousGameState == GameState.Menu)
-        {
-            mainMenuAnimator.SetTrigger("hideMenu");
-            Debug.Log("hide main menu");
-        }
-        else if (gameManager.previousGameState == GameState.GameOver)
-        {
-            hudMenu.SetActive(true);
-            gameOverMenuAnimator.SetTrigger("hideMenu");
-            Debug.Log("hide gameover menu");
-        }*/
-
         Time.timeScale = 1;
         Debug.Log("PLAY");
 
         if (gameManager.previousGameState != GameState.Pause)
         {
-            //gameManager.OnStateChange -= ManageStateChange;
             playerController.Restart();
         }
     }

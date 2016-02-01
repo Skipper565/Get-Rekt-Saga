@@ -110,15 +110,15 @@ public class BarrierGenerator : MonoBehaviour
         if (currentObstacleRepetition >= obstacleRepetition)
         {
             ChangePavilon();
-            Debug.Log("Current repetition: " + currentObstacleRepetition + ", obstacle repetition: " + obstacleRepetition);
+            //Debug.Log("Current repetition: " + currentObstacleRepetition + ", obstacle repetition: " + obstacleRepetition);
             currentObstacleRepetition = 0;
         }
     }
 
     private float getNextPositionX()
     {
-        Debug.Log("Next position X: " + (lastBarrier.transform.position.x + barrierLengthInCurrentPavilon));
-        Debug.Log("Barrier length: " + barrierLengthInCurrentPavilon);
+        //Debug.Log("Next position X: " + (lastBarrier.transform.position.x + barrierLengthInCurrentPavilon));
+        //Debug.Log("Barrier length: " + barrierLengthInCurrentPavilon);
         return lastBarrier.transform.position.x + barrierLengthInCurrentPavilon;
     }
 

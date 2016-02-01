@@ -6,16 +6,10 @@ public class MenuController : MonoBehaviour
 {
     private GameManager gameManager;
 
-    void Awake()
+    void Start()
     {
         gameManager = GameManager.Instance;
     }
-
-    /*public void Clicked()
-    {
-        Debug.Log("Clicked");
-        gameManager.SetGameState(GameState.Playing);
-    }*/
 
     public void ClickedPlay()
     {
