@@ -73,24 +73,29 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
     private DateTime deathTime;
     private float screenSplit;
-    public static string nickName;
+    public static string nickName = "default";
 
-    public int numberOfTopScores;
+    public static int numberOfTopScores = 3;
 
-    private static DifficultyScore[] localHighScore = { new DifficultyScore(), new DifficultyScore(), new DifficultyScore()};
-    private static DifficultyScore[] globalHighScore = { new DifficultyScore(), new DifficultyScore(), new DifficultyScore() };
+    public static string urlGet = "http://grs.pe.hu/app/loadScore.php?difficulty=";
+    public static string urlSet = "http://grs.pe.hu/app/saveScore.php?";
+
+    private static DifficultyScore[] localHighScore = { new DifficultyScore(), new DifficultyScore(), new DifficultyScore(), new DifficultyScore() };
+    private static DifficultyScore[] globalHighScore = { new DifficultyScore(), new DifficultyScore(), new DifficultyScore(), new DifficultyScore() };
 
     //public static float[] localHighScore = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     //public static float[] globalHighScore = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
     void Awake()
     {
+        //getGlobalHighScores();
+
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
             float tempScore;
             string tempNick;
 
-            string debugLog = "" + ((GameDifficulty)i).ToString();
+            string debugLog = "LOCAL " + ((GameDifficulty)i).ToString();
 
             localHighScore[i].score = new List<Tuple<float, string>>();
 
@@ -109,7 +114,19 @@ public class PlayerController : MonoBehaviour {
 #if UNITY_EDITOR
             //Debug.ClearDeveloperConsole();
 
-            Debug.Log("On start:" + localHighScore[1].score.Count);
+            //Debug.Log("On start:" + localHighScore[1].score.Count);
+            Debug.Log(debugLog);
+
+            debugLog = "GLOBAL " + ((GameDifficulty)i).ToString();
+
+            for (int scorePos = 0; scorePos < numberOfTopScores; scorePos++)
+            {
+                tempScore = globalHighScore[i].score[scorePos].First;
+                tempNick = globalHighScore[i].score[scorePos].Second;
+
+                debugLog += " " + tempNick + "_" + tempScore + " ";
+            }
+
             Debug.Log(debugLog);
 #endif
         }
@@ -364,23 +381,12 @@ public class PlayerController : MonoBehaviour {
 
             //Handle and save score
             nickName = PlayerPrefs.GetString("playerName");
-
-            PlayerPrefs.SetInt("lastScore", (int)ScoreManager.distance);
-
-            localHighScore[(int)gameDif].score.Add(new Tuple<float, string>(ScoreManager.distance, nickName));
-            localHighScore[(int)gameDif].score.Sort(
-                delegate(Tuple<float, string> x, Tuple<float, string> y) 
-                {
-                    return x.First.CompareTo(y.First);
-                });
-            localHighScore[(int) gameDif].score.Reverse();
-            localHighScore[(int)gameDif].score.RemoveAt(numberOfTopScores);
-
-            for (int i = 0; i < numberOfTopScores; i++)
+            if (nickName == "")
             {
-                PlayerPrefs.SetFloat("scoreF_" + gameDif.ToString()+ "_" + i, localHighScore[(int)gameDif].score[i].First);
-                PlayerPrefs.SetString("scoreS_" + gameDif.ToString() + "_" + i, localHighScore[(int)gameDif].score[i].Second);
+                nickName = "Bunny";
             }
+
+            saveScore();
         }
 
         //Debug.Log("Collision with " + coll.gameObject.tag + " " + coll.gameObject.ToString());
@@ -402,6 +408,35 @@ public class PlayerController : MonoBehaviour {
 //                //TODO add wave splash sound 
 //            }
         }
+    }
+
+    private void saveScore()
+    {
+        int originalTopHighScores = localHighScore.GetHashCode();
+
+        PlayerPrefs.SetInt("lastScore", (int)ScoreManager.distance);
+
+        localHighScore[(int)gameDif].score.Add(new Tuple<float, string>(ScoreManager.distance, nickName));
+        localHighScore[(int)gameDif].score.Sort(
+            delegate(Tuple<float, string> x, Tuple<float, string> y)
+            {
+                return x.First.CompareTo(y.First);
+            });
+        localHighScore[(int)gameDif].score.Reverse();
+        localHighScore[(int)gameDif].score.RemoveAt(numberOfTopScores);
+
+        for (int i = 0; i < numberOfTopScores; i++)
+        {
+            PlayerPrefs.SetFloat("scoreF_" + gameDif.ToString() + "_" + i, localHighScore[(int)gameDif].score[i].First);
+            PlayerPrefs.SetString("scoreS_" + gameDif.ToString() + "_" + i, localHighScore[(int)gameDif].score[i].Second);
+        }
+
+        if (originalTopHighScores != localHighScore.GetHashCode())
+        {
+            PlayerPrefs.SetInt("newHighScore", 1);
+        }
+
+        WWW www = new WWW(urlSet + "score=" + (int)ScoreManager.distance + "&nickname=" + nickName + "&difficulty=" + (int)gameDif);
     }
 
     public void Restart()
@@ -434,14 +469,62 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public static IList<Tuple<float, string>> getLocalHighScore()
+    public static IList<Tuple<float, string>> getLocalHighScore(int i)
     {
-        return localHighScore[(int)gameDif].score.AsReadOnly();
+        return localHighScore[i].score.AsReadOnly();
     }
 
-    public static IList<Tuple<float, string>> getGlobalHighScore()
+    /// <summary>
+    /// submethod of getGlobalHighScores, loads only specified difficulty and returns it
+    /// </summary>
+    /// <param name="i">difficulty to be loaded</param>
+    /// <returns></returns>
+    public static IList<Tuple<float, string>> getGlobalHighScore(int i)
     {
-        //!!sync
-        return globalHighScore[(int)gameDif].score.AsReadOnly();
+        WWW www = new WWW(urlGet + i);
+        globalHighScore[i].score = new List<Tuple<float, string>>();
+
+        while (!www.isDone)
+        {
+            WaitForOneSec();
+        }
+
+        string content = www.text;
+
+        //Debug.Log(content);
+
+        string[] scoresTemp = content.Split('?');
+
+        foreach (var item in scoresTemp)
+        {
+            string[] scoreTemp = item.Split(',');
+            if (scoreTemp[0] != "")
+            {
+                globalHighScore[i].score.Add(new Tuple<float, string>(float.Parse(scoreTemp[0]), scoreTemp[1]));
+            }
+        }
+
+        while (globalHighScore[i].score.Count < numberOfTopScores)
+        {
+            globalHighScore[i].score.Add(new Tuple<float, string>(0, "Bunny"));
+        }
+
+        return globalHighScore[i].score.AsReadOnly();
+    }
+
+    /// <summary>
+    /// Use this to load globalHighScore variable
+    /// </summary>
+    public static void getGlobalHighScores()
+    {
+        for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
+        {
+            getGlobalHighScore(i);
+        }
+    }
+
+    public static IEnumerator WaitForOneSec()
+    {
+        yield return new WaitForSeconds(1);
     }
 }
