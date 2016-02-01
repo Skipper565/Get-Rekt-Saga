@@ -394,13 +394,13 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
 
-            if (coll.gameObject.name.StartsWith("seaWaves"))
-            {
-                //Debug.Log("Collided with" + coll.gameObject.name);
-                rb.AddForce(new Vector2(0, waveHopVelocity));
-
-                //TODO add wave splash sound 
-            }
+//            if (coll.gameObject.name.StartsWith("seaWaves"))
+//            {
+//                //Debug.Log("Collided with" + coll.gameObject.name);
+//                rb.AddForce(new Vector2(0, waveHopVelocity));
+//
+//                //TODO add wave splash sound 
+//            }
         }
     }
 
