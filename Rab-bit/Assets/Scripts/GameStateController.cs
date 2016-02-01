@@ -49,16 +49,19 @@ public class GameStateController : MonoBehaviour {
         {
             gameManager.SetGameState(GameState.Menu);
         }
+        // Else the game was resetted and is now in the Playing state
         else
         {
             // Unsubscribe from the event if the game was restarted to prevent duplicate event calls
             gameManager.OnStateChange -= ManageStateChange;
 
+            // Show HUD
+            hudMenu.SetActive(true);
+
             // Finish hide menu animations after game reset.
             // NOTE: Flashing hide menu animations after pressing "play" may be caused by this! Not proved.
             if (gameManager.previousGameState == GameState.GameOver)
             {
-                hudMenu.SetActive(true);
                 gameOverMenu.SetActive(true);
                 gameOverMenuAnimator.SetTrigger("hideMenu");
             }
@@ -102,6 +105,8 @@ public class GameStateController : MonoBehaviour {
 
     private void InAboutMenu()
     {
+        hudMenu.SetActive(false);
+
         // Always accessed from main menu
         mainMenuAnimator.SetTrigger("hideMenu");
 
@@ -119,13 +124,15 @@ public class GameStateController : MonoBehaviour {
 
     private void InMainMenu()
     {
+        // Show HUD again (and in Start) might not be duplicate if the pause is implemented
+        hudMenu.SetActive(false);
+
         if (gameManager.previousGameState == GameState.About)
         {
             aboutMenuAnimator.SetTrigger("hideMenu");
         }
         else if (gameManager.previousGameState == GameState.GameOver)
         {
-            hudMenu.SetActive(true);
             gameOverMenuAnimator.SetTrigger("hideMenu");
         }
 
@@ -144,6 +151,8 @@ public class GameStateController : MonoBehaviour {
 
     private void WhilePlaying()
     {
+        hudMenu.SetActive(true);
+
         Time.timeScale = 1;
         Debug.Log("PLAY");
 

@@ -110,21 +110,16 @@ public class BarrierGenerator : MonoBehaviour
         if (currentObstacleRepetition >= obstacleRepetition)
         {
             ChangePavilon();
-<<<<<<< Updated upstream
             //Debug.Log("Current repetition: " + currentObstacleRepetition + ", obstacle repetition: " + obstacleRepetition);
-=======
->>>>>>> Stashed changes
             currentObstacleRepetition = 0;
         }
     }
 
     private float getNextPositionX()
     {
-<<<<<<< Updated upstream
         //Debug.Log("Next position X: " + (lastBarrier.transform.position.x + barrierLengthInCurrentPavilon));
         //Debug.Log("Barrier length: " + barrierLengthInCurrentPavilon);
-=======
->>>>>>> Stashed changes
+
         return lastBarrier.transform.position.x + barrierLengthInCurrentPavilon;
     }
 
