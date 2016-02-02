@@ -109,8 +109,10 @@ public class GameStateController : MonoBehaviour {
     {
         hudMenu.SetActive(true);
 
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         //Debug.Log("PLAY");
+
+        PlayerController.setDifficulty(PlayerController.gameDif);
 
         if (gameManager.previousGameState != GameState.Pause)
         {
