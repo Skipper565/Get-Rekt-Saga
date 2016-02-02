@@ -8,6 +8,7 @@ TagManager:
   - BarrierBottom
   - Barrier
   - NotToTouch
+  - Splash
   layers:
   - Default
   - TransparentFX

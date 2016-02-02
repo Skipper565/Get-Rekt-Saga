@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
@@ -425,12 +425,24 @@ public class PlayerController : MonoBehaviour {
 
             //}
         }
+
+
     }
+
+	void OnTriggerEnter2D(Collider2D coll)
+	{
+		// if player touches water play splash animation
+		if (coll.gameObject.tag == "Splash")
+		{
+			waterDrops.SetActive(true);
+			waterDrops.GetComponent<Animator>().Play("waterDrop");
+		}
+	}
 
     void LateUpdate()
     {
-        bloodDrops.transform.localPosition += gameObject.transform.position;
-        waterDrops.transform.localPosition += gameObject.transform.position; 
+        bloodDrops.transform.position = gameObject.transform.position;
+		waterDrops.transform.position = new Vector3(gameObject.transform.position.x,-4.3f,gameObject.transform.position.z);
     }
 
     private void saveScore()
