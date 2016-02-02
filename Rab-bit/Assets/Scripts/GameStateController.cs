@@ -41,7 +41,7 @@ public class GameStateController : MonoBehaviour {
         // Load player controller
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
-        Debug.Log(gameManager.gameState);
+        //Debug.Log(gameManager.gameState);
 
         // Disable all menus; enable them as their events are fired
         mainMenu.SetActive(false);
@@ -110,7 +110,7 @@ public class GameStateController : MonoBehaviour {
         hudMenu.SetActive(true);
 
         Time.timeScale = 1;
-        Debug.Log("PLAY");
+        //Debug.Log("PLAY");
 
         if (gameManager.previousGameState != GameState.Pause)
         {
@@ -137,7 +137,7 @@ public class GameStateController : MonoBehaviour {
         }
 
         Time.timeScale = 1;
-        Debug.Log("GAME OVER");
+        //Debug.Log("GAME OVER");
     }
 
     private void InMainMenu()
@@ -169,7 +169,7 @@ public class GameStateController : MonoBehaviour {
         }
 
         Time.timeScale = 0;
-        Debug.Log("MENU");
+        //Debug.Log("MENU");
     }
 
     private void InAboutMenu()

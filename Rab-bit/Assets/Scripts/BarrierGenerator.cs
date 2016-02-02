@@ -12,6 +12,8 @@ public class BarrierGenerator : MonoBehaviour
     public int obstacleRepetition;
     private int currentObstacleRepetition;
 
+    public PowerUp powerUp;
+
     // List of barriers; each contain barriers of exactly one type
     // Add new list for each new pavilon
     public List<GameObject> listOfTeethBarriers;
@@ -77,9 +79,6 @@ public class BarrierGenerator : MonoBehaviour
         barrierLengthInCurrentPavilon = currentPavilon.GetBarrierLength();
 
         // First barrier must be shifted a bit to the left; translate the first barrier to suitable position
-        /*var startingOffsetOfAxisX = -3f;
-        firstBarrier.transform.Translate(new Vector2(Camera.main.transform.position[0] + startingOffsetOfAxisX, 
-                                                     Camera.main.transform.position[1]));*/
         firstBarrier.transform.Translate(new Vector2(Camera.main.transform.position[0] - firstBarrier.transform.position.x - 20f,
                                                      Camera.main.transform.position[1]));
         lastBarrier = firstBarrier;
@@ -144,13 +143,17 @@ public class BarrierGenerator : MonoBehaviour
 
         } while (randomBarrier.activeSelf && iterationCounter < MaxIterations);
 
+        var nextPosition = new Vector2(getNextPositionX(), getNextPositionY());
+
         Debug.Log("Generated barrier " + randomBarrier.name);
         randomBarrier.SetActive(true);
-        randomBarrier.transform.position = new Vector2(getNextPositionX(), getNextPositionY());
+        randomBarrier.transform.position = nextPosition;
         currentPavilon.ApplyInitialPosition(randomBarrier);
 
         lastBarrier = randomBarrier;
         queueOfBarriers.Enqueue(lastBarrier);
+
+        powerUp.SpawnIfAvailable(GetMaxBoundsOfPrefab(randomBarrier));
     }
 
     private void GenerateBarrier(GameObject barrier)
@@ -213,5 +216,21 @@ public class BarrierGenerator : MonoBehaviour
         firstBarrier.SetActive(false);
         queueOfBarriers.Dequeue();
         firstBarrier = queueOfBarriers.Peek();
+    }
+
+    private Bounds GetMaxBoundsOfPrefab(GameObject barrier)
+    {
+        var bounds = new Bounds(barrier.transform.position, Vector3.zero);
+
+        var boundingChildren = barrier.GetComponentsInChildren<Renderer>()
+            .Where(x => x.gameObject.tag == "BarrierBottom" || x.gameObject.tag == "BarrierTop")
+            .ToList();
+
+        foreach (var child in boundingChildren)
+        {
+            bounds.Encapsulate(child.bounds);
+        }
+
+        return bounds;
     }
 }

@@ -91,7 +91,7 @@ public class BarriersGenerator : MonoBehaviour {
 				nextBarrierBottom.tag = "BarrierBottom";
 
                 // Generate powerUp
-                powerUp.SpawnIfAvailable(new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0] * 2f, yScreenCoo - 8));
+                //powerUp.SpawnIfAvailable(new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0] * 2f, yScreenCoo - 8));
 
 				// generating obstacles here:
 				obstacleList.Enqueue((GameObject) Instantiate(obstacleOne, new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0]*2f, 0), Quaternion.identity));

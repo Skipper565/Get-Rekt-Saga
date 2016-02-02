@@ -3,50 +3,81 @@ using System.Collections;
 
 public class PowerUp : MonoBehaviour {
 
-    public Vector2 offset;
-    public Vector2 rotationVelocity;
     public float recycleOffset;
     public float spawnChance;
+
+    // Prototype variable; intended use - to regulate number of power ups the player has collected.
+    // Feel free to modify/delete it.
+    private bool collected;
     
-	void Start () {
-        // You use this method to either activate or deactivate an entire game object, not just a single component. 
-        // Also, when deactivating a game object all its child game objects will be deactivated as well. 
+	void Start ()
+    {
         gameObject.SetActive(false);
+	    collected = false;
     }
 	
 	// Update is called once per frame
-	void Update () {
-        if (transform.localPosition.x + recycleOffset < Camera.main.transform.position[0])
-        {
-            // Position of powerUp behind the camera, deactivate it
-            gameObject.SetActive(false);
-            return;
+	void Update ()
+    {
+	    if (gameObject.activeSelf)
+	    {
+            if (transform.localPosition.x + recycleOffset < Camera.main.transform.position[0])
+            {
+                // Position of powerUp behind the camera, deactivate it
+                gameObject.SetActive(false);
+                return;
+            }
         }
-        transform.Rotate(rotationVelocity * Time.deltaTime);
     }
 
-    public void SpawnIfAvailable(Vector2 position)
+    public void SpawnIfAvailable(Bounds bounds)
     {
-        if (gameObject.activeSelf || spawnChance <= Random.Range(0f, 100f))
+        if (gameObject.activeSelf || collected || spawnChance <= Random.Range(0f, 100f))
         {
             return;
         }
 
-        transform.localPosition = position + offset;
+        transform.localPosition = FindSpawnPosition(bounds);
         gameObject.SetActive(true);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Power up collected! Prepare to be rekt.");
+        Debug.Log("Power up collected, prepare to get rekt!");
         gameObject.SetActive(false);
 
-        PlayerController.swapGravity = true;
-        PlayerController.jumpCount = 0;
+        collected = true;
+
+        //PlayerController.swapGravity = true;
+        //PlayerController.jumpCount = 0;
     }
 
-    /*private void GameOver()
+    private Vector2 FindSpawnPosition(Bounds bounds)
     {
-        gameObject.SetActive(false);
-    }*/
+        int maxIterations = 1000;
+        int iterationCounter = 0;
+        float x, y;
+        bool collided = false;
+        float radius = 0.5f;
+
+        do
+        {
+            x = Random.Range(bounds.min.x, bounds.max.x);
+            y = Random.Range(bounds.min.y, bounds.max.y);
+
+            collided = Physics2D.OverlapCircle(new Vector2(x, y), radius);
+
+            iterationCounter++;
+
+        } while (collided && iterationCounter < maxIterations);
+
+        if (collided)
+        {
+            return Vector2.zero;
+        }
+
+        //Debug.Log("Position of power up: " + x + ", " + y);
+
+        return new Vector2(x, y);
+    }
 }
