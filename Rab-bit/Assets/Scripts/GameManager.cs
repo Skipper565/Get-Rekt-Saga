@@ -3,12 +3,13 @@ using System.Collections;
 
 public enum GameState
 {
-    About,
-    Menu,
+    NewGame,
     Playing,
     Pause,
     GameOver,
-    NewGame,
+    Menu,
+    About,
+    Highscore,
 }
 
 public delegate void OnStateChangeHandler();
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
                     DontDestroyOnLoad(manager);
                     _instance = manager.AddComponent<GameManager>();
                     _instance.gameState = GameState.NewGame;
-                    _instance.gameState = GameState.NewGame;
+                    _instance.previousGameState = GameState.NewGame;
                 }
             }
             return _instance;

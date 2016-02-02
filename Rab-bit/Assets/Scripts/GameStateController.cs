@@ -9,10 +9,12 @@ public class GameStateController : MonoBehaviour {
     private GameObject mainMenu;
     private GameObject aboutMenu;
     private GameObject hudMenu;
+    private GameObject highscoreMenu;
 
     private Animator gameOverMenuAnimator;
     private Animator mainMenuAnimator;
     private Animator aboutMenuAnimator;
+    private Animator highscoreMenuAnimator;
 
     private PlayerController playerController;
 
@@ -28,11 +30,13 @@ public class GameStateController : MonoBehaviour {
         mainMenu = UIManager.MainMenu;
         aboutMenu = UIManager.AboutMenu;
         hudMenu = UIManager.HudMenu;
+        highscoreMenu = UIManager.HighscoreMenu;
 
         // Load menu animators
         gameOverMenuAnimator = GetMenuAnimator(gameOverMenu);
         mainMenuAnimator = GetMenuAnimator(mainMenu);
         aboutMenuAnimator = GetMenuAnimator(aboutMenu);
+        highscoreMenuAnimator = GetMenuAnimator(highscoreMenu);
 
         // Load player controller
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -43,6 +47,7 @@ public class GameStateController : MonoBehaviour {
         mainMenu.SetActive(false);
         aboutMenu.SetActive(false);
         gameOverMenu.SetActive(false);
+        highscoreMenu.SetActive(false);
 
         // Go to menu when the game starts, but don't when it's just restarted
         if (gameManager.gameState == GameState.NewGame)
@@ -59,7 +64,7 @@ public class GameStateController : MonoBehaviour {
             hudMenu.SetActive(true);
 
             // Finish hide menu animations after game reset.
-            // NOTE: Flashing hide menu animations after pressing "play" may be caused by this! Not proved.
+            // NOTE: Flashing hide menu animations after pressing "play" may be caused by this! Only theory, not proved.
             if (gameManager.previousGameState == GameState.GameOver)
             {
                 gameOverMenu.SetActive(true);
@@ -73,24 +78,12 @@ public class GameStateController : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
-        // Fix the missing cameras problem
-        SetAllMenuCameras();
-    }
-
     public void ManageStateChange()
     {
         Debug.Log("Changing game state to " + gameManager.gameState);
 
         switch (gameManager.gameState)
         {
-            case GameState.About:
-                InAboutMenu();
-                break;
-            case GameState.Menu:
-                InMainMenu();
-                break;
             case GameState.Playing:
                 WhilePlaying();
                 break;
@@ -100,53 +93,16 @@ public class GameStateController : MonoBehaviour {
             case GameState.GameOver:
                 GameOver();
                 break;
+            case GameState.Menu:
+                InMainMenu();
+                break;
+            case GameState.About:
+                InAboutMenu();
+                break;
+            case GameState.Highscore:
+                InHighscoreMenu();
+                break;
         }
-    }
-
-    private void InAboutMenu()
-    {
-        hudMenu.SetActive(false);
-
-        // Always accessed from main menu
-        mainMenuAnimator.SetTrigger("hideMenu");
-
-        if (aboutMenu.activeSelf)
-        {
-            aboutMenuAnimator.SetTrigger("showMenu");
-        }
-        else
-        {
-            aboutMenu.SetActive(true);
-        }
-
-        Time.timeScale = 0;
-    }
-
-    private void InMainMenu()
-    {
-        // Show HUD again (and in Start) might not be duplicate if the pause is implemented
-        hudMenu.SetActive(false);
-
-        if (gameManager.previousGameState == GameState.About)
-        {
-            aboutMenuAnimator.SetTrigger("hideMenu");
-        }
-        else if (gameManager.previousGameState == GameState.GameOver)
-        {
-            gameOverMenuAnimator.SetTrigger("hideMenu");
-        }
-
-        if (mainMenu.activeSelf)
-        {
-            mainMenuAnimator.SetTrigger("showMenu");
-        }
-        else
-        {
-            mainMenu.SetActive(true);
-        }
-
-        Time.timeScale = 0;
-        Debug.Log("MENU");
     }
 
     private void WhilePlaying()
@@ -184,18 +140,74 @@ public class GameStateController : MonoBehaviour {
         Debug.Log("GAME OVER");
     }
 
-    private void SetMenuCamera(GameObject menu)
+    private void InMainMenu()
     {
-        var canvas = menu.GetComponent<Canvas>();
-        canvas.worldCamera = Camera.main;
+        // Show HUD again (and in Start) might not be duplicate if the pause is implemented
+        hudMenu.SetActive(false);
+
+        
+        if (gameManager.previousGameState == GameState.GameOver)
+        {
+            gameOverMenuAnimator.SetTrigger("hideMenu");
+        }
+        else if (gameManager.previousGameState == GameState.About)
+        {
+            aboutMenuAnimator.SetTrigger("hideMenu");
+        }
+        else if (gameManager.previousGameState == GameState.Highscore)
+        {
+            highscoreMenuAnimator.SetTrigger("hideMenu");
+        }
+
+        if (mainMenu.activeSelf)
+        {
+            mainMenuAnimator.SetTrigger("showMenu");
+        }
+        else
+        {
+            mainMenu.SetActive(true);
+        }
+
+        Time.timeScale = 0;
+        Debug.Log("MENU");
     }
 
-    private void SetAllMenuCameras()
+    private void InAboutMenu()
     {
-        SetMenuCamera(gameOverMenu);
-        SetMenuCamera(mainMenu);
-        SetMenuCamera(aboutMenu);
-        SetMenuCamera(hudMenu);
+        hudMenu.SetActive(false);
+
+        // Always accessed from main menu
+        mainMenuAnimator.SetTrigger("hideMenu");
+
+        if (aboutMenu.activeSelf)
+        {
+            aboutMenuAnimator.SetTrigger("showMenu");
+        }
+        else
+        {
+            aboutMenu.SetActive(true);
+        }
+
+        Time.timeScale = 0;
+    }
+
+    private void InHighscoreMenu()
+    {
+        hudMenu.SetActive(false);
+
+        // Always accessed from main menu
+        mainMenuAnimator.SetTrigger("hideMenu");
+
+        if (highscoreMenu.activeSelf)
+        {
+            highscoreMenuAnimator.SetTrigger("showMenu");
+        }
+        else
+        {
+            highscoreMenu.SetActive(true);
+        }
+
+        Time.timeScale = 0;
     }
 
     private Animator GetMenuAnimator(GameObject menu)

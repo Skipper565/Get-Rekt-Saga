@@ -5,10 +5,12 @@ public class UIManager : MonoBehaviour
 {
 
     public static UIManager Instance;
+
     public static GameObject GameOverMenu;
     public static GameObject MainMenu;
     public static GameObject AboutMenu;
     public static GameObject HudMenu;
+    public static GameObject HighscoreMenu;
 
     void Awake()
     {
@@ -20,10 +22,33 @@ public class UIManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+
             GameOverMenu = transform.FindChild("GameOverMenu").gameObject;
             MainMenu = transform.FindChild("MainMenu").gameObject;
             AboutMenu = transform.FindChild("AboutMenu").gameObject;
             HudMenu = transform.FindChild("HUD Canvas").gameObject;
+            HighscoreMenu = transform.FindChild("HighScoreMenu").gameObject;
         }
+    }
+
+    private void SetMenuCamera(GameObject menu)
+    {
+        var canvas = menu.GetComponent<Canvas>();
+        canvas.worldCamera = Camera.main;
+    }
+
+    void Update()
+    {
+        // Fix the missing cameras problem
+        SetAllMenuCameras();
+    }
+
+    private void SetAllMenuCameras()
+    {
+        SetMenuCamera(GameOverMenu);
+        SetMenuCamera(MainMenu);
+        SetMenuCamera(AboutMenu);
+        SetMenuCamera(HudMenu);
+        SetMenuCamera(HighscoreMenu);
     }
 }

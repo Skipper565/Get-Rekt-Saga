@@ -32,6 +32,18 @@ public class MenuController : MonoBehaviour
     public void ClickedBack()
     {
         Debug.Log("Clicked Back button");
-        gameManager.SetGameState(GameState.Menu);
+        gameManager.SetGameState(gameManager.previousGameState);
+    }
+
+    public void ClickedHighscore()
+    {
+        Debug.Log("Clicked Highscore button");
+        gameManager.SetGameState(GameState.Highscore);
+    }
+
+    public void ClickedQuit()
+    {
+        Debug.Log("Clicked Quit button");
+        Application.Quit();
     }
 }
