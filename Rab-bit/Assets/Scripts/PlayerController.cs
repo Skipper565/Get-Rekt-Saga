@@ -68,7 +68,12 @@ public class PlayerController : MonoBehaviour {
     private KeyCode restartKey;
     private KeyCode quitKey;
 
-    // OTHER
+    //EFFECTS
+
+    public GameObject waterDrops;
+    public GameObject bloodDrops;
+
+    //OTHER
     private AudioSource audio;
     private Rigidbody2D rb;
     private DateTime deathTime;
@@ -88,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 
     void Awake()
     {
+        //
         //getGlobalHighScores();
 
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
@@ -117,17 +123,17 @@ public class PlayerController : MonoBehaviour {
             //Debug.Log("On start:" + localHighScore[1].score.Count);
             Debug.Log(debugLog);
 
-            debugLog = "GLOBAL " + ((GameDifficulty)i).ToString();
+            //debugLog = "GLOBAL " + ((GameDifficulty)i).ToString();
 
-            for (int scorePos = 0; scorePos < numberOfTopScores; scorePos++)
-            {
-                tempScore = globalHighScore[i].score[scorePos].First;
-                tempNick = globalHighScore[i].score[scorePos].Second;
+            //for (int scorePos = 0; scorePos < numberOfTopScores; scorePos++)
+            //{
+            //    tempScore = globalHighScore[i].score[scorePos].First;
+            //    tempNick = globalHighScore[i].score[scorePos].Second;
 
-                debugLog += " " + tempNick + "_" + tempScore + " ";
-            }
+            //    debugLog += " " + tempNick + "_" + tempScore + " ";
+            //}
 
-            Debug.Log(debugLog);
+            //Debug.Log(debugLog);
 #endif
         }
     }
@@ -136,6 +142,8 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         gameManager = GameManager.Instance;
+        bloodDrops.SetActive(false);
+        waterDrops.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
@@ -368,6 +376,13 @@ public class PlayerController : MonoBehaviour {
         // Pause game on collision with tagged object
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
         {
+            bloodDrops.SetActive(true);
+            bloodDrops.GetComponent<Animator>().Play("waterDrop");
+
+            GameObject.Find("squish").transform.Translate(new Vector3(0,0,90));
+            
+            //bloodDrops.GetComponent<Animator>().Play("waterDrops");
+
             if (gameManager.gameState != GameState.GameOver)
             {
                 gameManager.SetGameState(GameState.GameOver);
@@ -400,14 +415,22 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
 
-//            if (coll.gameObject.name.StartsWith("seaWaves"))
-//            {
-//                //Debug.Log("Collided with" + coll.gameObject.name);
-//                rb.AddForce(new Vector2(0, waveHopVelocity));
-//
-//                //TODO add wave splash sound 
-//            }
+            //if (coll.gameObject.name.StartsWith("SeaWaves"))
+            //{
+            //    rb.AddForce(new Vector2(0, waveHopVelocity));
+
+            //    //TODO add wave splash sound 
+            //    waterDrops.SetActive(true);
+            //    waterDrops.GetComponent<Animator>().Play("waterDrop");
+
+            //}
         }
+    }
+
+    void LateUpdate()
+    {
+        bloodDrops.transform.localPosition += gameObject.transform.position;
+        waterDrops.transform.localPosition += gameObject.transform.position; 
     }
 
     private void saveScore()
