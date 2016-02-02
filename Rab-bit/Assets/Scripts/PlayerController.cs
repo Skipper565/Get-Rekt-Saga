@@ -374,7 +374,7 @@ public class PlayerController : MonoBehaviour {
     {
         // Pause game on collision with tagged object
         if (coll.gameObject.tag == "NotToTouch" && pauseOnCollide)
-        {
+		{
             bloodDrops.SetActive(true);
             bloodDrops.GetComponent<Animator>().Play("waterDrop");
 
