@@ -16,14 +16,11 @@ public class BarrierGenerator : MonoBehaviour
     // Add new list for each new pavilon
     public List<GameObject> listOfTeethBarriers;
     public List<GameObject> listOfSeaBarriers;
-    //public List<GameObject> listOfAnotherPavilonBarriers;
     // TODO: Add other list
 
-    private Pavilon firstPavilon;
     private Pavilon currentPavilon;
     TeethPavilon teethPavilon;
     SeaPavilon seaPavilon;
-    //TeethPavilon anotherPavilon;
     List<Pavilon> listOfAllPavilons; 
     // TODO: Add other pavilons
 
@@ -45,13 +42,11 @@ public class BarrierGenerator : MonoBehaviour
     {
         teethPavilon = new TeethPavilon(listOfTeethBarriers);
         seaPavilon = new SeaPavilon(listOfSeaBarriers);
-        //secondPavilon = new AnotherPavilon(listOfAnotherPavilonBarriers);
         // TODO: Initialize other pavilons by their type (PavilonType : Pavilon)
-        currentPavilon = teethPavilon;
 
         // Load all barriers and their initial position
         // TODO: Add other pavilons to the list of all pavilons
-        listOfAllPavilons = new List<Pavilon>() { teethPavilon, seaPavilon/*, anotherPavilon*/ };
+        listOfAllPavilons = new List<Pavilon>() { teethPavilon, seaPavilon };
 
         foreach (var pavilon in listOfAllPavilons)
         {
@@ -62,9 +57,13 @@ public class BarrierGenerator : MonoBehaviour
             }
         }
         
-        // Deterministically set the first barriers as teeth barriers
-        firstPavilon = teethPavilon;
-        firstBarrier = firstPavilon.GetBarriers().First();
+        /* Choose current pavilon and the first barrier.
+        We always want to start with the first barrier of the teeth pavilon 
+        which has good starting conditions (some space at the beginning), but 
+        first we must choose any barrier prior to the first one to act as a "scenery". */
+        currentPavilon = teethPavilon;
+        //firstBarrier = currentPavilon.GetBarriers().First();
+        firstBarrier = PickRandomBarrier(currentPavilon.GetBarriers().Skip(1).ToList());
 
         // Get screen width and height + world coordinates of axis x
         int screenPixelWidth = Camera.main.pixelWidth;
@@ -75,19 +74,22 @@ public class BarrierGenerator : MonoBehaviour
         firstBarrier.SetActive(true);
         queueOfBarriers = new Queue<GameObject>();
         queueOfBarriers.Enqueue(firstBarrier);
-        barrierLengthInCurrentPavilon = firstPavilon.GetBarrierLength();
+        barrierLengthInCurrentPavilon = currentPavilon.GetBarrierLength();
 
         // First barrier must be shifted a bit to the left; translate the first barrier to suitable position
-        var startingOffsetOfAxisX = -3f;
+        /*var startingOffsetOfAxisX = -3f;
         firstBarrier.transform.Translate(new Vector2(Camera.main.transform.position[0] + startingOffsetOfAxisX, 
+                                                     Camera.main.transform.position[1]));*/
+        firstBarrier.transform.Translate(new Vector2(Camera.main.transform.position[0] - firstBarrier.transform.position.x - 20f,
                                                      Camera.main.transform.position[1]));
         lastBarrier = firstBarrier;
 
         // Set second barrier just to be sure; generate next barriers with Update()
+        GenerateBarrier(currentPavilon.GetBarriers().First());
         GenerateBarrier();
 
         // Two barriers generated so far
-        currentObstacleRepetition = 2;
+        currentObstacleRepetition = 3;
         xGenerationOffset = 5;
     }
 
@@ -148,6 +150,24 @@ public class BarrierGenerator : MonoBehaviour
         currentPavilon.ApplyInitialPosition(randomBarrier);
 
         lastBarrier = randomBarrier;
+        queueOfBarriers.Enqueue(lastBarrier);
+    }
+
+    private void GenerateBarrier(GameObject barrier)
+    {
+        if (barrier.activeSelf)
+        {
+            Debug.LogError("Attempted to generate barrier that is already active. Generating random barrier instead.");
+            GenerateBarrier();
+            return;
+        }
+
+        Debug.Log("Generated barrier " + barrier.name);
+        barrier.SetActive(true);
+        barrier.transform.position = new Vector2(getNextPositionX(), getNextPositionY());
+        currentPavilon.ApplyInitialPosition(barrier);
+
+        lastBarrier = barrier;
         queueOfBarriers.Enqueue(lastBarrier);
     }
 
