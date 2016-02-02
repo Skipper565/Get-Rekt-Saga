@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
     public static bool swapGravity = false;
 
     // DIFFICULTY
-    public static GameDifficulty gameDif = GameDifficulty.MODERATE;
+    public static GameDifficulty gameDif = GameDifficulty.HARD;
     public static float scoreCoeficient = 1;
 
     //PLAYER CONTROL
