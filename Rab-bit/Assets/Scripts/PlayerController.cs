@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
     private float screenSplit;
     public static string nickName = "default";
 
-    public static int numberOfTopScores = 3;
+    public static int numberOfTopScores = 5;
 
     public static string urlGet = "http://grs.pe.hu/app/loadScore.php?difficulty=";
     public static string urlSet = "http://grs.pe.hu/app/saveScore.php?";
@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour {
     {
         //
         //getGlobalHighScores();
+        //PlayerPrefs.DeleteAll();
 
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
@@ -107,8 +108,6 @@ public class PlayerController : MonoBehaviour {
 
             for (int scorePos = 0; scorePos < numberOfTopScores; scorePos++)
             {
-                //PlayerPrefs.DeleteAll();
-
                 tempScore = PlayerPrefs.GetFloat("scoreF_" + ((GameDifficulty)i).ToString() + "_" + scorePos);
                 tempNick = PlayerPrefs.GetString("scoreS_" + ((GameDifficulty)i).ToString() + "_" + scorePos);
 
