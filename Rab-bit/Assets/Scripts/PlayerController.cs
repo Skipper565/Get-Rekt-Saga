@@ -540,7 +540,7 @@ public class PlayerController : MonoBehaviour {
 
         while (globalHighScore[i].score.Count < numberOfTopScores)
         {
-            globalHighScore[i].score.Add(new Tuple<float, string>(0, "Bunny"));
+            globalHighScore[i].score.Add(new Tuple<float, string>(0, ""));
         }
 
         return globalHighScore[i].score.AsReadOnly();
