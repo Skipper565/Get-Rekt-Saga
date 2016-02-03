@@ -78,6 +78,11 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
     private DateTime deathTime;
     private float screenSplit;
+	private GameObject jumpHudOne;
+	private GameObject jumpHudTwo;
+	private GameObject jumpHudThree;
+	private GameObject jumpHudFour;
+	private int bars; // number of jump hud bars to be shown
     public static string nickName = "default";
 
     public PowerUp powerUp;
@@ -145,6 +150,11 @@ public class PlayerController : MonoBehaviour {
         gameManager = GameManager.Instance;
         bloodDrops.SetActive(false);
         waterDrops.SetActive(false);
+
+		jumpHudOne = GameObject.Find("One");
+		jumpHudTwo = GameObject.Find("Two");
+		jumpHudThree = GameObject.Find("Three");
+		jumpHudFour = GameObject.Find("Four");
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
@@ -340,6 +350,48 @@ public class PlayerController : MonoBehaviour {
             audio.Play();
 
             jumpCount++;
+
+			bars = jumpCountLimit-jumpCount;
+			if(PowerUp.collected)
+				bars += 1;
+			switch (bars) {
+			case 0:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 1:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 2:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 3:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 4:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				break;
+			default:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			}
             //Debug.Log("JumpCount: " + jumpCount);
         }          
     }
@@ -421,6 +473,48 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("InJumpOne",false);
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
 
+			bars = jumpCountLimit-jumpCount;
+			if(PowerUp.collected)
+				bars += 1;
+			switch (bars) {
+			case 0:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 1:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 2:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 3:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 4:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				break;
+			default:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			}
+
             //if (coll.gameObject.name.StartsWith("SeaWaves"))
             //{
             //    rb.AddForce(new Vector2(0, waveHopVelocity));
@@ -432,7 +526,6 @@ public class PlayerController : MonoBehaviour {
             //}
         }
 
-
     }
 
 	void OnTriggerEnter2D(Collider2D coll)
@@ -442,6 +535,50 @@ public class PlayerController : MonoBehaviour {
 		{
 			waterDrops.SetActive(true);
 			waterDrops.GetComponent<Animator>().Play("waterDrop");
+		}
+
+		// refresh jump hud when hitting jump powerup
+		if (coll.gameObject.tag == "JumpPowerUp")
+		{
+			bars = jumpCountLimit-jumpCount+1;
+			switch (bars) {
+			case 0:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 1:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 2:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 3:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			case 4:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0.6f);
+				break;
+			default:
+				jumpHudOne.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudTwo.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudThree.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
+				break;
+			}
 		}
 	}
 

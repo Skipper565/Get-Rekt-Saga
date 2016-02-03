@@ -9,6 +9,7 @@ TagManager:
   - Barrier
   - NotToTouch
   - Splash
+  - JumpPowerUp
   layers:
   - Default
   - TransparentFX
