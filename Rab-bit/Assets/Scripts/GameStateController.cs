@@ -112,7 +112,7 @@ public class GameStateController : MonoBehaviour {
         //Time.timeScale = 1;
         //Debug.Log("PLAY");
 
-        PlayerController.setDifficulty(PlayerController.gameDif);
+        //PlayerController.setDifficulty(PlayerController.gameDif);
 
         if (gameManager.previousGameState != GameState.Pause)
         {

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class InputFieldManager : MonoBehaviour {
 
-    private bool isDone = false;
+    public bool isDone = false;
 
     void Start()
     {
@@ -34,11 +34,7 @@ public class InputFieldManager : MonoBehaviour {
         }
 
         PlayerPrefs.SetString("playerName", arg0);
-        GameObject.Find("MainMenu").SetActive(true);
-        GameObject.Find("NicknameEdit").SetActive(false);
-        GameObject.Find("MainMenu").GetComponent<Canvas>().sortingOrder = 100;
 
-        isDone = true;
         //Destroy(this.gameObject);
     }
 
@@ -50,4 +46,12 @@ public class InputFieldManager : MonoBehaviour {
         }
         
 	}
+
+    public void DoneAndClose()
+    {
+        GameObject.Find("MainMenu").SetActive(true);
+        GameObject.Find("NicknameEdit").SetActive(false);
+        GameObject.Find("MainMenu").GetComponent<Canvas>().sortingOrder = 100;
+        isDone = true;
+    }
 }
