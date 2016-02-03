@@ -2759,11 +2759,15 @@ Prefab:
     - target: {fileID: 11440484, guid: e0011f1a8013e487faa1e5c230f9c114, type: 2}
       propertyPath: guts
       value: 
-      objectReference: {fileID: 159860, guid: 684fb1cab9c4a4025bf58860f431c3d2, type: 2}
+      objectReference: {fileID: 560264692}
     - target: {fileID: 11440484, guid: e0011f1a8013e487faa1e5c230f9c114, type: 2}
       propertyPath: powerUp
       value: 
       objectReference: {fileID: 849915315}
+    - target: {fileID: 11440484, guid: e0011f1a8013e487faa1e5c230f9c114, type: 2}
+      propertyPath: gutsSpeed
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0011f1a8013e487faa1e5c230f9c114, type: 2}
   m_IsPrefabParent: 0
@@ -3307,6 +3311,10 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 555504098}
+--- !u!1 &560264692 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 159860, guid: 684fb1cab9c4a4025bf58860f431c3d2, type: 2}
+  m_PrefabInternal: {fileID: 1621910455}
 --- !u!1 &562212528 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 169548, guid: 89d8d804f1adfc34786cc6f09443c48e, type: 2}

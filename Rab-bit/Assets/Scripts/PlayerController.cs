@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject jumpHudFour;
 	private int bars; // number of jump hud bars to be shown
     public static string nickName = "default";
+    public GameObject guts;
+    public int gutsSpeed;
 
     public PowerUp powerUp;
 
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour {
     {
         //
         //getGlobalHighScores();
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
@@ -459,6 +461,8 @@ public class PlayerController : MonoBehaviour {
                 nickName = "Bunny";
             }
 
+            Splat();
+
             saveScore();
         }
 
@@ -704,5 +708,28 @@ public class PlayerController : MonoBehaviour {
     public static IEnumerator WaitForOneSec()
     {
         yield return new WaitForSeconds(1);
+    }
+
+    public void Splat()
+    {
+        System.Random rnd = new System.Random();
+        int randNum;
+
+        foreach (Transform child in guts.transform)
+        {
+            randNum = rnd.Next(360);
+
+            Vector2 newpos = new Vector2(1.2f * (float)Math.Cos(randNum),1.2f * (float)Math.Sin(randNum));
+
+            Debug.Log(newpos);
+
+            child.position = transform.position + new Vector3(newpos.x, newpos.y, 0);
+            child.gameObject.GetComponent<Rigidbody2D>().AddForce(newpos*gutsSpeed);
+        }
+    }
+
+    public void ResetSplat()
+    {
+
     }
 }
