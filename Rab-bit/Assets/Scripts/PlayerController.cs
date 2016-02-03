@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour {
     private float screenSplit;
     public static string nickName = "default";
 
+    public PowerUp powerUp;
+
     public static int numberOfTopScores = 5;
 
     public static string urlGet = "http://grs.pe.hu/app/loadScore.php?difficulty=";
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour {
     {
         //
         //getGlobalHighScores();
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
@@ -321,8 +323,13 @@ public class PlayerController : MonoBehaviour {
     void moveUp()
     {
         // ignore jump if limit was exceeded
-        if (jumpCount < jumpCountLimit)
+        if (jumpCount < jumpCountLimit || (PowerUp.collected && jumpCount < jumpCountLimit + 1))
         {
+            if (jumpCount == jumpCountLimit)
+            {
+                PowerUp.collected = false;
+            }
+
             // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
             rb.velocity = new Vector2(rb.velocity.x, 0);
 
