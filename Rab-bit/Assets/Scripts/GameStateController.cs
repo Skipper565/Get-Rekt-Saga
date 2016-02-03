@@ -138,7 +138,7 @@ public class GameStateController : MonoBehaviour {
             gameOverMenu.SetActive(true);
         }
 
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         //Debug.Log("GAME OVER");
     }
 
