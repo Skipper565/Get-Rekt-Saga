@@ -45,15 +45,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DifficultySelector.cs" />
-     <Compile Include="Assets\GameOverScore.cs" />
-     <Compile Include="Assets\HighScoreDisplayManager.cs" />
-     <Compile Include="Assets\InputFieldManager.cs" />
      <Compile Include="Assets\Scripts\BarrierGenerator.cs" />
      <Compile Include="Assets\Scripts\BarriersGenerator.cs" />
      <Compile Include="Assets\Scripts\CameraMover.cs" />
+     <Compile Include="Assets\Scripts\DifficultySelector.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\GameOverScore.cs" />
      <Compile Include="Assets\Scripts\GameStateController.cs" />
+     <Compile Include="Assets\Scripts\HighScoreDisplayManager.cs" />
+     <Compile Include="Assets\Scripts\InputFieldManager.cs" />
      <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\Pavilon.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
