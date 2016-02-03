@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/PowerUp.cs" Line="36" Column="20" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="535" Column="37" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="539" Column="3" />
+      <File FileName="Assets/Scripts/PowerUp.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/jumpHud.cs" Line="9" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
