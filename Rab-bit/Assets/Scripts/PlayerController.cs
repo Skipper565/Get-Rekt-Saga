@@ -178,20 +178,21 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            setDifficulty(GameDifficulty.EASY);
-        }
-        else if (Input.GetKeyDown(KeyCode.K))
-        {
-            setDifficulty(GameDifficulty.MODERATE);
-        }
-        else if (Input.GetKeyDown(KeyCode.L))
-        {
-            setDifficulty(GameDifficulty.HARD);
-        }
-#endif
+        // deprecated
+//#if UNITY_EDITOR
+//        if (Input.GetKeyDown(KeyCode.J))
+//        {
+//            setDifficulty(GameDifficulty.EASY);
+//        }
+//        else if (Input.GetKeyDown(KeyCode.K))
+//        {
+//            setDifficulty(GameDifficulty.MODERATE);
+//        }
+//        else if (Input.GetKeyDown(KeyCode.L))
+//        {
+//            setDifficulty(GameDifficulty.HARD);
+//        }
+//#endif
 
         if (gameManager.gameState != GameState.GameOver)
         {
