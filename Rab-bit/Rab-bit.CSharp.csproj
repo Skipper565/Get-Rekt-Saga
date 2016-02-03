@@ -68,8 +68,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DifficultySelector.cs" />
     <Compile Include="Assets\GameOverScore.cs" />
     <Compile Include="Assets\HighScoreDisplayManager.cs" />
+    <Compile Include="Assets\InputFieldManager.cs" />
     <Compile Include="Assets\Scripts\BarrierGenerator.cs" />
     <Compile Include="Assets\Scripts\BarriersGenerator.cs" />
     <Compile Include="Assets\Scripts\CameraMover.cs" />

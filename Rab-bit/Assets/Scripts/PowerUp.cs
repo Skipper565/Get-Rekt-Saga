@@ -6,9 +6,8 @@ public class PowerUp : MonoBehaviour {
     public float recycleOffset;
     public float spawnChance;
 
-    // Prototype variable; intended use - to regulate number of power ups the player has collected.
-    // Feel free to modify/delete it.
-    private bool collected;
+    // Intended use - to regulate number of power ups the player has collected.
+    public static bool collected;
     
 	void Start ()
     {

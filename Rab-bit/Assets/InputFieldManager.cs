@@ -50,7 +50,8 @@ public class InputFieldManager : MonoBehaviour {
     public void DoneAndClose()
     {
         GameObject.Find("MainMenu").SetActive(true);
-        GameObject.Find("NicknameEdit").SetActive(false);
+        //GameObject.Find("NicknameEdit").SetActive(false);
+        GameObject.Find("NicknameEdit").transform.FindChild("Panel").GetComponent<Animator>().SetTrigger("hideMenu");
         GameObject.Find("MainMenu").GetComponent<Canvas>().sortingOrder = 100;
         isDone = true;
     }

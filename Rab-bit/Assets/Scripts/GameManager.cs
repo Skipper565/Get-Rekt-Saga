@@ -10,6 +10,7 @@ public enum GameState
     Menu,
     About,
     Highscore,
+    DifficultySelection,
 }
 
 public delegate void OnStateChangeHandler();

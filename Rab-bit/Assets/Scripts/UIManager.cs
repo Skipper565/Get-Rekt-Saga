@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public static GameObject AboutMenu;
     public static GameObject HudMenu;
     public static GameObject HighscoreMenu;
+    public static GameObject DifficultyMenu;
+    public static GameObject NicknameMenu;
 
     void Awake()
     {
@@ -28,13 +30,9 @@ public class UIManager : MonoBehaviour
             AboutMenu = transform.FindChild("AboutMenu").gameObject;
             HudMenu = transform.FindChild("HUD Canvas").gameObject;
             HighscoreMenu = transform.FindChild("HighScoreMenu").gameObject;
+            DifficultyMenu = transform.FindChild("SelectDifficultyMenu").gameObject;
+            NicknameMenu = transform.FindChild("NicknameEdit").gameObject;
         }
-    }
-
-    private void SetMenuCamera(GameObject menu)
-    {
-        var canvas = menu.GetComponent<Canvas>();
-        canvas.worldCamera = Camera.main;
     }
 
     void Update()
@@ -50,5 +48,12 @@ public class UIManager : MonoBehaviour
         SetMenuCamera(AboutMenu);
         SetMenuCamera(HudMenu);
         SetMenuCamera(HighscoreMenu);
+        SetMenuCamera(DifficultyMenu);
+    }
+
+    private void SetMenuCamera(GameObject menu)
+    {
+        var canvas = menu.GetComponent<Canvas>();
+        canvas.worldCamera = Camera.main;
     }
 }

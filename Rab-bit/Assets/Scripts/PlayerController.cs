@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
     {
         //
         //getGlobalHighScores();
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
 
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {

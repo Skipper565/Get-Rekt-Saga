@@ -10,11 +10,10 @@ public class GameStateController : MonoBehaviour {
     private GameObject aboutMenu;
     private GameObject hudMenu;
     private GameObject highscoreMenu;
+    private GameObject difficultyMenu;
+    private GameObject nicknameMenu;
 
-    private Animator gameOverMenuAnimator;
-    private Animator mainMenuAnimator;
-    private Animator aboutMenuAnimator;
-    private Animator highscoreMenuAnimator;
+    private Animator nicknameMenuAnimator;
 
     private PlayerController playerController;
 
@@ -31,50 +30,31 @@ public class GameStateController : MonoBehaviour {
         aboutMenu = UIManager.AboutMenu;
         hudMenu = UIManager.HudMenu;
         highscoreMenu = UIManager.HighscoreMenu;
-
-        // Load menu animators
-        gameOverMenuAnimator = GetMenuAnimator(gameOverMenu);
-        mainMenuAnimator = GetMenuAnimator(mainMenu);
-        aboutMenuAnimator = GetMenuAnimator(aboutMenu);
-        highscoreMenuAnimator = GetMenuAnimator(highscoreMenu);
+        difficultyMenu = UIManager.DifficultyMenu;
 
         // Load player controller
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-
-        //Debug.Log(gameManager.gameState);
 
         // Disable all menus; enable them as their events are fired
         mainMenu.SetActive(false);
         aboutMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         highscoreMenu.SetActive(false);
+        difficultyMenu.SetActive(false);
 
         // Go to menu when the game starts, but don't when it's just restarted
         if (gameManager.gameState == GameState.NewGame)
         {
             gameManager.SetGameState(GameState.Menu);
         }
-        // Else the game was resetted and is now in the Playing state
+        // Else the game was restarted and is now in the Playing state
         else
         {
             // Unsubscribe from the event if the game was restarted to prevent duplicate event calls
             gameManager.OnStateChange -= ManageStateChange;
 
-            // Show HUD
             hudMenu.SetActive(true);
-
-            // Finish hide menu animations after game reset.
-            // NOTE: Flashing hide menu animations after pressing "play" may be caused by this! Only theory, not proved.
-            if (gameManager.previousGameState == GameState.GameOver)
-            {
-                gameOverMenu.SetActive(true);
-                gameOverMenuAnimator.SetTrigger("hideMenu");
-            }
-            else if (gameManager.previousGameState == GameState.Menu)
-            {
-                mainMenu.SetActive(true);
-                mainMenuAnimator.SetTrigger("hideMenu");
-            }
+            TriggerHideMenuAnimation();
         }
     }
 
@@ -94,13 +74,16 @@ public class GameStateController : MonoBehaviour {
                 GameOver();
                 break;
             case GameState.Menu:
-                InMainMenu();
+                InMenu();
                 break;
             case GameState.About:
-                InAboutMenu();
+                InMenu();
                 break;
             case GameState.Highscore:
-                InHighscoreMenu();
+                InMenu();
+                break;
+            case GameState.DifficultySelection:
+                InMenu();
                 break;
         }
     }
@@ -108,11 +91,6 @@ public class GameStateController : MonoBehaviour {
     private void WhilePlaying()
     {
         hudMenu.SetActive(true);
-
-        //Time.timeScale = 1;
-        //Debug.Log("PLAY");
-
-        //PlayerController.setDifficulty(PlayerController.gameDif);
 
         if (gameManager.previousGameState != GameState.Pause)
         {
@@ -128,86 +106,15 @@ public class GameStateController : MonoBehaviour {
     private void GameOver()
     {
         hudMenu.SetActive(false);
-
-        if (gameOverMenu.activeSelf)
-        {
-            gameOverMenuAnimator.SetTrigger("showMenu");
-        }
-        else
-        {
-            gameOverMenu.SetActive(true);
-        }
-
-        //Time.timeScale = 1;
-        //Debug.Log("GAME OVER");
+        TriggerShowMenuAnimation();
     }
 
-    private void InMainMenu()
-    {
-        // Show HUD again (and in Start) might not be duplicate if the pause is implemented
-        hudMenu.SetActive(false);
-
-        
-        if (gameManager.previousGameState == GameState.GameOver)
-        {
-            gameOverMenuAnimator.SetTrigger("hideMenu");
-        }
-        else if (gameManager.previousGameState == GameState.About)
-        {
-            aboutMenuAnimator.SetTrigger("hideMenu");
-        }
-        else if (gameManager.previousGameState == GameState.Highscore)
-        {
-            highscoreMenuAnimator.SetTrigger("hideMenu");
-        }
-
-        if (mainMenu.activeSelf)
-        {
-            mainMenuAnimator.SetTrigger("showMenu");
-        }
-        else
-        {
-            mainMenu.SetActive(true);
-        }
-
-        Time.timeScale = 0;
-        //Debug.Log("MENU");
-    }
-
-    private void InAboutMenu()
+    private void InMenu()
     {
         hudMenu.SetActive(false);
 
-        // Always accessed from main menu
-        mainMenuAnimator.SetTrigger("hideMenu");
-
-        if (aboutMenu.activeSelf)
-        {
-            aboutMenuAnimator.SetTrigger("showMenu");
-        }
-        else
-        {
-            aboutMenu.SetActive(true);
-        }
-
-        Time.timeScale = 0;
-    }
-
-    private void InHighscoreMenu()
-    {
-        hudMenu.SetActive(false);
-
-        // Always accessed from main menu
-        mainMenuAnimator.SetTrigger("hideMenu");
-
-        if (highscoreMenu.activeSelf)
-        {
-            highscoreMenuAnimator.SetTrigger("showMenu");
-        }
-        else
-        {
-            highscoreMenu.SetActive(true);
-        }
+        TriggerHideMenuAnimation();
+        TriggerShowMenuAnimation();
 
         Time.timeScale = 0;
     }
@@ -216,5 +123,61 @@ public class GameStateController : MonoBehaviour {
     {
         var panel = menu.transform.FindChild("Panel").gameObject;
         return panel.GetComponent<Animator>();
+    }
+
+    private GameObject GetMenuFromState(GameState state)
+    {
+        GameObject menu = null;
+
+        switch (state)
+        {
+            case GameState.GameOver:
+                menu = gameOverMenu;
+                break;
+            case GameState.Menu:
+                menu = mainMenu;
+                break;
+            case GameState.About:
+                menu = aboutMenu;
+                break;
+            case GameState.Highscore:
+                menu = highscoreMenu;
+                break;
+            case GameState.DifficultySelection:
+                menu = difficultyMenu;
+                break;
+            default:
+                break;
+        }
+
+        return menu;
+    }
+
+    private void TriggerHideMenuAnimation()
+    {
+        GameObject menu = GetMenuFromState(gameManager.previousGameState);
+
+        if (menu != null)
+        {
+            menu.SetActive(true);
+            GetMenuAnimator(menu).SetTrigger("hideMenu");
+        }
+    }
+
+    private void TriggerShowMenuAnimation()
+    {
+        GameObject menu = GetMenuFromState(gameManager.gameState);
+
+        if (menu != null)
+        {
+            if (menu.activeSelf)
+            {
+                GetMenuAnimator(menu).SetTrigger("showMenu");
+            }
+            else
+            {
+                menu.SetActive(true);
+            }
+        }
     }
 }

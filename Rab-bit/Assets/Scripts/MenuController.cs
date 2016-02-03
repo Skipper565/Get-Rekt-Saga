@@ -46,4 +46,28 @@ public class MenuController : MonoBehaviour
         Debug.Log("Clicked Quit button");
         Application.Quit();
     }
+
+    public void ClickedPlaySelectDifficulty()
+    {
+        Debug.Log("Clicked Play button, select difficulty");
+        gameManager.SetGameState(GameState.DifficultySelection);
+    }
+
+    public void ClickedEasy()
+    {
+        PlayerController.setDifficulty(GameDifficulty.EASY);
+        gameManager.SetGameState(GameState.Playing);
+    }
+
+    public void ClickedModerate()
+    {
+        PlayerController.setDifficulty(GameDifficulty.MODERATE);
+        gameManager.SetGameState(GameState.Playing);
+    }
+
+    public void ClickedHard()
+    {
+        PlayerController.setDifficulty(GameDifficulty.HARD);
+        gameManager.SetGameState(GameState.Playing);
+    }
 }
