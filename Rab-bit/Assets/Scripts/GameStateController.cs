@@ -85,6 +85,12 @@ public class GameStateController : MonoBehaviour {
             case GameState.DifficultySelection:
                 InMenu();
                 break;
+            case GameState.Tutorial1:
+                InMenu();
+                break;
+            case GameState.Tutorial2:
+                InMenu();
+                break;
         }
     }
 

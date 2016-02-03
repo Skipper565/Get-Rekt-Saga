@@ -11,6 +11,8 @@ public enum GameState
     About,
     Highscore,
     DifficultySelection,
+    Tutorial1,
+    Tutorial2,
 }
 
 public delegate void OnStateChangeHandler();
