@@ -73,8 +73,13 @@ public class PlayerController : MonoBehaviour {
     public GameObject waterDrops;
     public GameObject bloodDrops;
 
+    //AUDIO
+    public AudioSource jumpUp;
+    public AudioSource jumpDown;
+    public AudioSource ploppy;
+    public AudioSource gameOver;
+
     //OTHER
-    private AudioSource audio;
     private Rigidbody2D rb;
     private DateTime deathTime;
     private float screenSplit;
@@ -164,7 +169,11 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
 
-        audio = GetComponent<AudioSource>();
+        var audioSources = GetComponents<AudioSource>();
+        jumpUp = audioSources[0];
+        jumpDown = audioSources[1];
+        ploppy = audioSources[2];
+        gameOver = audioSources[3];
 
         screenSplit = Camera.main.pixelWidth/2;
 
@@ -357,7 +366,7 @@ public class PlayerController : MonoBehaviour {
             var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
 
             rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
-            audio.Play();
+            jumpUp.Play();
 
             jumpCount++;
 
@@ -412,6 +421,8 @@ public class PlayerController : MonoBehaviour {
         var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
         var targetCollider = Physics2D.Raycast(transform.position, -transform.up).collider;
 
+        jumpDown.Play();
+
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
         if (distanceToCollider <= diveLength)
         {
@@ -446,6 +457,8 @@ public class PlayerController : MonoBehaviour {
 		{
             bloodDrops.SetActive(true);
             bloodDrops.GetComponent<Animator>().Play("waterDrop");
+
+            gameOver.PlayOneShot(gameOver.clip);
 
             GameObject.Find("squish").transform.Translate(new Vector3(0,0,90));
             
@@ -547,6 +560,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			waterDrops.SetActive(true);
 			waterDrops.GetComponent<Animator>().Play("waterDrop");
+            ploppy.PlayOneShot(ploppy.clip);
 		}
 
 		// refresh jump hud when hitting jump powerup
