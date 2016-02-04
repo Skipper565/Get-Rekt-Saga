@@ -1766,7 +1766,7 @@ GameObject:
   - 60: {fileID: 6020302}
   m_Layer: 0
   m_Name: publicEnemy
-  m_TagString: Untagged
+  m_TagString: NotToTouch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1972,7 +1972,7 @@ GameObject:
   - 60: {fileID: 6007686}
   m_Layer: 0
   m_Name: publicEnemy
-  m_TagString: Untagged
+  m_TagString: NotToTouch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
