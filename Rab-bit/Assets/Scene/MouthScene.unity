@@ -6493,13 +6493,13 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 849915318}
-  - 114: {fileID: 849915315}
   - 58: {fileID: 849915316}
   - 212: {fileID: 849915317}
   - 95: {fileID: 849915319}
+  - 114: {fileID: 849915315}
   m_Layer: 0
-  m_Name: PowerUp
-  m_TagString: JumpPowerUp
+  m_Name: PowerUpJump
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6512,11 +6512,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 849915314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce954fa91eab9f040aa8404e9e355024, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bc351465cff3d840b81bf47c0114fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recycleOffset: 20
-  spawnChance: 100
+  spawnChance: 1000
+  collected: 0
 --- !u!58 &849915316
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12530,11 +12530,11 @@ MonoBehaviour:
   horizontalVelocity: 9
   waveHopVelocity: 2300
   pauseOnCollide: 1
+  powerUpJump: {fileID: 849915315}
   waterDrops: {fileID: 1700783020}
   bloodDrops: {fileID: 693305776}
   guts: {fileID: 560264692}
   gutsSpeed: 2
-  powerUp: {fileID: 849915315}
 --- !u!50 &1725049314
 Rigidbody2D:
   serializedVersion: 2

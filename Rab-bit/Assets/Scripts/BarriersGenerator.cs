@@ -50,7 +50,7 @@ public class BarriersGenerator : MonoBehaviour {
 		obstacleList.Enqueue(new GameObject());
 		obstacleList.Enqueue(new GameObject());
 
-        //powerUp = new PowerUp();
+        //powerUpJump = new PowerUp();
 
 //		Debug.Log(YScreenCoo*barrierOffset + barrierDimensions[1]);
 //		Debug.Log(YScreenCoo);
@@ -90,8 +90,8 @@ public class BarriersGenerator : MonoBehaviour {
 				nextBarrierBottom = (GameObject) Instantiate(barrier, new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0]*2f, -yScreenCoo*barrierYOffset - barrierDimensions[1]), Quaternion.identity);
 				nextBarrierBottom.tag = "BarrierBottom";
 
-                // Generate powerUp
-                //powerUp.SpawnIfAvailable(new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0] * 2f, yScreenCoo - 8));
+                // Generate powerUpJump
+                //powerUpJump.SpawnIfAvailable(new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0] * 2f, yScreenCoo - 8));
 
 				// generating obstacles here:
 				obstacleList.Enqueue((GameObject) Instantiate(obstacleOne, new Vector2(NowOnScreenTop.transform.position[0] + barrierDimensions[0]*2f, 0), Quaternion.identity));

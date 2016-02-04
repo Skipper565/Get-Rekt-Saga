@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using Assets.Scripts;
 using UnityEngine.UI;
 
 public enum GameDifficulty
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour {
 
     // POWERUPS
     public static bool swapGravity = false;
+    public PowerUpJump powerUpJump;
 
     // DIFFICULTY
     public static GameDifficulty gameDif = GameDifficulty.HARD;
@@ -93,8 +95,6 @@ public class PlayerController : MonoBehaviour {
     public static string nickName = "default";
     public GameObject guts;
     public int gutsSpeed;
-
-    public PowerUp powerUp;
 
     public static int numberOfTopScores = 5;
 
@@ -360,11 +360,11 @@ public class PlayerController : MonoBehaviour {
     void moveUp()
     {
         // ignore jump if limit was exceeded
-        if (jumpCount < jumpCountLimit || (PowerUp.collected && jumpCount < jumpCountLimit + 1))
+        if (jumpCount < jumpCountLimit || (powerUpJump.collected && jumpCount < jumpCountLimit + 1))
         {
             if (jumpCount == jumpCountLimit)
             {
-                PowerUp.collected = false;
+                powerUpJump.collected = false;
             }
 
             // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
@@ -380,7 +380,7 @@ public class PlayerController : MonoBehaviour {
             jumpCount++;
 
 			bars = jumpCountLimit-jumpCount;
-			if(PowerUp.collected)
+			if (powerUpJump.collected)
 				bars += 1;
 			switch (bars) {
 			case 0:
@@ -433,7 +433,7 @@ public class PlayerController : MonoBehaviour {
         jumps[UnityEngine.Random.Range(0, 4)].Play();
 
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
-        if (distanceToCollider <= diveLength && targetCollider.tag != "JumpPowerUp")
+        if (distanceToCollider <= diveLength && targetCollider.tag.Contains("PowerUp"))
         {
             // Uncomment this for determining distance of the player and the collider. Set value collisionTolerance accordingly.
             Debug.Log("Move down: Collider: " + targetCollider.name + " Distance: " + distanceToCollider 
@@ -451,6 +451,11 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            if (targetCollider.tag == "JumpPowerUp")
+            {
+                powerUpJump.Collect();
+            }
+            
             // when diving, player´s position changes discretely (but visually with continuous motion animation)
             transform.Translate(Vector3.down * diveLength);
 			diveAnim.SetActive(false);
@@ -512,7 +517,7 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
 
 			bars = jumpCountLimit-jumpCount;
-			if(PowerUp.collected)
+			if (powerUpJump.collected)
 				bars += 1;
 			switch (bars) {
 			case 0:

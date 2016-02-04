@@ -12,7 +12,7 @@ public class BarrierGenerator : MonoBehaviour
     public int obstacleRepetition;
     private int currentObstacleRepetition;
 
-    public PowerUp powerUp;
+    public PowerUpJump powerUp;
 
     // List of barriers; each contain barriers of exactly one type
     // Add new list for each new pavilon
