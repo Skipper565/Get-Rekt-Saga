@@ -13,6 +13,9 @@ public enum GameState
     DifficultySelection,
     Tutorial1,
     Tutorial2,
+    Tutorial3,
+    Tutorial4,
+    Tutorial5,
 }
 
 public delegate void OnStateChangeHandler();

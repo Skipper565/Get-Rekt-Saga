@@ -13,6 +13,11 @@ public class UIManager : MonoBehaviour
     public static GameObject HighscoreMenu;
     public static GameObject DifficultyMenu;
     public static GameObject NicknameMenu;
+    public static GameObject Tutorial1;
+    public static GameObject Tutorial2;
+    public static GameObject Tutorial3;
+    public static GameObject Tutorial4;
+    public static GameObject Tutorial5;
 
     void Awake()
     {
@@ -32,6 +37,13 @@ public class UIManager : MonoBehaviour
             HighscoreMenu = transform.FindChild("HighScoreMenu").gameObject;
             DifficultyMenu = transform.FindChild("DifficultyMenu").gameObject;
             NicknameMenu = transform.FindChild("NicknameEdit").gameObject;
+
+            var tutorial = transform.FindChild("Tutorial");
+            Tutorial1 = tutorial.FindChild("Tutorial 1").gameObject;
+            Tutorial2 = tutorial.FindChild("Tutorial 2").gameObject;
+            Tutorial3 = tutorial.FindChild("Tutorial 3").gameObject;
+            Tutorial4 = tutorial.FindChild("Tutorial 4").gameObject;
+            Tutorial5 = tutorial.FindChild("Tutorial 5").gameObject;
         }
     }
 

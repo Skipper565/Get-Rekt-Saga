@@ -12,6 +12,11 @@ public class GameStateController : MonoBehaviour {
     private GameObject highscoreMenu;
     private GameObject difficultyMenu;
     private GameObject nicknameMenu;
+    private GameObject tutorial1;
+    private GameObject tutorial2;
+    private GameObject tutorial3;
+    private GameObject tutorial4;
+    private GameObject tutorial5;
 
     private Animator nicknameMenuAnimator;
 
@@ -32,6 +37,12 @@ public class GameStateController : MonoBehaviour {
         highscoreMenu = UIManager.HighscoreMenu;
         difficultyMenu = UIManager.DifficultyMenu;
 
+        tutorial1 = UIManager.Tutorial1;
+        tutorial2 = UIManager.Tutorial2;
+        tutorial3 = UIManager.Tutorial3;
+        tutorial4 = UIManager.Tutorial4;
+        tutorial5 = UIManager.Tutorial5;
+
         // Load player controller
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
@@ -41,6 +52,12 @@ public class GameStateController : MonoBehaviour {
         gameOverMenu.SetActive(false);
         highscoreMenu.SetActive(false);
         difficultyMenu.SetActive(false);
+
+        tutorial1.SetActive(false);
+        tutorial2.SetActive(false);
+        tutorial3.SetActive(false);
+        tutorial4.SetActive(false);
+        tutorial5.SetActive(false);
 
         // Go to menu when the game starts, but don't when it's just restarted
         if (gameManager.gameState == GameState.NewGame)
@@ -89,6 +106,15 @@ public class GameStateController : MonoBehaviour {
                 InMenu();
                 break;
             case GameState.Tutorial2:
+                InMenu();
+                break;
+            case GameState.Tutorial3:
+                InMenu();
+                break;
+            case GameState.Tutorial4:
+                InMenu();
+                break;
+            case GameState.Tutorial5:
                 InMenu();
                 break;
         }
@@ -151,6 +177,21 @@ public class GameStateController : MonoBehaviour {
                 break;
             case GameState.DifficultySelection:
                 menu = difficultyMenu;
+                break;
+            case GameState.Tutorial1:
+                menu = tutorial1;
+                break;
+            case GameState.Tutorial2:
+                menu = tutorial2;
+                break;
+            case GameState.Tutorial3:
+                menu = tutorial3;
+                break;
+            case GameState.Tutorial4:
+                menu = tutorial4;
+                break;
+            case GameState.Tutorial5:
+                menu = tutorial5;
                 break;
             default:
                 break;
