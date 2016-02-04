@@ -476,7 +476,7 @@ public class PlayerController : MonoBehaviour {
             if (gameManager.gameState != GameState.GameOver)
             {
                 gameManager.SetGameState(GameState.GameOver);
-                if (!waterDrops.active)
+                if (!waterDrops.activeSelf)
                 {
                     gameOver.PlayOneShot(gameOver.clip);
                 }

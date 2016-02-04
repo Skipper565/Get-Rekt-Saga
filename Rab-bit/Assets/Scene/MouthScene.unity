@@ -12231,7 +12231,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 64746cec4443e7341b529e4098fdb8da, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12344,7 +12344,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 371cd5871187ba145ba4535585fdfbc5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12415,7 +12415,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 232f980b6a8109a468257fa72986b22c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12486,7 +12486,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 256c8fe65b4bac0448c642ce83c6bb49, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12557,7 +12557,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 69f4203d0d2b9b54cbb7b59c1634d8db, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12628,7 +12628,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: b353c7bc3ef89e54595cc1b7eadf0be1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12699,7 +12699,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300001, guid: d5cfa0ea6849c5144a69d4136287a911,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 77de9eed0bc69eb418bca018a9b18e48, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
