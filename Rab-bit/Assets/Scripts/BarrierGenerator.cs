@@ -18,11 +18,13 @@ public class BarrierGenerator : MonoBehaviour
     // Add new list for each new pavilon
     public List<GameObject> listOfTeethBarriers;
     public List<GameObject> listOfSeaBarriers;
+    public List<GameObject> listOfSpaceBarriers;
     // TODO: Add other list
 
     private Pavilon currentPavilon;
     TeethPavilon teethPavilon;
     SeaPavilon seaPavilon;
+    SpacePavilon spacePavilon;
     List<Pavilon> listOfAllPavilons; 
     // TODO: Add other pavilons
 
@@ -44,11 +46,12 @@ public class BarrierGenerator : MonoBehaviour
     {
         teethPavilon = new TeethPavilon(listOfTeethBarriers);
         seaPavilon = new SeaPavilon(listOfSeaBarriers);
+        spacePavilon = new SpacePavilon(listOfSpaceBarriers);
         // TODO: Initialize other pavilons by their type (PavilonType : Pavilon)
 
         // Load all barriers and their initial position
         // TODO: Add other pavilons to the list of all pavilons
-        listOfAllPavilons = new List<Pavilon>() { teethPavilon, seaPavilon };
+        listOfAllPavilons = new List<Pavilon>() { teethPavilon, seaPavilon, spacePavilon };
 
         foreach (var pavilon in listOfAllPavilons)
         {
