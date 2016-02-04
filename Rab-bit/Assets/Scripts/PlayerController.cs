@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject jumpHudThree;
 	private GameObject jumpHudFour;
 	private int bars; // number of jump hud bars to be shown
+    private Vector2 previousVelocity = new Vector2(0,0);
+
     public static string nickName = "default";
     public GameObject guts;
     public int gutsSpeed;
@@ -173,6 +175,11 @@ public class PlayerController : MonoBehaviour {
         restartKey = KeyCode.Space;
         quitKey = KeyCode.Escape;
 #endif
+    }
+
+    void FixedUpdate()
+    {
+        previousVelocity = rb.velocity;
     }
 
     // Update is called once per frame
@@ -721,11 +728,13 @@ public class PlayerController : MonoBehaviour {
             randNum = rnd.Next(360);
 
             Vector2 newpos = new Vector2(1.2f * (float)Math.Cos(randNum),1.2f * (float)Math.Sin(randNum));
+            Vector2 velocity = newpos + previousVelocity * 2f;
 
-            Debug.Log(newpos);
+            Rigidbody2D childRB = child.gameObject.GetComponent<Rigidbody2D>();
 
+            childRB.AddForce(velocity * gutsSpeed);
             child.position = transform.position + new Vector3(newpos.x, newpos.y, 0);
-            child.gameObject.GetComponent<Rigidbody2D>().AddForce(newpos*gutsSpeed);
+            
         }
     }
 
