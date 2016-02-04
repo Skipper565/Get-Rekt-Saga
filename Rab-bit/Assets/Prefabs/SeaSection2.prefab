@@ -223,6 +223,8 @@ GameObject:
   - 212: {fileID: 21249360}
   - 61: {fileID: 6159006}
   - 114: {fileID: 11498284}
+  - 61: {fileID: 6183368}
+  - 61: {fileID: 6198654}
   m_Layer: 0
   m_Name: seaWaves 1
   m_TagString: NotToTouch
@@ -989,6 +991,19 @@ BoxCollider2D:
   m_Offset: {x: -.0617439561, y: -1.48413587}
   serializedVersion: 2
   m_Size: {x: 17.9693813, y: 1.40145659}
+--- !u!61 &6183368
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134168}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 9.28999996, y: -1.36000001}
+  serializedVersion: 2
+  m_Size: {x: .980000019, y: 2.01999998}
 --- !u!61 &6187750
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1002,6 +1017,19 @@ BoxCollider2D:
   m_Offset: {x: -1.09484154e-06, y: -.281359345}
   serializedVersion: 2
   m_Size: {x: 16.2900009, y: 1.4572835}
+--- !u!61 &6198654
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134168}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -9.23999977, y: -1.36000001}
+  serializedVersion: 2
+  m_Size: {x: .980000019, y: 2.01999998}
 --- !u!64 &6499688
 MeshCollider:
   m_ObjectHideFlags: 1
