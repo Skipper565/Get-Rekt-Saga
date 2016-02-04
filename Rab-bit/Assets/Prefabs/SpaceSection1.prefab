@@ -3703,6 +3703,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 454552}
   - 212: {fileID: 21230474}
+  - 61: {fileID: 6159288}
   m_Layer: 0
   m_Name: SpaceCeiling
   m_TagString: Untagged
@@ -5149,6 +5150,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 487788}
   - 212: {fileID: 21235322}
+  - 61: {fileID: 6150048}
   m_Layer: 0
   m_Name: SpaceGround
   m_TagString: Untagged
@@ -6350,7 +6352,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.2999992, y: -5.30000019, z: 0}
+  m_LocalPosition: {x: 14.3000002, y: -44.8499985, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 487788}
@@ -10298,6 +10300,32 @@ PolygonCollider2D:
       - {x: 1.64349759, y: -.80300808}
       - {x: 1.6095134, y: -.649998665}
       - {x: 1.57800925, y: -.600972176}
+--- !u!61 &6150048
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194878}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -.639999986}
+  serializedVersion: 2
+  m_Size: {x: 19.5200005, y: 3.69000006}
+--- !u!61 &6159288
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168170}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 19.5699997, y: 2.4000001}
 --- !u!95 &9501548
 Animator:
   serializedVersion: 3

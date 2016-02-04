@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
             AboutMenu = transform.FindChild("AboutMenu").gameObject;
             HudMenu = transform.FindChild("HUD Canvas").gameObject;
             HighscoreMenu = transform.FindChild("HighScoreMenu").gameObject;
-            DifficultyMenu = transform.FindChild("SelectDifficultyMenu").gameObject;
+            DifficultyMenu = transform.FindChild("DifficultyMenu").gameObject;
             NicknameMenu = transform.FindChild("NicknameEdit").gameObject;
         }
     }

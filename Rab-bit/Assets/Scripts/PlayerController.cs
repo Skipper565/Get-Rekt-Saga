@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour {
 	private GameObject jumpHudTwo;
 	private GameObject jumpHudThree;
 	private GameObject jumpHudFour;
+	private GameObject diveAnim;
 	private int bars; // number of jump hud bars to be shown
     private Vector2 previousVelocity = new Vector2(0,0);
 
@@ -160,10 +161,14 @@ public class PlayerController : MonoBehaviour {
         bloodDrops.SetActive(false);
         waterDrops.SetActive(false);
 
+		diveAnim = GameObject.Find("diveAnim");
+		diveAnim.SetActive(false);
+
 		jumpHudOne = GameObject.Find("One");
 		jumpHudTwo = GameObject.Find("Two");
 		jumpHudThree = GameObject.Find("Three");
 		jumpHudFour = GameObject.Find("Four");
+
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
@@ -444,6 +449,8 @@ public class PlayerController : MonoBehaviour {
         {
             // when diving, player´s position changes discretely (but visually with continuous motion animation)
             transform.Translate(Vector3.down * diveLength);
+			diveAnim.SetActive(false);
+			diveAnim.SetActive(true);
         }
 
         // set vertical velocity to zero so player slowly starts to fall after dive action
