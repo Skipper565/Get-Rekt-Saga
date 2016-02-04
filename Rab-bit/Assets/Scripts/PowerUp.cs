@@ -36,8 +36,14 @@ public class PowerUp : MonoBehaviour {
             return;
         }
 
-        transform.localPosition = FindSpawnPosition(bounds);
-        gameObject.SetActive(true);
+        var position = FindSpawnPosition(bounds);
+
+        // Can happen if no suitable position is found within some iterations
+        if (position != Vector2.zero)
+        {
+            transform.localPosition = position;
+            gameObject.SetActive(true);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -53,11 +59,12 @@ public class PowerUp : MonoBehaviour {
 
     private Vector2 FindSpawnPosition(Bounds bounds)
     {
-        int maxIterations = 1000;
+        const int maxIterations = 1000;
         int iterationCounter = 0;
         float x, y;
         bool collided = false;
         float radius = 0.5f;
+        var player = GameObject.Find("Player").transform;
 
         do
         {
@@ -65,6 +72,12 @@ public class PowerUp : MonoBehaviour {
             y = Random.Range(bounds.min.y, bounds.max.y);
 
             collided = Physics2D.OverlapCircle(new Vector2(x, y), radius);
+
+            // Do not spawn it behind player (and certain offset in front of him)
+            if (player.position.x + 2 > x)
+            {
+                continue;
+            }
 
             iterationCounter++;
 

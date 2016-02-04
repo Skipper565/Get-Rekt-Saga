@@ -153,7 +153,7 @@ public class BarrierGenerator : MonoBehaviour
         lastBarrier = randomBarrier;
         queueOfBarriers.Enqueue(lastBarrier);
 
-        powerUp.SpawnIfAvailable(GetMaxBoundsOfPrefab(randomBarrier));
+        powerUp.SpawnIfAvailable(GetBounds(randomBarrier));
     }
 
     private void GenerateBarrier(GameObject barrier)
@@ -216,6 +216,24 @@ public class BarrierGenerator : MonoBehaviour
         firstBarrier.SetActive(false);
         queueOfBarriers.Dequeue();
         firstBarrier = queueOfBarriers.Peek();
+    }
+
+    private Bounds GetBounds(GameObject barrier)
+    {
+        var bounds = GetMaxBoundsOfPrefab(barrier);
+
+        // Spawn power up only in the upper half of the barrier
+        if (currentPavilon == seaPavilon)
+        {
+            var center = new Vector3(bounds.center.x, (bounds.center.y + bounds.max.y)/2, bounds.center.z);
+            var size = new Vector3(bounds.size.x, bounds.size.y/2, bounds.size.z);
+            Bounds b = new Bounds(center, size);
+            return b;
+        }
+        else
+        {
+            return bounds;
+        }
     }
 
     private Bounds GetMaxBoundsOfPrefab(GameObject barrier)
