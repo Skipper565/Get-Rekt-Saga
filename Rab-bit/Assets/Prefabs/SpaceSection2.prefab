@@ -2774,7 +2774,7 @@ GameObject:
   - 61: {fileID: 6137566}
   m_Layer: 0
   m_Name: SpaceCeiling
-  m_TagString: Untagged
+  m_TagString: BarrierTop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5190,7 +5190,7 @@ GameObject:
   - 61: {fileID: 6191144}
   m_Layer: 0
   m_Name: SpaceGround
-  m_TagString: Untagged
+  m_TagString: BarrierBottom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
