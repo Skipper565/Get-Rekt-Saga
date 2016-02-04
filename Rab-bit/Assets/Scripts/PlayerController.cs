@@ -74,10 +74,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject bloodDrops;
 
     //AUDIO
-    public AudioSource jumpUp;
-    public AudioSource jumpDown;
-    public AudioSource ploppy;
-    public AudioSource gameOver;
+    private AudioSource[] jumps;
+    private AudioSource ploppy;
+    private AudioSource gameOver;
 
     //OTHER
     private Rigidbody2D rb;
@@ -169,16 +168,20 @@ public class PlayerController : MonoBehaviour {
 		jumpHudThree = GameObject.Find("Three");
 		jumpHudFour = GameObject.Find("Four");
 
+        jumps = new AudioSource[5];
+
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
 
         var audioSources = GetComponents<AudioSource>();
-        jumpUp = audioSources[0];
-        jumpDown = audioSources[1];
-        ploppy = audioSources[2];
-        gameOver = audioSources[3];
+        for (int i = 0; i < 5; i++)
+        {
+            jumps[i] = audioSources[i];
+        }
+        ploppy = audioSources[5];
+        gameOver = audioSources[6];
 
         screenSplit = Camera.main.pixelWidth/2;
 
@@ -371,7 +374,8 @@ public class PlayerController : MonoBehaviour {
             var jumpVelocityGravityDirection = rb.gravityScale > 0 ? jumpVelocity : -jumpVelocity;
 
             rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
-            jumpUp.Play();
+
+            jumps[UnityEngine.Random.Range(0,4)].Play();
 
             jumpCount++;
 
@@ -426,7 +430,7 @@ public class PlayerController : MonoBehaviour {
         var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
         var targetCollider = Physics2D.Raycast(transform.position, -transform.up).collider;
 
-        jumpDown.Play();
+        jumps[UnityEngine.Random.Range(0, 4)].Play();
 
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
         if (distanceToCollider <= diveLength && targetCollider.tag != "JumpPowerUp")
@@ -465,8 +469,6 @@ public class PlayerController : MonoBehaviour {
             bloodDrops.SetActive(true);
             bloodDrops.GetComponent<Animator>().Play("waterDrop");
 
-            gameOver.PlayOneShot(gameOver.clip);
-
             GameObject.Find("squish").transform.Translate(new Vector3(0,0,90));
             
             //bloodDrops.GetComponent<Animator>().Play("waterDrops");
@@ -474,8 +476,12 @@ public class PlayerController : MonoBehaviour {
             if (gameManager.gameState != GameState.GameOver)
             {
                 gameManager.SetGameState(GameState.GameOver);
+                if (!waterDrops.active)
+                {
+                    gameOver.PlayOneShot(gameOver.clip);
+                }
             }
-
+            
             deathTime = DateTime.Now;
 
 			GetComponent<Animator>().SetBool("IsCrashed",true);
