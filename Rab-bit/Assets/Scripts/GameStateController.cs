@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameStateController : MonoBehaviour {
 
@@ -12,15 +13,16 @@ public class GameStateController : MonoBehaviour {
     private GameObject highscoreMenu;
     private GameObject difficultyMenu;
     private GameObject nicknameMenu;
+    private GameObject moreMenu;
+
     private GameObject tutorial1;
     private GameObject tutorial2;
     private GameObject tutorial3;
     private GameObject tutorial4;
     private GameObject tutorial5;
 
-    private Animator nicknameMenuAnimator;
-
     private PlayerController playerController;
+    private bool dontAnimateHideNicknameMenu;
 
     // Use this for initialization
     void Start() {
@@ -36,6 +38,8 @@ public class GameStateController : MonoBehaviour {
         hudMenu = UIManager.HudMenu;
         highscoreMenu = UIManager.HighscoreMenu;
         difficultyMenu = UIManager.DifficultyMenu;
+        nicknameMenu = UIManager.NicknameMenu;
+        moreMenu = UIManager.MoreMenu;
 
         tutorial1 = UIManager.Tutorial1;
         tutorial2 = UIManager.Tutorial2;
@@ -52,6 +56,8 @@ public class GameStateController : MonoBehaviour {
         gameOverMenu.SetActive(false);
         highscoreMenu.SetActive(false);
         difficultyMenu.SetActive(false);
+        nicknameMenu.SetActive(false);
+        moreMenu.SetActive(false);
 
         tutorial1.SetActive(false);
         tutorial2.SetActive(false);
@@ -59,14 +65,22 @@ public class GameStateController : MonoBehaviour {
         tutorial4.SetActive(false);
         tutorial5.SetActive(false);
 
+        dontAnimateHideNicknameMenu = true;
+
         // Go to menu when the game starts, but don't when it's just restarted
-        if (gameManager.gameState == GameState.NewGame)
+        if (gameManager.gameState == GameState.NewGame/* || gameManager.gameState == GameState.Nickname*/)
         {
-            gameManager.SetGameState(GameState.Menu);
+            //gameManager.SetGameState(GameState.Menu);
+            gameManager.SetGameState(GameState.Nickname);
         }
         // Else the game was restarted and is now in the Playing state
         else
         {
+            if (gameManager.gameState != GameState.Playing)
+            {
+                Debug.LogError("Unexpected game state - should be Playing! Current game state: " + gameManager.gameState);
+            }
+            
             // Unsubscribe from the event if the game was restarted to prevent duplicate event calls
             gameManager.OnStateChange -= ManageStateChange;
 
@@ -81,6 +95,9 @@ public class GameStateController : MonoBehaviour {
 
         switch (gameManager.gameState)
         {
+            case GameState.NewGame:
+                gameManager.SetGameState(GameState.Nickname);
+                break;
             case GameState.Playing:
                 WhilePlaying();
                 break;
@@ -100,6 +117,12 @@ public class GameStateController : MonoBehaviour {
                 InMenu();
                 break;
             case GameState.DifficultySelection:
+                InMenu();
+                break;
+            case GameState.Nickname:
+                InNicknameEdit();
+                break;
+            case GameState.More:
                 InMenu();
                 break;
             case GameState.Tutorial1:
@@ -151,6 +174,25 @@ public class GameStateController : MonoBehaviour {
         Time.timeScale = 0;
     }
 
+    private void InNicknameEdit()
+    {
+        if (gameManager.previousGameState == GameState.NewGame)
+        {
+            if (PlayerPrefs.GetString("playerName") != "")
+            {
+                dontAnimateHideNicknameMenu = true;
+                gameManager.SetGameState(GameState.Menu);
+                return;
+            }
+        }
+
+        dontAnimateHideNicknameMenu = false;
+        InMenu();
+
+        //var inputField = nicknameMenu.transform.FindChild("Panel").FindChild("InputField").GetComponent<InputField>();
+        //inputField.onEndEdit.AddListener();
+    }
+
     private Animator GetMenuAnimator(GameObject menu)
     {
         var panel = menu.transform.FindChild("Panel").gameObject;
@@ -177,6 +219,12 @@ public class GameStateController : MonoBehaviour {
                 break;
             case GameState.DifficultySelection:
                 menu = difficultyMenu;
+                break;
+            case GameState.Nickname:
+                menu = nicknameMenu;
+                break;
+            case GameState.More:
+                menu = moreMenu;
                 break;
             case GameState.Tutorial1:
                 menu = tutorial1;
@@ -206,6 +254,11 @@ public class GameStateController : MonoBehaviour {
 
         if (menu != null)
         {
+            if (gameManager.previousGameState == GameState.Nickname && dontAnimateHideNicknameMenu)
+            {
+                return;
+            }
+
             menu.SetActive(true);
             GetMenuAnimator(menu).SetTrigger("hideMenu");
         }

@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     public static GameObject Tutorial3;
     public static GameObject Tutorial4;
     public static GameObject Tutorial5;
+    public static GameObject MoreMenu;
 
     void Awake()
     {
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
             HighscoreMenu = transform.FindChild("HighScoreMenu").gameObject;
             DifficultyMenu = transform.FindChild("DifficultyMenu").gameObject;
             NicknameMenu = transform.FindChild("NicknameEdit").gameObject;
+            MoreMenu = transform.FindChild("MoreMenu").gameObject;
 
             var tutorial = transform.FindChild("Tutorial");
             Tutorial1 = tutorial.FindChild("Tutorial 1").gameObject;
@@ -61,6 +63,14 @@ public class UIManager : MonoBehaviour
         SetMenuCamera(HudMenu);
         SetMenuCamera(HighscoreMenu);
         SetMenuCamera(DifficultyMenu);
+        SetMenuCamera(NicknameMenu);
+        SetMenuCamera(MoreMenu);
+
+        SetMenuCamera(Tutorial1);
+        SetMenuCamera(Tutorial2);
+        SetMenuCamera(Tutorial3);
+        SetMenuCamera(Tutorial4);
+        SetMenuCamera(Tutorial5);
     }
 
     private void SetMenuCamera(GameObject menu)

@@ -89,4 +89,19 @@ public class MenuController : MonoBehaviour
     {
         gameManager.SetGameState(GameState.Tutorial5);
     }
+
+    public void ClickedNicknameEdit()
+    {
+        gameManager.SetGameState(GameState.Nickname);
+    }
+
+    public void ClickedNicknameDone()
+    {
+        gameManager.SetGameState(GameState.Menu);
+    }
+
+    public void ClickedMore()
+    {
+        gameManager.SetGameState(GameState.More);
+    }
 }

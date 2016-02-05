@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class InputFieldManager : MonoBehaviour {
 
-    public bool isDone = false;
+    /*public bool isDone = false;
 
     void Start()
     {
@@ -23,9 +23,9 @@ public class InputFieldManager : MonoBehaviour {
 
         //or simply use the line below, 
         //input.onEndEdit.AddListener(SubmitName);  // This also works
-    }
+    }*/
 
-    private void SubmitName(string arg0)
+    public void SubmitName(string arg0)
     {
         //Debug.Log(arg0);
         if (arg0 == "")
@@ -39,7 +39,7 @@ public class InputFieldManager : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
         if (!isDone)
         {
             GameObject.Find("MainMenu").GetComponent<Canvas>().sortingOrder = -1;
@@ -54,5 +54,5 @@ public class InputFieldManager : MonoBehaviour {
         GameObject.Find("NicknameEdit").transform.FindChild("Panel").GetComponent<Animator>().SetTrigger("hideMenu");
         GameObject.Find("MainMenu").GetComponent<Canvas>().sortingOrder = 100;
         isDone = true;
-    }
+    }*/
 }
