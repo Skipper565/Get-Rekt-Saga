@@ -16,6 +16,7 @@ public class InputFieldManager : MonoBehaviour {
         }
 
         GameObject.Find("MainMenu").SetActive(false);
+        PlayerController.inMenu = true;
         var input = gameObject.GetComponent<InputField>();
         var se = new InputField.SubmitEvent();
         se.AddListener(SubmitName);
@@ -54,5 +55,10 @@ public class InputFieldManager : MonoBehaviour {
         GameObject.Find("NicknameEdit").transform.FindChild("Panel").GetComponent<Animator>().SetTrigger("hideMenu");
         GameObject.Find("MainMenu").GetComponent<Canvas>().sortingOrder = 100;
         isDone = true;
-    }*/
+<<<<<<< HEAD
+    }
+=======
+        PlayerController.inMenu = false;
+    }
+>>>>>>> origin/master*/
 }

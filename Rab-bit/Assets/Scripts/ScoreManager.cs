@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour {
     public static float distance;
     public static float score;
 
-    private int scoreFromPowerUps;
+    public static int scoreFromPowerUps;
 
 	// Use this for initialization
 	void Start () {
