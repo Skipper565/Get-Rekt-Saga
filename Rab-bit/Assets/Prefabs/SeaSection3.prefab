@@ -253,6 +253,7 @@ GameObject:
   - 212: {fileID: 21232292}
   - 61: {fileID: 6189422}
   - 114: {fileID: 11494622}
+  - 61: {fileID: 6117414}
   m_Layer: 0
   m_Name: seaWaves 1
   m_TagString: NotToTouch
@@ -1005,6 +1006,19 @@ PolygonCollider2D:
       - {x: -.0721745491, y: -.237766743}
       - {x: -1.33074379, y: -.217152119}
       - {x: -1.92882681, y: -.0427069664}
+--- !u!61 &6117414
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128672}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 7.5, y: -.460000008}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.03999996}
 --- !u!61 &6121366
 BoxCollider2D:
   m_ObjectHideFlags: 1

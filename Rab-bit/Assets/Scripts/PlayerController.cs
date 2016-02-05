@@ -87,8 +87,8 @@ public class PlayerController : MonoBehaviour {
 	private GameObject jumpHudThree;
 	private GameObject jumpHudFour;
 	private GameObject diveAnim;
-	private GameObject jumpGlowAnim;
-	private GameObject scoreGlowAnim;
+	public GameObject jumpGlowAnim;
+	public GameObject scoreGlowAnim;
 
 
     //OTHER
@@ -120,6 +120,38 @@ public class PlayerController : MonoBehaviour {
         //
         //getGlobalHighScores();
         //PlayerPrefs.DeleteAll();
+		
+//		if(jumpGlowAnim == null)
+//		{
+//			jumpGlowAnim = GameObject.Find("glowingWheelJumps");
+//			if(jumpGlowAnim == null)
+//				Debug.Log("jumpy");
+//			if(jumpGlowAnim != null)
+//				jumpGlowAnim.SetActive(false);
+//		}
+//		Debug.Log("kotokotokoot");
+//
+//		if(scoreGlowAnim == null)
+//		{
+//			scoreGlowAnim = GameObject.Find("glowingWheelScore");
+//			if(scoreGlowAnim == null)
+//				Debug.Log("skore");
+//			if(scoreGlowAnim != null)
+//				scoreGlowAnim.SetActive(false);
+//		}
+
+//		jumpGlowAnim.SetActive(false);
+//		scoreGlowAnim.SetActive(false);
+//		
+//		Debug.Log("thug lyfe");
+//		Debug.Log(jumpGlowAnim);
+//		Debug.Log(scoreGlowAnim);
+//		Debug.Log("thug lyfe");
+//		if(scoreGlowAnim == null)
+//			Debug.Log("thug lyfe");
+		
+//		if(scoreGlowAnim != null)
+//			scoreGlowAnim.SetActive(false);
 
         for (int i = 0; i < Enum.GetNames(typeof(GameDifficulty)).Length; i++)
         {
@@ -129,6 +161,7 @@ public class PlayerController : MonoBehaviour {
             string debugLog = "LOCAL " + ((GameDifficulty)i).ToString();
 
             localHighScore[i].score = new List<Tuple<float, string>>();
+
 
             for (int scorePos = 0; scorePos < numberOfTopScores; scorePos++)
             {
@@ -176,11 +209,13 @@ public class PlayerController : MonoBehaviour {
 		jumpHudThree = GameObject.Find("Three");
 		jumpHudFour = GameObject.Find("Four");
 
-		jumpGlowAnim = GameObject.Find("glowingWheelJumps");
-		scoreGlowAnim = GameObject.Find("glowingWheelScore");
+//		jumpGlowAnim = GameObject.Find("glowingWheelJumps");
+//		scoreGlowAnim = GameObject.Find("glowingWheelScore");
 
-		jumpGlowAnim.SetActive(false);
-		scoreGlowAnim.SetActive(false);
+//		if(jumpGlowAnim != null)
+//			jumpGlowAnim.SetActive(false);
+//		if(scoreGlowAnim != null)
+//			scoreGlowAnim.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
@@ -385,7 +420,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (jumpCount == jumpCountLimit)
             {
-				jumpGlowAnim.SetActive(false); // disable glowing animation of jump hud
+//				jumpGlowAnim.SetActive(false); // disable glowing animation of jump hud
                 PowerUpJump.collected = false;
             }
 
@@ -501,8 +536,8 @@ public class PlayerController : MonoBehaviour {
 		{
             bloodDrops.SetActive(true);
             bloodDrops.GetComponent<Animator>().Play("waterDrop");
-			jumpGlowAnim.SetActive(false);
-			scoreGlowAnim.SetActive(false);
+//			jumpGlowAnim.SetActive(false);
+//			scoreGlowAnim.SetActive(false);
 
             GameObject.Find("squish").transform.Translate(new Vector3(0,0,90));
             
@@ -621,8 +656,8 @@ public class PlayerController : MonoBehaviour {
 		if (coll.gameObject.tag == "JumpPowerUp")
 		{
 			
-			jumpGlowAnim.SetActive(false); // ensuring animation object is inactive so it can be activated below and therefore animation is palyed
-			jumpGlowAnim.SetActive(true);
+//			jumpGlowAnim.SetActive(false); // ensuring animation object is inactive so it can be activated below and therefore animation is palyed
+//			jumpGlowAnim.SetActive(true);
 
 			bars = jumpCountLimit-jumpCount+1;
 			switch (bars) {
@@ -667,8 +702,8 @@ public class PlayerController : MonoBehaviour {
 		// refresh jump hud when hitting jump powerup
 		if (coll.gameObject.tag == "ScorePowerUp")
 		{
-			scoreGlowAnim.SetActive(false);
-			scoreGlowAnim.SetActive(true);
+//			scoreGlowAnim.SetActive(false);
+//			scoreGlowAnim.SetActive(true);
 		}
 	}
 
@@ -681,7 +716,6 @@ public class PlayerController : MonoBehaviour {
     private void saveScore()
     {
         int originalTopHighScores = localHighScore.GetHashCode();
-		Debug.Log(ScoreManager.score);
         PlayerPrefs.SetInt("lastScore", (int)ScoreManager.score);
 
         localHighScore[(int)gameDif].score.Add(new Tuple<float, string>(ScoreManager.score, nickName));

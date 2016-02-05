@@ -3958,6 +3958,7 @@ RectTransform:
   - {fileID: 1811580167}
   - {fileID: 1562202243}
   - {fileID: 944775673}
+  - {fileID: 720955328}
   m_Father: {fileID: 305948732}
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
@@ -4515,6 +4516,7 @@ RectTransform:
   m_Children:
   - {fileID: 1958055171}
   - {fileID: 39855617}
+  - {fileID: 1195032736}
   m_Father: {fileID: 305948732}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: 1}
@@ -5830,7 +5832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &720955328
 Transform:
   m_ObjectHideFlags: 0
@@ -5838,11 +5840,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 720955327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5999999, y: 3.9000001, z: 963.796997}
-  m_LocalScale: {x: .81236279, y: .787947416, z: .999765098}
+  m_LocalPosition: {x: 2.93222046, y: 0, z: 38879.7344}
+  m_LocalScale: {x: 45.5, y: 40.5999985, z: 44.9996948}
   m_Children: []
-  m_Father: {fileID: 757208577}
-  m_RootOrder: 2
+  m_Father: {fileID: 459556701}
+  m_RootOrder: 4
 --- !u!95 &720955329
 Animator:
   serializedVersion: 3
@@ -6062,8 +6064,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 199135238}
-  - {fileID: 1195032736}
-  - {fileID: 720955328}
   m_Father: {fileID: 0}
   m_RootOrder: 15
 --- !u!114 &757208578
@@ -6972,7 +6972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc351465cff3d840b81bf47c0114fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnChance: 20
+  spawnChance: 135.449997
 --- !u!58 &849915316
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9749,7 +9749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1195032736
 Transform:
   m_ObjectHideFlags: 0
@@ -9757,11 +9757,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1195032735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.9000001, z: 100}
-  m_LocalScale: {x: 1.2704823, y: 1.02988064, z: .999765098}
+  m_LocalPosition: {x: 0, y: 48.7000008, z: 0}
+  m_LocalScale: {x: 57.1847534, y: 52.9599991, z: 44.9996948}
   m_Children: []
-  m_Father: {fileID: 757208577}
-  m_RootOrder: 1
+  m_Father: {fileID: 511142564}
+  m_RootOrder: 2
 --- !u!95 &1195032737
 Animator:
   serializedVersion: 3
@@ -13795,6 +13795,8 @@ MonoBehaviour:
   powerUpJump: {fileID: 849915315}
   waterDrops: {fileID: 1700783020}
   bloodDrops: {fileID: 693305776}
+  jumpGlowAnim: {fileID: 720955327}
+  scoreGlowAnim: {fileID: 1195032735}
   guts: {fileID: 560264692}
   gutsSpeed: 2
 --- !u!50 &1725049314
@@ -13807,7 +13809,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1725049309}
   m_Mass: 2.79999995
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0
   m_GravityScale: 6
   m_IsKinematic: 0
   m_Interpolate: 1
