@@ -13,6 +13,7 @@ public class GameOverScore : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         scoreText.text = "" + PlayerPrefs.GetInt("lastScore");
+//		scoreText.text = "MLG";
 	}
 
     /// <summary>

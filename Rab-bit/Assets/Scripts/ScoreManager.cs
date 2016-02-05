@@ -32,6 +32,7 @@ public class ScoreManager : MonoBehaviour {
             PowerUpScore.collected = false;
         }
 
+
         score = (distance + scoreFromPowerUps) * PlayerController.scoreCoeficient;
 
         scoreText.text = "" + (int)score;

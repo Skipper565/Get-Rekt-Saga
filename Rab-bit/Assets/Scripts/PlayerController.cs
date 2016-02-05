@@ -675,7 +675,7 @@ public class PlayerController : MonoBehaviour {
     private void saveScore()
     {
         int originalTopHighScores = localHighScore.GetHashCode();
-
+		Debug.Log(ScoreManager.score);
         PlayerPrefs.SetInt("lastScore", (int)ScoreManager.score);
 
         localHighScore[(int)gameDif].score.Add(new Tuple<float, string>(ScoreManager.score, nickName));
@@ -699,10 +699,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         WWW www = new WWW(urlSet + "score=" + (int)ScoreManager.score + "&nickname=" + nickName + "&difficulty=" + (int)gameDif);
-
-        ScoreManager.distance = 0;
-        ScoreManager.score = 0;
-        ScoreManager.scoreFromPowerUps = 0;
+//
+//        ScoreManager.distance = 0;
+//        ScoreManager.score = 0;
+//        ScoreManager.scoreFromPowerUps = 0;
     }
 
     public void Restart()
@@ -710,6 +710,10 @@ public class PlayerController : MonoBehaviour {
         //gameOverMenu.enabled = false;
         jumpCount = 0;
         Application.LoadLevel(0);
+		
+		ScoreManager.distance = 0;
+		ScoreManager.score = 0;
+		ScoreManager.scoreFromPowerUps = 0;
     }
 
     public static void setDifficulty(GameDifficulty gd)
