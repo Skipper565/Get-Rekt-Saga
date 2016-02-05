@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour {
     private AudioSource[] jumpSounds;
     private AudioSource ploppySound;
     private AudioSource gameOverSound;
+	private AudioSource powerUpSound;
 
     //OTHER
     private Rigidbody2D rb;
@@ -182,6 +183,7 @@ public class PlayerController : MonoBehaviour {
         }
         ploppySound = audioSources[5];
         gameOverSound = audioSources[6];
+		powerUpSound = audioSources[7];
 
         screenSplit = Camera.main.pixelWidth/2;
 
@@ -579,6 +581,12 @@ public class PlayerController : MonoBehaviour {
 			waterDrops.SetActive(true);
 			waterDrops.GetComponent<Animator>().Play("waterDrop");
             ploppySound.PlayOneShot(ploppySound.clip);
+		}
+
+		// if player gets powerup play animation and sound
+		if (coll.gameObject.tag == "PowerUp")
+		{
+			powerUpSound.PlayOneShot(powerUpSound.clip);
 		}
 
 		// refresh jump hud when hitting jump powerup
