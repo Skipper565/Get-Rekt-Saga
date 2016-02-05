@@ -4,9 +4,11 @@ public class PowerUpJump : PowerUp
 {
     public float spawnChance;
     public static bool collected;
+    private AudioSource popSound;
 
     protected override void Start()
     {
+        popSound = GetComponent<AudioSource>();
         collected = false;
         base.Start();
     }
@@ -34,6 +36,7 @@ public class PowerUpJump : PowerUp
     public void Collect()
     {
         Debug.Log("Jump power up collected, prepare to get rekt!");
+        popSound.Play();
         gameObject.SetActive(false);
 
         collected = true;

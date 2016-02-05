@@ -76,9 +76,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject bloodDrops;
 
     //AUDIO
-    private AudioSource[] jumps;
-    private AudioSource ploppy;
-    private AudioSource gameOver;
+    private AudioSource[] jumpSounds;
+    private AudioSource ploppySound;
+    private AudioSource gameOverSound;
 
     //OTHER
     private Rigidbody2D rb;
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour {
 		jumpHudThree = GameObject.Find("Three");
 		jumpHudFour = GameObject.Find("Four");
 
-        jumps = new AudioSource[5];
+        jumpSounds = new AudioSource[5];
 
 
         rb = GetComponent<Rigidbody2D>();
@@ -178,10 +178,10 @@ public class PlayerController : MonoBehaviour {
         var audioSources = GetComponents<AudioSource>();
         for (int i = 0; i < 5; i++)
         {
-            jumps[i] = audioSources[i];
+            jumpSounds[i] = audioSources[i];
         }
-        ploppy = audioSources[5];
-        gameOver = audioSources[6];
+        ploppySound = audioSources[5];
+        gameOverSound = audioSources[6];
 
         screenSplit = Camera.main.pixelWidth/2;
 
@@ -375,7 +375,7 @@ public class PlayerController : MonoBehaviour {
 
             rb.AddForce(new Vector2(0, jumpVelocityGravityDirection));
 
-            jumps[UnityEngine.Random.Range(0,4)].Play();
+            jumpSounds[UnityEngine.Random.Range(0, 4)].Play();
 
             jumpCount++;
 
@@ -430,7 +430,7 @@ public class PlayerController : MonoBehaviour {
         var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
         var targetCollider = Physics2D.Raycast(transform.position, -transform.up).collider;
 
-        jumps[UnityEngine.Random.Range(0, 4)].Play();
+        jumpSounds[UnityEngine.Random.Range(0, 4)].Play();
 
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
         if (distanceToCollider <= diveLength && targetCollider.tag.Contains("PowerUp"))
@@ -483,7 +483,7 @@ public class PlayerController : MonoBehaviour {
                 gameManager.SetGameState(GameState.GameOver);
                 if (!waterDrops.activeSelf)
                 {
-                    gameOver.PlayOneShot(gameOver.clip);
+                    gameOverSound.PlayOneShot(gameOverSound.clip);
                 }
             }
             
@@ -578,12 +578,12 @@ public class PlayerController : MonoBehaviour {
 		{
 			waterDrops.SetActive(true);
 			waterDrops.GetComponent<Animator>().Play("waterDrop");
-            ploppy.PlayOneShot(ploppy.clip);
+            ploppySound.PlayOneShot(ploppySound.clip);
 		}
 
 		// refresh jump hud when hitting jump powerup
 		if (coll.gameObject.tag == "JumpPowerUp")
-		{
+		{            
 			bars = jumpCountLimit-jumpCount+1;
 			switch (bars) {
 			case 0:
