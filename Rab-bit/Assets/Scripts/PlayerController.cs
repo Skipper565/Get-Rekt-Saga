@@ -452,14 +452,20 @@ public class PlayerController : MonoBehaviour {
         var distanceToCollider = Physics2D.Raycast(transform.position, -transform.up).distance;
         var targetCollider = Physics2D.Raycast(transform.position, -transform.up).collider;
 
+        if (targetCollider == null)
+        {
+            //Debug.Log("DISTANCE TO COLLIDER: " + distanceToCollider);
+            return;
+        }
+
         jumpSounds[UnityEngine.Random.Range(0, 4)].Play();
 
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
         if (distanceToCollider <= diveLength && !targetCollider.tag.Contains("PowerUp"))
         {
             // Uncomment this for determining distance of the player and the collider. Set value collisionTolerance accordingly.
-            Debug.Log("Move down: Collider: " + targetCollider.name + " Distance: " + distanceToCollider 
-                + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));
+            /*Debug.Log("Move down: Collider: " + targetCollider.name + " Distance: " + distanceToCollider 
+                + " In the gravity direction: " + (rb.gravityScale > 0 ? "Down" : "Up"));*/
 
             if (distanceToCollider <= collisionTolerance)
             {
