@@ -2351,7 +2351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34455303c3bab742857c6cf75e923ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnChance: 100
+  spawnChance: 20
+  powerUpValue: 20
 --- !u!95 &241967737
 Animator:
   serializedVersion: 3
@@ -6615,7 +6616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc351465cff3d840b81bf47c0114fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnChance: 100
+  spawnChance: 20
 --- !u!58 &849915316
 CircleCollider2D:
   m_ObjectHideFlags: 0

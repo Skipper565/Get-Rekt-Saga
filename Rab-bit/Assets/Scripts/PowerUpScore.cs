@@ -3,10 +3,21 @@
 public class PowerUpScore : PowerUp
 {
     public float spawnChance;
+    public int powerUpValue;
+    public static int value;
     public static bool collected;
 
     protected override void Start()
     {
+        if (powerUpValue == 0)
+        {
+            value = 20;
+        }
+        else
+        {
+            value = powerUpValue;
+        }
+
         collected = false;
         base.Start();
     }

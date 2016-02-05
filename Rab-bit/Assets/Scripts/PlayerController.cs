@@ -667,9 +667,9 @@ public class PlayerController : MonoBehaviour {
     {
         int originalTopHighScores = localHighScore.GetHashCode();
 
-        PlayerPrefs.SetInt("lastScore", (int)ScoreManager.distance);
+        PlayerPrefs.SetInt("lastScore", (int)ScoreManager.score);
 
-        localHighScore[(int)gameDif].score.Add(new Tuple<float, string>(ScoreManager.distance, nickName));
+        localHighScore[(int)gameDif].score.Add(new Tuple<float, string>(ScoreManager.score, nickName));
         localHighScore[(int)gameDif].score.Sort(
             delegate(Tuple<float, string> x, Tuple<float, string> y)
             {
@@ -689,7 +689,7 @@ public class PlayerController : MonoBehaviour {
             PlayerPrefs.SetInt("newHighScore", 1);
         }
 
-        WWW www = new WWW(urlSet + "score=" + (int)ScoreManager.distance + "&nickname=" + nickName + "&difficulty=" + (int)gameDif);
+        WWW www = new WWW(urlSet + "score=" + (int)ScoreManager.score + "&nickname=" + nickName + "&difficulty=" + (int)gameDif);
     }
 
     public void Restart()
