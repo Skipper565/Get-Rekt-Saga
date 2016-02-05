@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PowerUpJump : PowerUp
+public class PowerUpScore : PowerUp
 {
     public float spawnChance;
     public static bool collected;
@@ -18,7 +18,7 @@ public class PowerUpJump : PowerUp
 
     public override void SpawnIfAvailable(Bounds bounds)
     {
-        if (collected || spawnChance <= Random.Range(0f, 100f))
+        if (/*collected || */spawnChance <= Random.Range(0f, 100f))
         {
             return;
         }
@@ -33,7 +33,7 @@ public class PowerUpJump : PowerUp
 
     public void Collect()
     {
-        Debug.Log("Jump power up collected, prepare to get rekt!");
+        Debug.Log("Score power up collected, prepare to get rekt!");
         gameObject.SetActive(false);
 
         collected = true;

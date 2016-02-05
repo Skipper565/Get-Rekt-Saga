@@ -360,11 +360,11 @@ public class PlayerController : MonoBehaviour {
     void moveUp()
     {
         // ignore jump if limit was exceeded
-        if (jumpCount < jumpCountLimit || (powerUpJump.collected && jumpCount < jumpCountLimit + 1))
+        if (jumpCount < jumpCountLimit || (PowerUpJump.collected && jumpCount < jumpCountLimit + 1))
         {
             if (jumpCount == jumpCountLimit)
             {
-                powerUpJump.collected = false;
+                PowerUpJump.collected = false;
             }
 
             // before jump - especially for jumping in air - we set current y velocity to zero, so every jump has same height when force is applied
@@ -380,7 +380,7 @@ public class PlayerController : MonoBehaviour {
             jumpCount++;
 
 			bars = jumpCountLimit-jumpCount;
-			if (powerUpJump.collected)
+			if (PowerUpJump.collected)
 				bars += 1;
 			switch (bars) {
 			case 0:
@@ -517,7 +517,7 @@ public class PlayerController : MonoBehaviour {
 			GetComponent<Animator>().SetBool("InJumpTwo",false);
 
 			bars = jumpCountLimit-jumpCount;
-			if (powerUpJump.collected)
+			if (PowerUpJump.collected)
 				bars += 1;
 			switch (bars) {
 			case 0:

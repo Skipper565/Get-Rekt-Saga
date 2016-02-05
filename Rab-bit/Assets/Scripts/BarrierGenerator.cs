@@ -12,7 +12,8 @@ public class BarrierGenerator : MonoBehaviour
     public int obstacleRepetition;
     private int currentObstacleRepetition;
 
-    public PowerUpJump powerUp;
+    public PowerUpJump powerUpJump;
+    public PowerUpScore powerUpScore;
 
     // List of barriers; each contain barriers of exactly one type
     // Add new list for each new pavilon
@@ -156,6 +157,7 @@ public class BarrierGenerator : MonoBehaviour
         lastBarrier = randomBarrier;
         queueOfBarriers.Enqueue(lastBarrier);
 
+        var powerUp = PickRandomPowerUp(new List<PowerUp>() {powerUpJump, powerUpScore});
         powerUp.SpawnIfAvailable(GetBounds(randomBarrier));
     }
 
@@ -253,5 +255,11 @@ public class BarrierGenerator : MonoBehaviour
         }
 
         return bounds;
+    }
+
+    private PowerUp PickRandomPowerUp(List<PowerUp> listOfPowerUps)
+    {
+        int randomNumber = Random.Range(0, listOfPowerUps.Count);
+        return listOfPowerUps[randomNumber];
     }
 }
