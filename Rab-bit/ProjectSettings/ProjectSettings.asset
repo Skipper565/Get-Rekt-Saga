@@ -164,15 +164,15 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
-      m_Width: 0
-      m_Height: 0
+      m_Icon: {fileID: 2800000, guid: 045736df0d2cb45fb87f08253d8e7512, type: 3}
+      m_Width: 128
+      m_Height: 128
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: AndroidPlayer
     m_APIs: 08000000
     m_Automatic: 0
-  webPlayerTemplate: APPLICATION:Default
+  webPlayerTemplate: APPLICATION:Black Background
   m_TemplateCustomTags: {}
   wiiUTitleID: 0005000011000000
   wiiUGroupID: 00010000
