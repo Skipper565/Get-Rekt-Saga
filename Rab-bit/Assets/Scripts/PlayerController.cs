@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.gameState != GameState.Playing) return;
+        //if (gameManager.gameState != GameState.Playing) return;
         // deprecated
 //#if UNITY_EDITOR
 //        if (Input.GetKeyDown(KeyCode.J))
@@ -362,7 +362,10 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(restartKey))
         {
             //Restart();
-            gameManager.SetGameState(GameState.Playing);
+            if (gameManager.gameState == GameState.Playing || gameManager.gameState == GameState.GameOver)
+            {
+                gameManager.SetGameState(GameState.Playing);
+            }
         }
         // Escape quits the game
         else if (Input.GetKeyDown(quitKey))
@@ -452,7 +455,7 @@ public class PlayerController : MonoBehaviour {
         jumpSounds[UnityEngine.Random.Range(0, 4)].Play();
 
         // If distance to collider is smaller than our usual dive, teleport to the collider, no further.
-        if (distanceToCollider <= diveLength && targetCollider.tag.Contains("PowerUp"))
+        if (distanceToCollider <= diveLength || !targetCollider.tag.Contains("PowerUp"))
         {
             // Uncomment this for determining distance of the player and the collider. Set value collisionTolerance accordingly.
             Debug.Log("Move down: Collider: " + targetCollider.name + " Distance: " + distanceToCollider 
