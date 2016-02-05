@@ -25,7 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 415566}
   - 212: {fileID: 21237952}
-  - 68: {fileID: 6827134}
+  - 60: {fileID: 6088256}
   m_Layer: 0
   m_Name: boat
   m_TagString: BarrierBottom
@@ -80,15 +80,15 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8499999, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .34301877, y: .34301883, z: .34301886}
   m_Children:
   - {fileID: 445324}
   - {fileID: 415566}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!68 &6827134
-EdgeCollider2D:
+--- !u!60 &6088256
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -97,15 +97,29 @@ EdgeCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: .0299999993, y: -.0900000036}
   m_Points:
-  - {x: 2.68436074, y: 1.05663753}
-  - {x: 2.37156749, y: .409202456}
-  - {x: 2.26782537, y: .278773338}
-  - {x: -.0816837102, y: -.260018259}
-  - {x: -2.01977396, y: .100158416}
-  - {x: -2.65060973, y: 1.05324697}
-  - {x: 2.68293571, y: 1.0204407}
+    m_Paths:
+    - - {x: 1.72803724, y: .0328097418}
+      - {x: 2.04089808, y: .385837436}
+      - {x: 2.48819065, y: .881768942}
+      - {x: 2.60184598, y: 1.0147835}
+      - {x: 2.5887928, y: 1.14742029}
+      - {x: 2.47952747, y: 1.15739989}
+      - {x: 2.32432032, y: 1.15920901}
+      - {x: 2.2711165, y: 1.16869783}
+      - {x: 2.20642781, y: 1.16670215}
+      - {x: 2.00907421, y: 1.17895782}
+      - {x: -.81058228, y: 1.18187344}
+      - {x: -.856519759, y: 1.15890467}
+      - {x: -2.17722297, y: 1.15890467}
+      - {x: -2.25657582, y: 1.16269588}
+      - {x: -2.32168818, y: 1.16574323}
+      - {x: -2.39618492, y: 1.16016686}
+      - {x: -2.57917595, y: 1.17038906}
+      - {x: -2.65956664, y: 1.08999848}
+      - {x: -2.52815843, y: .844939709}
+      - {x: -1.76283085, y: .0557764582}
 --- !u!95 &9542416
 Animator:
   serializedVersion: 3
@@ -181,7 +195,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105344}
