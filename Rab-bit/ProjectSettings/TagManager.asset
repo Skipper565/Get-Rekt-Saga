@@ -10,6 +10,8 @@ TagManager:
   - NotToTouch
   - Splash
   - JumpPowerUp
+  - PowerUp
+  - ScorePowerUp
   layers:
   - Default
   - TransparentFX

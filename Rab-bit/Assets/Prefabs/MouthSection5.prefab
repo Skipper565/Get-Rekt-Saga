@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 430740}
-  - 61: {fileID: 6139826}
+  - 61: {fileID: 6149726}
   m_Layer: 0
   m_Name: TeethGumBottom
   m_TagString: BarrierBottom
@@ -2032,19 +2032,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: .0500000007}
   serializedVersion: 2
   m_Size: {x: .800000012, y: 3.80999994}
---- !u!61 &6139826
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136812}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 4.64520121, y: -6.88000011}
-  serializedVersion: 2
-  m_Size: {x: 29.2503986, y: 5.63999987}
 --- !u!61 &6139890
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2084,6 +2071,19 @@ BoxCollider2D:
   m_Offset: {x: 4.64520121, y: -5.59320068}
   serializedVersion: 2
   m_Size: {x: 29.2503986, y: 3.16143799}
+--- !u!61 &6149726
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136812}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 4.71000004, y: -6.88000011}
+  serializedVersion: 2
+  m_Size: {x: 29.3655491, y: 5.63999987}
 --- !u!61 &6153052
 BoxCollider2D:
   m_ObjectHideFlags: 1

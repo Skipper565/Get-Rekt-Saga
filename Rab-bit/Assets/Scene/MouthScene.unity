@@ -2293,7 +2293,7 @@ GameObject:
   - 114: {fileID: 241967736}
   m_Layer: 0
   m_Name: PowerUpScore
-  m_TagString: PowerUp
+  m_TagString: ScorePowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6599,7 +6599,7 @@ GameObject:
   - 114: {fileID: 849915315}
   m_Layer: 0
   m_Name: PowerUpJump
-  m_TagString: PowerUp
+  m_TagString: JumpPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9370,7 +9370,7 @@ Animator:
   m_GameObject: {fileID: 1195032735}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2f56a424d7a7544159d1f31601873006, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3a92851c23ef04c65b0c0b872556bdb1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10208,7 +10208,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 37
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 4b6f7a46447004885b3d9305140f1a78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1315174147
@@ -13162,8 +13162,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 18c072d0d8c075243b64d4f0883b7e23, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: .400000006
+  m_Pitch: 2
   Loop: 0
   Mute: 0
   Spatialize: 0

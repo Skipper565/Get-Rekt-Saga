@@ -81,15 +81,20 @@ public class PlayerController : MonoBehaviour {
     private AudioSource gameOverSound;
 	private AudioSource powerUpSound;
 
-    //OTHER
-    private Rigidbody2D rb;
-    private DateTime deathTime;
-    private float screenSplit;
+	//ANIMATION
 	private GameObject jumpHudOne;
 	private GameObject jumpHudTwo;
 	private GameObject jumpHudThree;
 	private GameObject jumpHudFour;
 	private GameObject diveAnim;
+	private GameObject jumpGlowAnim;
+	private GameObject scoreGlowAnim;
+
+
+    //OTHER
+    private Rigidbody2D rb;
+    private DateTime deathTime;
+    private float screenSplit;
 	private int bars; // number of jump hud bars to be shown
     private Vector2 previousVelocity = new Vector2(0,0);
 
@@ -169,18 +174,23 @@ public class PlayerController : MonoBehaviour {
 		jumpHudThree = GameObject.Find("Three");
 		jumpHudFour = GameObject.Find("Four");
 
-        jumpSounds = new AudioSource[5];
+		jumpGlowAnim = GameObject.Find("glowingWheelJumps");
+		scoreGlowAnim = GameObject.Find("glowingWheelScore");
 
+		jumpGlowAnim.SetActive(false);
+		scoreGlowAnim.SetActive(false);
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
-
+		
+		jumpSounds = new AudioSource[5];
         var audioSources = GetComponents<AudioSource>();
         for (int i = 0; i < 5; i++)
         {
             jumpSounds[i] = audioSources[i];
         }
+
         ploppySound = audioSources[5];
         gameOverSound = audioSources[6];
 		powerUpSound = audioSources[7];
@@ -366,6 +376,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (jumpCount == jumpCountLimit)
             {
+				jumpGlowAnim.SetActive(false); // disable glowing animation of jump hud
                 PowerUpJump.collected = false;
             }
 
@@ -475,6 +486,8 @@ public class PlayerController : MonoBehaviour {
 		{
             bloodDrops.SetActive(true);
             bloodDrops.GetComponent<Animator>().Play("waterDrop");
+			jumpGlowAnim.SetActive(false);
+			scoreGlowAnim.SetActive(false);
 
             GameObject.Find("squish").transform.Translate(new Vector3(0,0,90));
             
@@ -584,14 +597,18 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// if player gets powerup play animation and sound
-		if (coll.gameObject.tag == "PowerUp")
+		if (coll.gameObject.tag == "JumpPowerUp" || coll.gameObject.tag == "ScorePowerUp")
 		{
 			powerUpSound.PlayOneShot(powerUpSound.clip);
 		}
 
 		// refresh jump hud when hitting jump powerup
 		if (coll.gameObject.tag == "JumpPowerUp")
-		{            
+		{
+			
+			jumpGlowAnim.SetActive(false); // ensuring animation object is inactive so it can be activated below and therefore animation is palyed
+			jumpGlowAnim.SetActive(true);
+
 			bars = jumpCountLimit-jumpCount+1;
 			switch (bars) {
 			case 0:
@@ -631,6 +648,12 @@ public class PlayerController : MonoBehaviour {
 				jumpHudFour.GetComponent<Image>().color = new Color(1f,1f,1f,0f);
 				break;
 			}
+		}
+		// refresh jump hud when hitting jump powerup
+		if (coll.gameObject.tag == "ScorePowerUp")
+		{
+			scoreGlowAnim.SetActive(false);
+			scoreGlowAnim.SetActive(true);
 		}
 	}
 
