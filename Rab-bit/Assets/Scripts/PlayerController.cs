@@ -102,6 +102,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject guts;
     public int gutsSpeed;
 
+    public static bool inMenu = false;
+
     public static int numberOfTopScores = 5;
 
     public static string urlGet = "http://grs.pe.hu/app/loadScore.php?difficulty=";
@@ -214,6 +216,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (inMenu) return;
         // deprecated
 //#if UNITY_EDITOR
 //        if (Input.GetKeyDown(KeyCode.J))
@@ -690,6 +693,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         WWW www = new WWW(urlSet + "score=" + (int)ScoreManager.score + "&nickname=" + nickName + "&difficulty=" + (int)gameDif);
+
+        ScoreManager.distance = 0;
+        ScoreManager.score = 0;
+        ScoreManager.scoreFromPowerUps = 0;
     }
 
     public void Restart()
