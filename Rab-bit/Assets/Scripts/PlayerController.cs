@@ -185,6 +185,8 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(horizontalVelocity, 0));
 		rb.freezeRotation = true;
+
+        //rb.gravityScale = 0.5f;
 		
 		jumpSounds = new AudioSource[5];
         var audioSources = GetComponents<AudioSource>();
@@ -216,7 +218,7 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (inMenu) return;
+        if (gameManager.gameState != GameState.Playing) return;
         // deprecated
 //#if UNITY_EDITOR
 //        if (Input.GetKeyDown(KeyCode.J))
@@ -239,6 +241,7 @@ public class PlayerController : MonoBehaviour {
             if (rb.velocity.x != horizontalVelocity)
             {
                 rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
+                //rb.AddForce(new Vector2(horizontalVelocity, 0.1f));
             }
 
             if (swapGravity)
